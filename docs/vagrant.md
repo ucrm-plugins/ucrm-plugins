@@ -15,7 +15,7 @@ development environment using [Vagrant](https://www.vagrantup.com/).
 The following will need to be installed for the system to work correctly:
 - [Vagrant](https://www.vagrantup.com/)
 - [Virtualbox](https://www.virtualbox.org/)
-- [PHP](https://windows.php.net/) (UCRM currently uses version 7.4 NTS)
+- [PHP](https://windows.php.net/) (UCRM currently uses version 7.4 x64 NTS)
 
 ### PHP
 
@@ -149,4 +149,8 @@ Vagrant provided the `vagrant ssh` command to allow for easy SSH access into the
 ### Accessing the VM (HTTP)
 
 The standard UISP on-boarding process should now also be available at https://localhost from your development machine.
+
+
+
+
 
