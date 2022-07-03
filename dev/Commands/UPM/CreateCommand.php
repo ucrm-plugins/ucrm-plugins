@@ -143,7 +143,7 @@ final class CreateCommand extends BaseCommand
         
         
         chdir($owd);
-        return self::SUCCESS;
+        return 0;
     }
 
 }
