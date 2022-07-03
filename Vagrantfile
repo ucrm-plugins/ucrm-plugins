@@ -130,7 +130,6 @@ Vagrant.configure("2") do |config|
 
         # Builds and runs our custom docker image.
         cd /home/unms/app && UCRM_VERSION=#{UCRM_VERSION} docker-compose -p unms up -d --build ucrm
-W
     SHELL
 
     config.vm.provision "tools", type: "shell", keep_color: true, inline: <<-SHELL
@@ -149,7 +148,12 @@ W
 
     SHELL
 
+    config.vm.provision "permissions", type: "shell", keep_color: true, inline: <<-SHELL
 
+        # Take ownership of the UCRM data folder and ALL sub-folders for SFTP access.
+        chown vagrant:vagrant -R /home/unms/data/ucrm/
+
+    SHELL
 
 
     #config.trigger.after [ :destroy ] do |trigger|
