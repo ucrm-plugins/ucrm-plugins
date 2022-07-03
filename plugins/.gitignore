@@ -1,0 +1,10 @@
+
+# Since we are using ./plugins/<plugin> as our working source folder during development, we need to make certain that no
+# sensitive or reserved files/folders make it into version control.
+
+**/src/data/plugin.log
+**/src/ucrm.json
+**/src/.ucrm*
+
+**/src/vendor/
+**/www/

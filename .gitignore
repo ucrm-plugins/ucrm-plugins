@@ -1,2 +1,22 @@
 .php_cs.cache
 vendor
+
+# JetBrains IDE
+.idea/*
+!.idea/dictionaries/
+!.idea/deployment.xml
+!.idea/sqldialects.xml
+!.idea/vcs.xml
+
+# Vagrant
+.vagrant/
+
+# Integrated Development Environment
+box/vagrant/env/*
+!box/vagrant/env/README.md
+box/vagrant/src/*
+!box/vagrant/src/README.md
+box/vagrant/www/*
+!box/vagrant/www/README.md
+
+.env

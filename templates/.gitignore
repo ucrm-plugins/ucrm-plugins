@@ -1,0 +1,12 @@
+
+# Templates should obviously follow the same version control rules as the Plugin's themselves.
+
+**/src/data/plugin.log
+**/src/ucrm.json
+**/src/.ucrm*
+
+**/src/vendor/
+**/www/
+
+# The one exception is that Templates (unlike Plugins) should not commit any actual ZIP bundles.
+**/*.zip

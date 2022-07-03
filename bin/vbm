@@ -1,0 +1,29 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types=1);
+
+use Symfony\Component\Console\Application;
+
+// IF this script is not being called from the CLI, THEN exit!
+if (php_sapi_name() !== "cli")
+    exit;
+
+require_once __DIR__ . "/../vendor/autoload.php";
+require_once __DIR__ . "/../dev/commands.php";
+
+const VBM_COMMAND_PATH = __DIR__ . "\\..\\dev\\Commands\\VBM";
+const VBM_COMMAND_FQNS = "UCRM\\Plugins\\Commands\\VBM";
+
+// Create the Application.
+$application = new Application();
+
+// Set any relevant application information.
+$application->setName("Vagrant Box Manager");
+$application->setVersion("1.0.0");
+
+// Add our custom commands, dynamically...
+$application->addCommands(loadCommands(VBM_COMMAND_PATH, VBM_COMMAND_FQNS));
+
+// Finally, run the console application.
+/** @noinspection PhpUnhandledExceptionInspection */
+$application->run();

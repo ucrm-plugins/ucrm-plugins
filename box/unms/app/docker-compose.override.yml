@@ -1,0 +1,17 @@
+version: "2"
+
+services:
+  postgres:
+    networks:
+      - public
+    ports:
+      - "5432:5432"
+  ucrm:
+    build:
+      context: xdebug
+      dockerfile: Dockerfile
+      args:
+        UCRM_VERSION: ${UCRM_VERSION}
+    volumes:
+      - ./xdebug/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+      - ./xdebug/xdebug_params:/etc/nginx/xdebug_params

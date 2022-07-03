@@ -1,0 +1,6 @@
+.vagrant/
+*.box
+
+vagrant/env/*
+!vagrant/env/README.md
+

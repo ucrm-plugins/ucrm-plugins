@@ -1,0 +1,46 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require "rbconfig"
+
+Vagrant.configure("2") do |config|
+
+    # Override the following defaults as desired:
+    VBOX_ROOT_PASSWORD  = "vagrant"
+    UISP_VERSION        = "1.4.5"
+
+    # Disable the default synced folder.
+    config.vm.synced_folder ".", "/vagrant", disabled: true
+
+    # Use an Ubuntu base box.
+    config.vm.box = "bento/ubuntu-20.04"
+
+    # VirtualBox VM Configuration.
+    config.vm.provider "virtualbox" do |vm|
+        vm.name = "uisp-#{UISP_VERSION}"
+
+        # NOTE: Set the following to suit your needs and based upon available host resources.
+        vm.cpus = 1
+        vm.memory = 4096
+    end
+
+    # Provision the VM...
+    config.vm.provision :shell, keep_color: true, inline: <<-SHELL
+
+        echo "Updating the root password..."
+        echo "root:#{VBOX_ROOT_PASSWORD}" | sudo chpasswd
+
+        echo "Disabling IPv6..."
+        echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf
+        echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf
+        echo "net.ipv6.conf.lo.disable_ipv6 = 1" >> /etc/sysctl.conf
+        echo "net.ipv6.conf.eth0.disable_ipv6 = 1" >> /etc/sysctl.conf
+        sysctl -p
+
+        echo "Installing UISP..."
+        curl -fsSL https://uisp.ui.com/v1/install > /tmp/uisp_inst.sh
+        bash /tmp/uisp_inst.sh --version #{UISP_VERSION}
+
+    SHELL
+
+end
