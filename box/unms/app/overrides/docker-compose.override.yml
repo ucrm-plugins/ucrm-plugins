@@ -1,0 +1,19 @@
+# NOTE: This file is symlinked, so all paths in this file need to either be absolute or relative to "/home/unms/app/".
+
+version: "2"
+
+services:
+    postgres:
+        networks:
+            - public
+        ports:
+            - "5432:5432"
+    ucrm:
+        build:
+            context: ./overrides/ucrm
+            dockerfile: Dockerfile
+            args:
+                UCRM_VERSION: ${UCRM_VERSION}
+        volumes:
+            - ./overrides/ucrm/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+            - ./overrides/ucrm/xdebug_params:/etc/nginx/xdebug_params

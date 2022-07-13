@@ -1,4 +1,5 @@
-# Make this EditorConfig a root, only because it helps to keep individual Plugin settings unique.
+
+# Make this EditorConfig a root, only because it helps to keep individual Plugin developer's settings unique.
 root = true
 
 [*]

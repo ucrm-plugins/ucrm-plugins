@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use UCRM\Plugins\Commands\BaseCommand;
 use UCRM\Plugins\Support\FileSystem;
+use UCRM\Plugins\Support\Templater;
 
 //use Symfony\Component\Console\Input\InputArgument;
 
@@ -45,6 +46,20 @@ final class CreateCommand extends BaseCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
+        
+        $info = Templater::getAuthor();
+        
+        
+        Templater::replace(FileSystem::path(PROJECT_PATH."/plugins/testing/src/"), [
+            "NAME" => $input->getArgument("name"),
+            "AUTHOR" => $info,
+            
+        ]);
+        
+        //print_r ($info);
+        exit;
+        
+        
         $owd = getcwd();
         chdir(FileSystem::path(PROJECT_PATH."/plugins/"));
         

@@ -1,22 +1,11 @@
 .php_cs.cache
-vendor
+vendor/
 
 # JetBrains IDE
-.idea/*
-!.idea/dictionaries/
-!.idea/deployment.xml
-!.idea/sqldialects.xml
-!.idea/vcs.xml
+# NOTE: Handled directly by .idea/.gitignore
 
-# Vagrant
+# Vagrant Metadata
 .vagrant/
 
-# Integrated Development Environment
-box/vagrant/env/*
-!box/vagrant/env/README.md
-box/vagrant/src/*
-!box/vagrant/src/README.md
-box/vagrant/www/*
-!box/vagrant/www/README.md
-
+# Any and all .env files!
 .env

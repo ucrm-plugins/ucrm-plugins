@@ -242,7 +242,7 @@ final class FileSystem
         return $result;
     }
     
-    public static function each(string $dir, callable $func = NULL): array
+    public static function each(string $dir, callable $func = NULL, bool $absolute = FALSE): array
     {
         $func = $func ?? function(string $file): string { return $file; };
         
@@ -256,10 +256,10 @@ final class FileSystem
             
             if (is_dir($filePath)) {
                 foreach (self::scandir($filePath) as $childFilename) {
-                    $result[] = $func($file . DIRECTORY_SEPARATOR . $childFilename);
+                    $result[] = $func(($absolute ? $dir . DIRECTORY_SEPARATOR : "") . $file . DIRECTORY_SEPARATOR . $childFilename);
                 }
             } else {
-                $result[] = $func($file);
+                $result[] = $func(($absolute ? $dir . DIRECTORY_SEPARATOR : "") . $file);
             }
         }
         return $result;
