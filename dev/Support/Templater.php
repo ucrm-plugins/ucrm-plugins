@@ -6,7 +6,7 @@ namespace UCRM\Plugins\Support;
 final class Templater
 {
     private const VAR_PATTERN = "/^(.*)\{\{ *([A-Za-z][A-Za-z0-9_-]*) *\}\}(.*)$/m";
-    private const CMD_PATTERN = "/^(.*)\{\% *(.*) *\%\}(.*)$/m";
+    private const CMD_PATTERN = "/^(.*)\{\% *(.*) *\%\}(.*)(\r\n|\r|\n)/m";
     
     
     private static function named(array $array): array
@@ -66,14 +66,22 @@ final class Templater
                 $content = preg_replace_callback(self::CMD_PATTERN,
                     function(array $matches)
                     {
-                        $code = trim($matches[2].";");
+                        switch($code = trim($matches[2]))
+                        {
+                            case "REMOVE_LINE":
+                                return "";
+                                
+                            default:
+                                ob_start();
+                                eval($code.";");
+                                $eval = ob_get_contents();
+                                ob_end_clean();
+    
+                                return ($matches[1] . $eval . $matches[3]);
+                            
+                        }
                         
-                        ob_start();
-                        eval($code);
-                        $eval = ob_get_contents();
-                        ob_end_clean();
                         
-                        return ($matches[1] . $eval . $matches[3]);
                     },
                     $content, -1, $cmd_count
                 );
