@@ -53,44 +53,57 @@ final class Templater
      *
      * @return bool
      */
-    public static function replace(string $dir, array $replacements): bool
+    public static function replace(string $dir, array $replacements, int &$modified = 0): bool
     {
-        $modified = 0;
-        
         
         FileSystem::each($dir,
             function($path) use ($replacements, &$modified)
             {
-                $changed = FALSE;
                 $content = file_get_contents($path);
     
-                if (preg_match_all(self::CMD_PATTERN, $content, $matches))
-                {
-                    // FUTURE: Determine how we want to handle commands in templates!
-                    $changed = TRUE;
-                }
-                
-                if (preg_match_all(self::VAR_PATTERN, $content, $matches))
-                {
-                    $names = [];
-                    
-                    foreach($matches[2] as $name)
+            
+                $cmd_count = 0;
+                $content = preg_replace_callback(self::CMD_PATTERN,
+                    function(array $matches)
                     {
-                        if (in_array($name, $names) || !array_key_exists($name, $replacements))
-                            continue; // Skip!
-                        else
-                            $names[] = $name;
-                
-                        $pattern = str_replace("([A-Za-z][A-Za-z0-9_-]*)", "($name)", self::VAR_PATTERN);
+                        $code = trim($matches[2].";");
+                        
+                        ob_start();
+                        eval($code);
+                        $eval = ob_get_contents();
+                        ob_end_clean();
+                        
+                        return ($matches[1] . $eval . $matches[3]);
+                    },
+                    $content, -1, $cmd_count
+                );
 
-                        $content = preg_replace($pattern, "$1".$replacements[$name]."$3", $content);
-                        $changed = TRUE;
-                    }
-                    
-                    
-                }
+                $var_count = 0;
+                $names = [];
     
-                if ($changed)
+                $content = preg_replace_callback(self::VAR_PATTERN,
+                    function(array $matches) use ($replacements, $names)
+                    {
+                        $name = $matches[2];
+                        
+                        if (in_array($name, $names) || !array_key_exists($name, $replacements))
+                            // Not named in replacements, skip!
+                            return ($matches[1] . "{{ " . $name . " }}" . $matches[3]);
+                        
+                        $names[] = $name;
+                        return ($matches[1] . $replacements[$name] . $matches[3]);
+                        
+                        
+                        //print_r($matches);
+                    
+                    
+                    },
+                    $content, -1, $var_count
+                );
+    
+                
+                
+                if ($cmd_count > 0 || $var_count > 0)
                 {
                     print_r($content);
                     //file_put_contents($path, $contents);
