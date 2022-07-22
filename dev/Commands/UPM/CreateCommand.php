@@ -50,10 +50,12 @@ final class CreateCommand extends BaseCommand
         $info = Templater::getAuthor();
         
         
-        Templater::replace(FileSystem::path(PROJECT_PATH."/plugins/testing/src/"), [
+        $modified = Templater::replace(FileSystem::path(PROJECT_PATH."/plugins/testing/src/"), [
             "UCRM_PLUGIN_NAME" => $input->getArgument("name"),
             "UCRM_PLUGIN_AUTHOR" => $info,
         ]);
+        
+        print_r($modified);
         
         //print_r ($info);
         exit;

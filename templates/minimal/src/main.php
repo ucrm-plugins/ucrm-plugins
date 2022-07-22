@@ -6,7 +6,7 @@ use Ubnt\UcrmPluginSdk\Service\PluginLogManager;
 
 chdir(__DIR__);
 
-/** {% Templater::removeLine %} @noinspection PhpIncludeInspection */
+/** {% ::removeLine %} @noinspection PhpIncludeInspection */
 require_once __DIR__ . "/vendor/autoload.php";
 
 // Get UCRM log manager.
