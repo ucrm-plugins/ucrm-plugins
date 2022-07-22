@@ -14,9 +14,11 @@ class Templater
     protected const CMD_PATTERN = "/^(.*)\{\% *(.*) *\%\}(.*)(\r\n|\r|\n)?/m";
     
     /**
-     * @param array $array
+     * Keeps only named indices of an associative array.
      *
-     * @return array
+     * @param array $array The array on which to operate.
+     *
+     * @return array Returns an array containing only entries where the key is a string.
      */
     protected static function named(array $array): array
     {
@@ -24,6 +26,8 @@ class Templater
     }
     
     /**
+     * Attempts to get the current user's information from Git.
+     *
      * @param bool $global
      *
      * @return string
@@ -46,9 +50,11 @@ class Templater
     }
     
     /**
-     * @param string $default
+     * Attempts to get the Author's information from Git.
      *
-     * @return string
+     * @param string $default The default to use when a Git user is not found.
+     *
+     * @return string The Author's information in the format `Name <email>`.
      */
     public static function getAuthor(string $default = "Unknown"): string
     {
@@ -64,13 +70,13 @@ class Templater
         return $default;
     }
     
-    
-    
     /**
-     * @param string $dir
-     * @param array<string, string> $replacements
+     * Replaces all occurrence of variables and available commands in the directory specified, recursively.
      *
-     * @return int
+     * @param string $dir The directory in which to search.
+     * @param array<string, string> $replacements An associative array of variable names and replacement values.
+     *
+     * @return int The number of modified files.
      */
     public static function replace(string $dir, array $replacements = []): int
     {
@@ -125,13 +131,16 @@ class Templater
                         
                         if ($class)
                         {
-                            //if (in_array($class, $uses))// || in_array($class, array_map("basename", $uses)))
                             if (class_exists($class))
                             {
                                 if (method_exists($class, $command))
+                                {
                                     return $class::$command($matches);
+                                }
                                 else
+                                {
                                     return "TEMPLATE_UNKNOWN_METHOD";
+                                }
         
                             }
                             
@@ -221,16 +230,31 @@ class Templater
         return $modified;
     }
     
-    /** @noinspection PhpUnusedParameterInspection */
+    #region COMMANDS
+    
+    
+    
+    /**
+     * @param array $matches
+     *
+     * @return string
+     * @noinspection PhpUnusedParameterInspection
+     */
     public static function removeLine(array $matches): string
     {
         return "";
     }
     
+    /**
+     * @param array $matches
+     *
+     * @return string
+     */
     public static function removeComment(array $matches): string
     {
         return preg_replace("#/\*.*\*/#", "", $matches[0]);
     }
     
+    #endregion
 
 }
