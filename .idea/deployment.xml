@@ -7,6 +7,9 @@
           <mappings>
             <mapping deploy="/home/unms/data/ucrm/ucrm/data/plugins/testing/" local="$PROJECT_DIR$/plugins/testing/src/" web="/crm/_plugins/testing/" />
           </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/plugins/testing/src/vendor" />
+          </excludedPaths>
         </serverdata>
       </paths>
     </serverData>

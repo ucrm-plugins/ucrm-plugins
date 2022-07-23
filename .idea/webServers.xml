@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="d85a2372-bbd1-427b-8783-a271733c5c17" name="vagrant" url="http://192.168.50.10/">
+      <webServer id="d85a2372-bbd1-427b-8783-a271733c5c17" name="vagrant" url="http://192.168.50.10">
         <fileTransfer rootFolder="/home/vagrant" accessType="SFTP" host="192.168.50.10" port="22" sshConfigId="dab6d08f-a01b-4e75-a2e2-32abf1fb614d" sshConfig="vagrant@192.168.50.10:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />

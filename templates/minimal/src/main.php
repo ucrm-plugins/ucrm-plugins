@@ -1,5 +1,5 @@
 <?php
-/** {% Templater::removeLine %} @noinspection PhpUndefinedNamespaceInspection, PhpUndefinedClassInspection */
+/** {% ::removeLine %} @noinspection PhpUndefinedNamespaceInspection, PhpUndefinedClassInspection */
 declare(strict_types=1);
 
 use Ubnt\UcrmPluginSdk\Service\PluginLogManager;

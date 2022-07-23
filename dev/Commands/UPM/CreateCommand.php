@@ -9,9 +9,8 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use UCRM\Plugins\Commands\BaseCommand;
 use UCRM\Plugins\Support\FileSystem;
+use UCRM\Plugins\Support\Git;
 use UCRM\Plugins\Support\Templater;
-
-//use Symfony\Component\Console\Input\InputArgument;
 
 /**
  * CreateCommand
@@ -21,7 +20,7 @@ use UCRM\Plugins\Support\Templater;
  *
  * @final
  */
-final class CreateCommand extends BaseCommand
+class CreateCommand extends BaseCommand
 {
     protected const NAMING_PATTERN = "/^[a-z][a-z\d-]*$/";
     
@@ -35,7 +34,7 @@ final class CreateCommand extends BaseCommand
             ->setDescription("Creates a new UCRM Plugin")
             ->addArgument("name", InputArgument::REQUIRED, "The name of the plugin")
             ->addArgument("template", InputArgument::REQUIRED, "The name of a template from templates/ or a git repo")
-            ->addOption("submodule", "s", InputOption::VALUE_NONE, "When used with --git, adds the Plugin as a submodule")
+            //->addOption("submodule", "s", InputOption::VALUE_NONE, "When used with --git, adds the Plugin as a submodule")
             ->addOption("force", "f", InputOption::VALUE_NONE, "Forces replacement of an existing Plugin");
         
     }
@@ -46,27 +45,12 @@ final class CreateCommand extends BaseCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
-        
-        $info = Templater::getAuthor();
-        
-        
-        $modified = Templater::replace(FileSystem::path(PROJECT_PATH."/plugins/testing/src/"), [
-            "UCRM_PLUGIN_NAME" => $input->getArgument("name"),
-            "UCRM_PLUGIN_AUTHOR" => $info,
-        ]);
-        
-        print_r($modified);
-        
-        //print_r ($info);
-        exit;
-        
-        
         $owd = getcwd();
         chdir(FileSystem::path(PROJECT_PATH."/plugins/"));
         
         $name = $input->getArgument("name");
         $template = $input->getArgument("template");
-        $submodule = $input->getOption("submodule");
+        //$submodule = $input->getOption("submodule");
         $force = $input->getOption("force");
         
         if (!preg_match(self::NAMING_PATTERN, $name))
@@ -108,15 +92,16 @@ final class CreateCommand extends BaseCommand
         
         chdir("$name/src");
         
-        if (file_exists("manifest.json"))
-        {
-            $manifest = json_decode(file_get_contents("manifest.json"), TRUE);
-            $manifest["information"]["name"] = $name;
-            //$manifest["information"]["author"] =
-            // TODO: Improve the templating system!
-            
-            file_put_contents("manifest.json", json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-        }
+    
+        $this->io->writeln("Replacing template variables and executing commands...");
+        
+        $modified = Templater::replace(FileSystem::path(PROJECT_PATH."/plugins/$name/src/"), [
+            "UCRM_PLUGIN_NAME" => $input->getArgument("name"),
+            "UCRM_PLUGIN_AUTHOR" => Git::getAuthor(),
+        ]);
+    
+        $this->io->writeln("Modified $modified template files!");
+        
         
         if(file_exists("composer.json"))
         {
@@ -136,19 +121,50 @@ final class CreateCommand extends BaseCommand
             EOF
         );
         
+        if (file_exists($box = FileSystem::path(PROJECT_PATH."/box/vagrant/env/box.conf")))
+        {
+            $ini = parse_ini_file($box);
+            $host = array_key_exists("IP", $ini) ? $ini["IP"] : "localhost";
+        }
+        else
+        {
+            $host = "localhost";
+        }
         
-        $zip = FileSystem::path(PROJECT_PATH."/plugins/$name/$name.zip");
-    
+        $zip = dirname(str_replace("\\", "/", FileSystem::path(PROJECT_PATH."/plugins/$name/$name.zip")));
+        $dir = FileSystem::path(PROJECT_PATH);
+        $doc = str_replace("\\", "/", FileSystem::path(PROJECT_PATH."/docs/vagrant.md"));
+        
         $this->io->writeln(<<<EOF
             
             Your newly created Plugin should now be ready for use.
             
             Next Steps:
-            - Login to your local/development UISP installation and complete setup if necessary.
-              > https://localhost/
+            - Login to your local development UISP installation and complete setup if necessary.
+              > https://$host
+            
             - Install, configure and enable the Plugin using the included ZIP file:
-              > $zip
-            - TBC...
+              > file:///$zip
+            
+            - Configure SFTP Deployment as desired, using the following settings:
+              > host: $host
+              > user: vagrant
+              > password: vagrant
+              > mappings:
+                ./plugins/$name/src/ <-> /home/unms/data/ucrm/ucrm/data/plugins/$name/
+                <options=bold>Do not sync until after the initial Plugin installation in UNMS!</>
+              > exclusions:
+                ./plugins/$name/src/vendor/ -> /home/unms/data/ucrm/ucrm/data/plugins/$name/vendor/
+                
+            - Best practice for composer dependency changes is to issue the following command after synchronization:
+              > cd $dir && vagrant ssh -c "cd /home/unms/data/ucrm/ucrm/data/plugins/$name && composer install"
+              
+            - When needed, you can SSH into the development VM using the following:
+              > cd $dir && vagrant ssh
+              
+            - Updates to the composer.json file
+              
+            - See file:///$doc for more information!
             
             EOF
         );

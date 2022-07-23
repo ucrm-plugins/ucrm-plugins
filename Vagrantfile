@@ -18,6 +18,22 @@ Vagrant.configure("2") do |config|
     # NOTE: Currently the UCRM version is ALWAYS exactly 2 major versions ahead.
     UCRM_VERSION = UISP_VERSION.gsub(/^(\d+)/) { |capture| (capture.to_i + 2).to_s }
 
+    # Change the UCRM_VERSION in static files, using this file as the source of truth.
+    override_file = "./box/unms/app/overrides/docker-compose.override.yml"
+    changed = false
+
+    override_data = File.read(override_file).gsub(/^(\s*UCRM_VERSION)\s*:\s*([\d\.]+)$/) do
+        changed = true unless $2 == "#{UCRM_VERSION}"; $1 + ": #{UCRM_VERSION}"
+    end
+
+    # Only write the contents to the file if they are actually changed...
+    if changed
+        File.open(override_file, "w") do |out|
+            out << override_data
+            puts "Changed UCRM_VERSION to #{UCRM_VERSION} in #{override_file}"
+        end
+    end
+
     # ------------------------------------------------------------------------------------------------------------------
     # NETWORKING
     # ------------------------------------------------------------------------------------------------------------------
@@ -90,6 +106,17 @@ Vagrant.configure("2") do |config|
     end
 
     # FUTURE: Consider adding support for other providers?
+    #config.vm.provider "vmware_desktop" do |vm|
+    #    vm.gui = false
+    #    vm.vmx["displayname"] = "uisp-dev-#{UISP_VERSION}"
+    #
+    #    # NOTE: Set the following to suit your needs and based upon available host resources.
+    #    #vm.cpus = 1
+    #    #vm.memory = 4096
+    #    vm.vmx["memsize"] = "4096"
+    #    vm.vmx["numvcpus"] = "1"
+    #end
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # PROVISIONERS
@@ -120,7 +147,7 @@ Vagrant.configure("2") do |config|
             echo "export UISP_VERSION=\"#{UISP_VERSION}\"" >> /etc/profile.d/box.sh
             echo "export UCRM_VERSION=\"#{UCRM_VERSION}\"" >> /etc/profile.d/box.sh
             echo "export UISP_ENVIRONMENT=\"development\"" >> /etc/profile.d/box.sh
-
+            echo "export COMPOSER_ALLOW_SUPERUSER=1"       >> /etc/profile.d/box.sh
             # ... Add any other system-wide environment variables here!
 
             # Double check permissions and source the new values.
@@ -133,13 +160,21 @@ Vagrant.configure("2") do |config|
     # build: This provisioner is responsible for building an updated version of the overrides.
     config.vm.provision "build", type: "shell", keep_color: true, inline: <<-SHELL
 
+        cd /home/unms/app
+        rm -f docker-compose.override.yml
+        ln -s ./overrides/docker-compose.override.yml docker-compose.override.yml
+
         # Builds and runs our custom docker image.
-        cd /home/unms/app && UCRM_VERSION=#{UCRM_VERSION} docker-compose -p unms up -d --build ucrm
+        docker-compose -p unms up -d --build ucrm
 
     SHELL
 
     # permissions: This provisioner checks and sets ownerships and permissions as needed.
     config.vm.provision "permissions", type: "shell", keep_color: true, inline: <<-SHELL
+
+        chmod 775 -R /home/unms/
+
+        # chown unms:vagrant -R /home/unms/
 
         # Take ownership of the UCRM data folder and ALL sub-folders for SFTP access.
         # NOTE: This folder maps directly to /data/ inside the UCRM container.

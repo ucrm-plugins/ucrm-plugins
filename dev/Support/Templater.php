@@ -20,55 +20,12 @@ class Templater
      *
      * @return array Returns an array containing only entries where the key is a string.
      */
+    /*
     protected static function named(array $array): array
     {
         return array_filter($array, function($key) { return is_string($key); }, ARRAY_FILTER_USE_KEY);
     }
-    
-    /**
-     * Attempts to get the current user's information from Git.
-     *
-     * @param bool $global
-     *
-     * @return string
-     */
-    protected static function getGitUser(bool $global = FALSE): string
-    {
-        // Build the command.
-        $config = shell_exec("git config " . ($global ? "--global " : ""). "--list");
-    
-        if ($config && preg_match_all("/^user.(?<key>(name|email))=(?<value>.*)$/m", $config, $matches))
-        {
-            if (array_key_exists("key", $matches) && array_key_exists("value", $matches))
-            {
-                $info = array_combine($matches["key"], $matches["value"]);
-                return $info["name"] . " <" . $info["email"] . ">";
-            }
-        }
-        
-        return "";
-    }
-    
-    /**
-     * Attempts to get the Author's information from Git.
-     *
-     * @param string $default The default to use when a Git user is not found.
-     *
-     * @return string The Author's information in the format `Name <email>`.
-     */
-    public static function getAuthor(string $default = "Unknown"): string
-    {
-        // Try local config first...
-        if ($user = self::getGitUser())
-            return $user;
-    
-        // Try global config next...
-        if ($user = self::getGitUser(TRUE))
-            return $user;
-    
-        // Otherwise, return the default!
-        return $default;
-    }
+    */
     
     /**
      * Replaces all occurrence of variables and available commands in the directory specified, recursively.
@@ -214,8 +171,8 @@ class Templater
                 // IF any commands or variables have been replaced...
                 if ($cmd_count > 0 || $var_count > 0)
                 {
-                    print_r($content);
-                    //file_put_contents($path, $contents);
+                    //print_r($content);
+                    file_put_contents($path, $content);
                     
                     $modified++;
                 }
