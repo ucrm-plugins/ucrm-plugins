@@ -1,14 +1,23 @@
 <component name="ProjectDictionaryState">
   <dictionary name="rspaeth">
     <words>
+      <w>chpasswd</w>
       <w>cmds</w>
       <w>compliancy</w>
       <w>disabledelayedexpansion</w>
+      <w>displayname</w>
+      <w>dmode</w>
       <w>fastcgi</w>
       <w>fqns</w>
       <w>gcstats</w>
       <w>gsub</w>
+      <w>hostmanager</w>
+      <w>hyperv</w>
       <w>idekey</w>
+      <w>maxmemory</w>
+      <w>memsize</w>
+      <w>mware</w>
+      <w>numvcpus</w>
       <w>postgre</w>
       <w>rbconfig</w>
       <w>setlocal</w>
@@ -17,6 +26,7 @@
       <w>ucrm</w>
       <w>uisp</w>
       <w>unms</w>
+      <w>vmname</w>
       <w>vmware</w>
     </words>
   </dictionary>

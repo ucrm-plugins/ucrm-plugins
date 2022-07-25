@@ -134,6 +134,19 @@ class CreateCommand extends BaseCommand
         $zip = dirname(str_replace("\\", "/", FileSystem::path(PROJECT_PATH."/plugins/$name/$name.zip")));
         $dir = FileSystem::path(PROJECT_PATH);
         $doc = str_replace("\\", "/", FileSystem::path(PROJECT_PATH."/docs/vagrant.md"));
+    
+        /*
+        <component name="PhpProjectServersManager">
+            <servers>
+              <server host="uisp-dev" id="c785963a-b7ef-4eeb-82b6-2847458309ca" name="vagrant" use_path_mappings="true">
+                <path_mappings>
+                  <mapping local-root="$PROJECT_DIR$/plugins/testing/src" remote-root="/data/ucrm/data/plugins/testing" />
+                  <mapping local-root="$PROJECT_DIR$/plugins/testing/www" remote-root="/usr/src/ucrm/web/_plugins/testing" />
+                </path_mappings>
+              </server>
+            </servers>
+        </component>
+        */
         
         $this->io->writeln(<<<EOF
             

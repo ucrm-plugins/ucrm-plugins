@@ -34,11 +34,18 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php70" />
     </include_path>
   </component>
   <component name="PhpProjectServersManager">
     <servers>
-      <server host="192.168.50.10" id="c785963a-b7ef-4eeb-82b6-2847458309ca" name="vagrant" use_path_mappings="true" />
+      <server host="uisp-dev" id="c785963a-b7ef-4eeb-82b6-2847458309ca" name="vagrant" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$/plugins/testing/src" remote-root="/data/ucrm/data/plugins/testing" />
+          <mapping local-root="$PROJECT_DIR$/plugins/testing/www" remote-root="/usr/src/ucrm/web/_plugins/testing" />
+        </path_mappings>
+      </server>
     </servers>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />

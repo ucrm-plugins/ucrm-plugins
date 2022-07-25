@@ -1,1 +1,1 @@
-fastcgi_param PHP_IDE_CONFIG "serverName=vagrant";
+fastcgi_param PHP_IDE_CONFIG "serverName=uisp-dev";

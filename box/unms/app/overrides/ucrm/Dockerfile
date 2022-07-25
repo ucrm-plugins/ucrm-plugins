@@ -9,7 +9,6 @@ ENV PHPIZE_DEPS="autoconf dpkg-dev dpkg file g++ gcc libc-dev make pkgconf re2c"
 RUN cd /etc/nginx/available-servers ; \
     sed -i '/        include xdebug_params;/d' ucrm.conf ; \
     sed -i 's|\$document_root;|\$document_root;\n        include xdebug_params;|g' ucrm.conf ; \
-    if ! pecl list | grep xdebug >/dev/null 2>&1; then rm -rf /var/cache/apk/* && rm -rf /tmp/*; fi ; \
     if ! pecl list | grep xdebug >/dev/null 2>&1; then apk add --update --no-cache $PHPIZE_DEPS; fi ; \
     if ! pecl list | grep xdebug >/dev/null 2>&1; then pecl install xdebug; fi ; \
     if ! php -m    | grep xdebug >/dev/null 2>&1; then docker-php-ext-enable xdebug; fi
