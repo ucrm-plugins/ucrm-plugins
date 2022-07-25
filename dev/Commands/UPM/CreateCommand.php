@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace UCRM\Plugins\Commands\UPM;
 
+use SimpleXMLElement;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -124,29 +125,28 @@ class CreateCommand extends BaseCommand
         if (file_exists($box = FileSystem::path(PROJECT_PATH."/box/vagrant/env/box.conf")))
         {
             $ini = parse_ini_file($box);
-            $host = array_key_exists("IP", $ini) ? $ini["IP"] : "localhost";
+            $host = array_key_exists("HOSTNAME", $ini) ? $ini["HOSTNAME"] : "localhost";
+            $ip = array_key_exists("IP", $ini) ? $ini["IP"] : "127.0.0.1";
+            
+            
+            
+            
+            
+            
         }
         else
         {
             $host = "localhost";
+            $ip = "127.0.0.1";
         }
         
         $zip = dirname(str_replace("\\", "/", FileSystem::path(PROJECT_PATH."/plugins/$name/$name.zip")));
         $dir = FileSystem::path(PROJECT_PATH);
         $doc = str_replace("\\", "/", FileSystem::path(PROJECT_PATH."/docs/vagrant.md"));
     
-        /*
-        <component name="PhpProjectServersManager">
-            <servers>
-              <server host="uisp-dev" id="c785963a-b7ef-4eeb-82b6-2847458309ca" name="vagrant" use_path_mappings="true">
-                <path_mappings>
-                  <mapping local-root="$PROJECT_DIR$/plugins/testing/src" remote-root="/data/ucrm/data/plugins/testing" />
-                  <mapping local-root="$PROJECT_DIR$/plugins/testing/www" remote-root="/usr/src/ucrm/web/_plugins/testing" />
-                </path_mappings>
-              </server>
-            </servers>
-        </component>
-        */
+        
+        
+        
         
         $this->io->writeln(<<<EOF
             

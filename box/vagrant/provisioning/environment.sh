@@ -15,7 +15,7 @@ IPV4=`ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1`
 IPV6=`ip addr show eth1 | grep "inet6\b" | awk '{print $2}' | cut -d/ -f1`
 
 echo 'HOSTNAME="'`hostname`'"' >> /home/vagrant/env/box.conf
-echo 'IP="IPV4"' >> /home/vagrant/env/box.conf
+echo "IP=\"$IPV4\"" >> /home/vagrant/env/box.conf
 
 # Make sure ownership and permissions are correct.
 chown -R vagrant:vagrant /home/vagrant/env/

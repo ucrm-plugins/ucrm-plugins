@@ -2,56 +2,56 @@
 <project version="4">
   <component name="PhpCSFixer">
     <phpcsfixer_settings>
-      <PhpCSFixerConfiguration tool_path="$PROJECT_DIR$/vendor/bin/php-cs-fixer" />
+      <PhpCSFixerConfiguration tool_path="$PROJECT_DIR$/vendor/bin/php-cs-fixer"/>
     </phpcsfixer_settings>
   </component>
   <component name="PhpIncludePathManager">
     <include_path>
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
-      <path value="$PROJECT_DIR$/vendor/symfony/process" />
-      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/stopwatch" />
-      <path value="$PROJECT_DIR$/vendor/composer" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
-      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
-      <path value="$PROJECT_DIR$/vendor/psr/container" />
-      <path value="$PROJECT_DIR$/vendor/friendsofphp/php-cs-fixer" />
-      <path value="$PROJECT_DIR$/vendor/psr/log" />
-      <path value="$PROJECT_DIR$/vendor/php-cs-fixer/diff" />
-      <path value="$PROJECT_DIR$/vendor/symfony/console" />
-      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
-      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
-      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
-      <path value="$PROJECT_DIR$/vendor/symfony/options-resolver" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
-      <path value="$PROJECT_DIR$/vendor/psr/cache" />
-      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
-      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
-      <path value="$PROJECT_DIR$/vendor/symfony/string" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
-      <path value="$PROJECT_DIR$/vendor/paragonie/random_compat" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php70" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73"/>
+      <path value="$PROJECT_DIR$/vendor/symfony/process"/>
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts"/>
+      <path value="$PROJECT_DIR$/vendor/symfony/stopwatch"/>
+      <path value="$PROJECT_DIR$/vendor/composer"/>
+      <path value="$PROJECT_DIR$/vendor/doctrine/annotations"/>
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer"/>
+      <path value="$PROJECT_DIR$/vendor/psr/container"/>
+      <path value="$PROJECT_DIR$/vendor/friendsofphp/php-cs-fixer"/>
+      <path value="$PROJECT_DIR$/vendor/psr/log"/>
+      <path value="$PROJECT_DIR$/vendor/php-cs-fixer/diff"/>
+      <path value="$PROJECT_DIR$/vendor/symfony/console"/>
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher"/>
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts"/>
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem"/>
+      <path value="$PROJECT_DIR$/vendor/symfony/finder"/>
+      <path value="$PROJECT_DIR$/vendor/symfony/options-resolver"/>
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype"/>
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring"/>
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72"/>
+      <path value="$PROJECT_DIR$/vendor/psr/cache"/>
+      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher"/>
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts"/>
+      <path value="$PROJECT_DIR$/vendor/symfony/string"/>
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer"/>
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80"/>
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme"/>
     </include_path>
   </component>
   <component name="PhpProjectServersManager">
     <servers>
-      <server host="uisp-dev" id="c785963a-b7ef-4eeb-82b6-2847458309ca" name="vagrant" use_path_mappings="true">
+      <server host="uisp-dev" id="3d0c13c6-ee14-4237-bdaf-cbbfd57a1ffd" name="uisp-dev" use_path_mappings="true">
         <path_mappings>
-          <mapping local-root="$PROJECT_DIR$/plugins/testing/src" remote-root="/data/ucrm/data/plugins/testing" />
-          <mapping local-root="$PROJECT_DIR$/plugins/testing/www" remote-root="/usr/src/ucrm/web/_plugins/testing" />
+          <mapping local-root="$PROJECT_DIR$/plugins/testing/src" remote-root="/data/ucrm/data/plugins/testing"/>
+          <mapping local-root="$PROJECT_DIR$/plugins/testing/www" remote-root="/usr/src/ucrm/web/_plugins/testing"/>
+          <mapping local-root="$PROJECT_DIR$/plugins/sms-twilio/src" remote-root="/data/ucrm/data/plugins/sms-twilio"/>
+          <mapping local-root="$PROJECT_DIR$/plugins/sms-twilio/www" remote-root="/usr/src/ucrm/web/_plugins/sms-twilio"/>
         </path_mappings>
       </server>
     </servers>
   </component>
-  <component name="PhpProjectSharedConfiguration" php_language_level="7.4" />
+  <component name="PhpProjectSharedConfiguration" php_language_level="7.4"/>
   <component name="PhpUnit">
     <phpunit_settings>
-      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/vendor/autoload.php" />
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/vendor/autoload.php"/>
     </phpunit_settings>
   </component>
 </project>
