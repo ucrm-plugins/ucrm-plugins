@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
     BOX_ADDRESS     = "192.168.50.10"
     DNS_ALIASES     = [ "vagrant" ]
     ROOT_PASSWORD   = "vagrant"
-    UISP_VERSION    = "1.4.5"
+    UISP_VERSION    = "1.4.6"
 
     # ------------------------------------------------------------------------------------------------------------------
     # CONFIGURATION (DYNAMIC)
@@ -170,10 +170,5 @@ Vagrant.configure("2") do |config|
     config.vm.provision "build", type: "shell", keep_color: true,
         path: "./box/vagrant/provisioning/build.sh",
         env: { "UISP_VERSION" => "#{UISP_VERSION}", "UCRM_VERSION" => "#{UCRM_VERSION}" }
-
-    # permissions: This provisioner checks and sets ownerships and permissions as needed.
-    config.vm.provision "permissions", type: "shell", keep_color: true, run: "always",
-        path: "./box/vagrant/provisioning/permissions.sh",
-        env: { }
 
 end

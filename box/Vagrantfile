@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
 
     # Override the following defaults as desired:
     ROOT_PASSWORD   = "vagrant"
-    UISP_VERSION    = "1.4.5"
+    UISP_VERSION    = "1.4.6"
 
     # ------------------------------------------------------------------------------------------------------------------
     # NETWORKING
@@ -59,17 +59,17 @@ Vagrant.configure("2") do |config|
 
     # Hyper-V
     # NOTE: Issues with synced folders, more work later.
-    config.vm.provider "hyperv" do |vm, override|
-        vm.vmname = "uisp-#{UISP_VERSION}"
-
-        # NOTE: Set the following to suit your needs and based upon available host resources.
-        vm.cpus = "1"
-        vm.memory = "4096"
-        vm.maxmemory = "8192"
-
-        # NOTE: This is used to skip the Switch prompt, change as needed; OR simply remove completely to be prompted.
-        override.vm.network "private_network", bridge: "Default Switch"
-    end
+    #config.vm.provider "hyperv" do |vm, override|
+    #    vm.vmname = "uisp-#{UISP_VERSION}"
+    #
+    #    # NOTE: Set the following to suit your needs and based upon available host resources.
+    #    vm.cpus = "1"
+    #    vm.memory = "4096"
+    #    vm.maxmemory = "8192"
+    #
+    #    # NOTE: This is used to skip the Switch prompt, change as needed; OR simply remove completely to be prompted.
+    #    override.vm.network "private_network", bridge: "Default Switch"
+    #end
 
     # ------------------------------------------------------------------------------------------------------------------
     # PROVISIONERS
@@ -95,4 +95,8 @@ Vagrant.configure("2") do |config|
         path: "./vagrant/provisioning/base/install.sh",
         env: { "UISP_VERSION" => "#{UISP_VERSION}" }
 
+    # Provision file/folder permissions...
+    config.vm.provision "permissions", type: "shell", keep_color: true,
+        path: "./vagrant/provisioning/base/permissions.sh",
+        env: { }
 end

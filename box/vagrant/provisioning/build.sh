@@ -33,9 +33,14 @@ fi
 
 rm "$filename.bak"
 
+xdebug=/home/unms/data/ucrm/log/ucrm/app/logs/xdebug.log
+touch $xdebug
+chmod 775 $xdebug
+chown vagrant:vagrant $xdebug
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Build
 # ----------------------------------------------------------------------------------------------------------------------
 
 # Restart UCRM while forcing a (re-)build of our custom docker image.
-docker-compose -p unms up -d --build ucrm
+#docker-compose -p unms up -d --build ucrm
