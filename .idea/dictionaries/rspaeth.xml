@@ -8,6 +8,7 @@
       <w>displayname</w>
       <w>dmode</w>
       <w>fastcgi</w>
+      <w>fileutils</w>
       <w>fqns</w>
       <w>gcstats</w>
       <w>gsub</w>
@@ -23,6 +24,7 @@
       <w>setlocal</w>
       <w>spaeth</w>
       <w>templater</w>
+      <w>ubnt</w>
       <w>ucrm</w>
       <w>uisp</w>
       <w>unms</w>

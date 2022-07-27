@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace UCRM\Plugins\Commands\UPM;
 
-use SimpleXMLElement;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -36,6 +35,7 @@ class CreateCommand extends BaseCommand
             ->addArgument("name", InputArgument::REQUIRED, "The name of the plugin")
             ->addArgument("template", InputArgument::REQUIRED, "The name of a template from templates/ or a git repo")
             //->addOption("submodule", "s", InputOption::VALUE_NONE, "When used with --git, adds the Plugin as a submodule")
+            ->addOption("map", "m", InputOption::VALUE_NONE, "Also creates the server mappings, using 'upm map'")
             ->addOption("force", "f", InputOption::VALUE_NONE, "Forces replacement of an existing Plugin");
         
     }
@@ -52,6 +52,7 @@ class CreateCommand extends BaseCommand
         $name = $input->getArgument("name");
         $template = $input->getArgument("template");
         //$submodule = $input->getOption("submodule");
+        $map = $input->getOption("map");
         $force = $input->getOption("force");
         
         if (!preg_match(self::NAMING_PATTERN, $name))
@@ -144,13 +145,12 @@ class CreateCommand extends BaseCommand
         $dir = FileSystem::path(PROJECT_PATH);
         $doc = str_replace("\\", "/", FileSystem::path(PROJECT_PATH."/docs/vagrant.md"));
     
-        
-        
-        
+        if ($map)
+            exec("upm map $name");
         
         $this->io->writeln(<<<EOF
             
-            Your newly created Plugin should now be ready for use.
+            Your newly created Plugin should now be ready for development.
             
             Next Steps:
             - Login to your local development UISP installation and complete setup if necessary.
@@ -159,33 +159,10 @@ class CreateCommand extends BaseCommand
             - Install, configure and enable the Plugin using the included ZIP file:
               > file:///$zip
             
-            - Configure SFTP Deployment as desired, using the following settings:
-              > host: $host
-              > user: vagrant
-              > password: vagrant
-              > mappings:
-                ./plugins/$name/src/ <-> /home/unms/data/ucrm/ucrm/data/plugins/$name/
-                <options=bold>Do not sync until after the initial Plugin installation in UNMS!</>
-              > exclusions:
-                ./plugins/$name/src/vendor/ -> /home/unms/data/ucrm/ucrm/data/plugins/$name/vendor/
-                
-            - Best practice for composer dependency changes is to issue the following command after synchronization:
-              > cd $dir && vagrant ssh -c "cd /home/unms/data/ucrm/ucrm/data/plugins/$name && composer install"
-              
-            - When needed, you can SSH into the development VM using the following:
-              > cd $dir && vagrant ssh
-              
-            - Updates to the composer.json file
-              
             - See file:///$doc for more information!
             
             EOF
         );
-        
-        
-        
-        
-        
         
         chdir($owd);
         return 0;

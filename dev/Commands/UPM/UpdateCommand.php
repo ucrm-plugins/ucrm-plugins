@@ -5,12 +5,9 @@ namespace UCRM\Plugins\Commands\UPM;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use UCRM\Plugins\Commands\BaseCommand;
 use UCRM\Plugins\Support\FileSystem;
-use UCRM\Plugins\Support\Git;
-use UCRM\Plugins\Support\Templater;
 
 /**
  * UpdateCommand

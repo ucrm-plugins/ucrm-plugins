@@ -1,34 +1,41 @@
 #!/bin/bash
 
-# Crete the shared env folder, if it does not already exist.
-mkdir -p /home/vagrant/env/
+app=/home/unms/app
+env=/home/vagrant/env
+profile=/etc/profile.d
 
-# Remove any stale env files.
-rm -f /home/vagrant/env/{box,unms}.conf
+# ----------------------------------------------------------------------------------------------------------------------
+# ENVIRONMENT FILES
+# ----------------------------------------------------------------------------------------------------------------------
+mkdir -p $env
 
-# Copy over the env information created by UISP.
-cp /home/unms/app/unms.conf /home/vagrant/env/unms.conf
+# Remove any stale files.
+rm -f $env/{box,unms}.conf
 
-# Create an ENV file for box specific information.
+# Copy over any information created by UISP.
+cp $app/unms.conf $env/unms.conf
 
-IPV4=`ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1`
-IPV6=`ip addr show eth1 | grep "inet6\b" | awk '{print $2}' | cut -d/ -f1`
+# Get the Box's IP information.
+ipv4=`ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1`
+ipv6=`ip addr show eth1 | grep "inet6\b" | awk '{print $2}' | cut -d/ -f1`
 
-echo 'HOSTNAME="'`hostname`'"' >> /home/vagrant/env/box.conf
-echo "IP=\"$IPV4\"" >> /home/vagrant/env/box.conf
+echo 'HOSTNAME="'`hostname`'"' >> $env/box.conf
+echo "IP=\"$ipv4\"" >> $env/box.conf
 
 # Make sure ownership and permissions are correct.
-chown -R vagrant:vagrant /home/vagrant/env/
+chown -R vagrant:vagrant $env
 
-# We also set some ENV variables for use on the guest itself.
-rm -f /etc/profile.d/box.sh
-echo "export UISP_VERSION=\"$UISP_VERSION\"" >> /etc/profile.d/box.sh
-echo "export UCRM_VERSION=\"$UCRM_VERSION\"" >> /etc/profile.d/box.sh
-echo "export UISP_ENVIRONMENT=\"development\"" >> /etc/profile.d/box.sh
-#echo "export COMPOSER_ALLOW_SUPERUSER=1"       >> /etc/profile.d/box.sh
-# ... Add any other system-wide environment variables here!
+# ----------------------------------------------------------------------------------------------------------------------
+# ENVIRONMENT VARIABLES
+# ----------------------------------------------------------------------------------------------------------------------
+rm -f $profile/box.sh
+echo "export UISP_VERSION=\"$UISP_VERSION\""    >> $profile/box.sh
+echo "export UCRM_VERSION=\"$UCRM_VERSION\""    >> $profile/box.sh
+echo "export UISP_ENVIRONMENT=\"development\""  >> $profile/box.sh
+
+# FUTURE: Add any other system-wide environment variables here!
 
 # Double check permissions and source the new values.
-chown root:root /etc/profile.d/box.sh
-chmod +x /etc/profile.d/box.sh
-source /etc/profile.d/box.sh
+chown root:root $profile/box.sh
+chmod +x $profile/box.sh
+source $profile/box.sh
