@@ -2,6 +2,12 @@
 
 const UCRM_MAX_PLUGIN_URL_LENGTH = 255;
 
+if ($argc > 1 && ($argv[1] === "-v" || $argv[1] === "--verbose" ))
+    define("VERBOSE", true);
+else
+    define("VERBOSE", false);
+
+
 function ensureFileExists(string $file): int
 {
     if (! file_exists($file)) {
@@ -343,7 +349,13 @@ function checkPluginsJson(): int
     return 1;
 }
 
-function validatePhp(string $path): int
+function fixPath(string $path, bool $quote = false): string
+{
+    $quotes = ($quote || strpos($path, " ") !== false) ? "\"" : "";
+    return $quotes . escapeshellcmd(str_replace("\\", "/", $path)) . $quotes;
+}
+
+function validatePhp(string $path, bool $verbose = VERBOSE): int
 {
     $errors = 0;
     $files = new CallbackFilterIterator(
@@ -353,18 +365,25 @@ function validatePhp(string $path): int
         function (SplFileInfo $fileInfo) {
             return (! $fileInfo->isDir())
                 && (stripos($fileInfo->getBasename(), '.php') === strlen($fileInfo->getBasename()) - 4)
-                && (strpos($fileInfo->getPathname(), '/src/vendor/') === false);
+                && (strpos(fixPath($fileInfo->getPathname()), '/src/vendor/') === false);
         }
     );
+    
     /** @var SplFileInfo $file */
     foreach ($files as $file) {
         $output = [];
         $result = null;
+    
         exec(
-            escapeshellcmd(PHP_BINARY) . ' -l ' . escapeshellarg($file->getPathname()),
+            //escapeshellcmd(PHP_BINARY) . ' -l ' . escapeshellarg($file->getPathname()),
+            fixPath(PHP_BINARY) . ' -l ' . fixPath($file->getPathname()),
             $output,
             $result
         );
+        
+        if ($verbose)
+            print_r(implode("\n", $output)."\n");
+        
         if ($result !== 0) {
             ++$errors;
         }
