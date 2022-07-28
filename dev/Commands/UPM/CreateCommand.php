@@ -7,7 +7,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use UCRM\Plugins\Commands\BaseCommand;
+use UCRM\Plugins\Commands\PluginSpecificCommand;
 use UCRM\Plugins\Support\FileSystem;
 use UCRM\Plugins\Support\Git;
 use UCRM\Plugins\Support\Templater;
@@ -20,9 +20,12 @@ use UCRM\Plugins\Support\Templater;
  *
  * @final
  */
-class CreateCommand extends BaseCommand
+final class CreateCommand extends PluginSpecificCommand
 {
-    protected const NAMING_PATTERN = "/^[a-z][a-z\d-]*$/";
+    protected string $template;
+    protected bool $submodule;
+    protected bool $map;
+    protected bool $force;
     
     /**
      * @inheritDoc
@@ -39,28 +42,23 @@ class CreateCommand extends BaseCommand
             ->addOption("force", "f", InputOption::VALUE_NONE, "Forces replacement of an existing Plugin");
         
     }
-   
+    
     /**
      * @inheritDoc
      *
      */
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
-        $owd = getcwd();
-        chdir(FileSystem::path(PROJECT_PATH."/plugins/"));
+        $this->beforeExecute($input, $output);
+    
+        $this->template = $input->getArgument("template");
+        //$this->submodule = $input->getOption("submodule");
+        $this->map = $input->getOption("map");
+        $this->force = $input->getOption("force");
         
-        $name = $input->getArgument("name");
-        $template = $input->getArgument("template");
-        //$submodule = $input->getOption("submodule");
-        $map = $input->getOption("map");
-        $force = $input->getOption("force");
-        
-        if (!preg_match(self::NAMING_PATTERN, $name))
-            $this->error("The Plugin's name is invalid, please adhere to ".self::NAMING_PATTERN, TRUE);
-        
-        if (file_exists($existing = FileSystem::path(PROJECT_PATH."/plugins/$name")))
+        if (file_exists($existing = FileSystem::path(PROJECT_PATH."/plugins/$this->name")))
         {
-            if (!$force)
+            if (!$this->force)
                 $this->error("A Plugin with that name already exists at: $existing", TRUE);
             else
             {
@@ -70,34 +68,34 @@ class CreateCommand extends BaseCommand
             }
         }
         
-        if ($path = realpath(PROJECT_PATH."/templates/$template"))
+        if ($path = realpath(PROJECT_PATH."/templates/$this->template"))
         {
             $this->io->writeln("Template found, locally, duplicating...");
-            FileSystem::copyDir($path, FileSystem::path(PROJECT_PATH."/plugins/$name"), TRUE, TRUE);
+            FileSystem::copyDir($path, FileSystem::path(PROJECT_PATH."/plugins/$this->name"), TRUE, TRUE);
             
         }
         else
         {
             $this->io->writeln("Template not found locally, trying repositories:");
             
-            $repo = filter_var($template, FILTER_VALIDATE_URL)
-                ? $template
-                : "https://github.com/ucrm-plugins/$template";
+            $repo = filter_var($this->template, FILTER_VALIDATE_URL)
+                ? $this->template
+                : "https://github.com/ucrm-plugins/$this->template";
             
             $this->io->writeln("> $repo");
     
-            FileSystem::gitClone($repo, $name, FALSE, TRUE);
+            FileSystem::gitClone($repo, $this->name, FALSE, TRUE);
         }
         
-        if (!file_exists($name))
-            $this->error("The specified template could not be found: $template", TRUE);
+        if (!file_exists($this->name))
+            $this->error("The specified template could not be found: $this->template", TRUE);
         
-        chdir("$name/src");
+        chdir("$this->name/src");
         
     
         $this->io->writeln("Replacing template variables and executing commands...");
         
-        $modified = Templater::replace(FileSystem::path(PROJECT_PATH."/plugins/$name/src/"), [
+        $modified = Templater::replace(FileSystem::path(PROJECT_PATH."/plugins/$this->name/src/"), [
             "UCRM_PLUGIN_NAME" => $input->getArgument("name"),
             "UCRM_PLUGIN_AUTHOR" => Git::getAuthor(),
         ]);
@@ -108,7 +106,7 @@ class CreateCommand extends BaseCommand
         if(file_exists("composer.json"))
         {
             exec("composer install");
-            exec("composer archive --file $name");
+            exec("composer archive --file $this->name");
         
         }
         
@@ -117,8 +115,8 @@ class CreateCommand extends BaseCommand
         mkdir("www");
         file_put_contents("www/public.php", <<<EOF
             <?php /** @noinspection PhpIncludeInspection */
-            chdir(dirname('/usr/src/ucrm/app/data/plugins/$name/public.php'));
-            require_once '/usr/src/ucrm/app/data/plugins/$name/public.php';
+            chdir(dirname('/usr/src/ucrm/app/data/plugins/$this->name/public.php'));
+            require_once '/usr/src/ucrm/app/data/plugins/$this->name/public.php';
             
             EOF
         );
@@ -141,12 +139,12 @@ class CreateCommand extends BaseCommand
             $ip = "127.0.0.1";
         }
         
-        $zip = dirname(str_replace("\\", "/", FileSystem::path(PROJECT_PATH."/plugins/$name/$name.zip")));
+        $zip = dirname(str_replace("\\", "/", FileSystem::path(PROJECT_PATH."/plugins/$this->name/$this->name.zip")));
         $dir = FileSystem::path(PROJECT_PATH);
         $doc = str_replace("\\", "/", FileSystem::path(PROJECT_PATH."/docs/vagrant.md"));
     
-        if ($map)
-            exec("upm map $name");
+        if ($this->map)
+            exec("upm map $this->name");
         
         $this->io->writeln(<<<EOF
             
@@ -164,7 +162,7 @@ class CreateCommand extends BaseCommand
             EOF
         );
         
-        chdir($owd);
+        $this->afterExecute($input, $output);
         return 0;
     }
 

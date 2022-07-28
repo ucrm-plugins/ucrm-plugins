@@ -1,4 +1,7 @@
-# NOTE: This file is symlinked, so all paths in this file need to either be absolute or relative to "/home/unms/app/".
+
+# NOTES:
+# - This file is symlinked, so all paths in this file need to either be absolute or relative to "/home/unms/app/".
+# - The version in the 'image' name and the 'UCRM_VERSION' arg will be updated by the 'build' provisioner, as needed.
 
 version: "2"
 
@@ -18,3 +21,4 @@ services:
         volumes:
             - ./overrides/ucrm/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
             - ./overrides/ucrm/xdebug_params:/etc/nginx/xdebug_params
+            - ../../vagrant/scripts/ucrm:/scripts

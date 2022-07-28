@@ -7,6 +7,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use UCRM\Plugins\Support\FileSystem;
 
 /**
  * BaseCommand
@@ -18,6 +19,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 abstract class BaseCommand extends Command
 {
     protected SymfonyStyle $io;
+    protected string $owd;
     
     /**
      * @param InputInterface $input
@@ -28,7 +30,6 @@ abstract class BaseCommand extends Command
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         $this->io = new SymfonyStyle($input, $output);
-        
     }
     
     
@@ -49,6 +50,19 @@ abstract class BaseCommand extends Command
         if($die)
             die();
     }
+    
+    
+    
+    protected function beforeExecute(InputInterface $input, OutputInterface $output): void
+    {
+        $this->owd = getcwd();
+        chdir(FileSystem::path(PROJECT_PATH."/plugins/"));
+    }
+    
+    protected function afterExecute(InputInterface $input, OutputInterface $output): void
+    {
+        chdir($this->owd);
+    }
 
-
+    
 }

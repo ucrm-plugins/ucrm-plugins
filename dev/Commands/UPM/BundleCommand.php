@@ -35,12 +35,7 @@ final class BundleCommand extends BaseCommand
         $this
             ->setName("bundle")
             ->setDescription("Bundles the specified UCRM plugin")
-            ->addArgument("dir", InputArgument::OPTIONAL, "The path in which the plugin resides", getcwd());
-
-   }
-
-   protected function initialize(InputInterface $input, OutputInterface $output)
-   {
+            ->addArgument("name", InputArgument::OPTIONAL, "The name of the plugin");
 
    }
 
@@ -50,9 +45,9 @@ final class BundleCommand extends BaseCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
-        echo $input->getArgument("dir") . "\n";
+        $name = $input->getArgument("name");
 
-        echo plugin_exists("ucrm-client-signup") ? "T" : "F";
+        //echo plugin_exists("ucrm-client-signup") ? "T" : "F";
         
         return self::SUCCESS;
     }

@@ -19,4 +19,3 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Copy over any custom Xdebug settings.
 COPY ./xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 COPY ./xdebug_params /etc/nginx/xdebug_params
-

@@ -24,6 +24,8 @@ Vagrant.configure("2") do |config|
     # NETWORKING
     # ------------------------------------------------------------------------------------------------------------------
 
+    # The hostmanager plugin alters the hosts file on both the host machine and any/all of the guest boxes to include
+    # the box hostname and any aliases provided above.
     config.hostmanager.enabled = true
     config.hostmanager.manage_host = true
     config.hostmanager.manage_guest = true
@@ -33,11 +35,12 @@ Vagrant.configure("2") do |config|
     config.vm.hostname = "#{BOX_HOSTNAME}"
     config.hostmanager.aliases = DNS_ALIASES
 
-    # NOTE: We prefer to use Private networking here for several notable reasons:
+    # NOTE: It is preferable to use private networking here for several notable reasons:
     # - Security, especially since we default to insecure passwords on the guest.
     # - UISP does not allow localhost for server name, so we can provide an IP or alias instead for testing public URLs.
     # - Easier configuration of Xdebug communication with the local machine.
     # - Segregation, in cases where developers may have multiple development environments on the same machine.
+    # - Also, since hostmanager does not work on reload/halt, this prevents the need for repeated hosts file changes.
 
     # Set the VM network type to private and assign a static IP address.
     config.vm.network "private_network", ip: "#{BOX_ADDRESS}"
@@ -62,6 +65,7 @@ Vagrant.configure("2") do |config|
 
     # Synced folder specifically for getting sensitive information back from the guest system.
     config.vm.synced_folder "./box/vagrant/env", "/home/vagrant/env"
+    config.vm.synced_folder "./box/vagrant/scripts/ucrm", "/home/vagrant/scripts/ucrm"
 
     # ------------------------------------------------------------------------------------------------------------------
     # BASE BOX
@@ -119,4 +123,24 @@ Vagrant.configure("2") do |config|
     config.vm.provision "build", type: "shell", keep_color: true,
         path: "./box/vagrant/provisioning/build.sh"
         #env: { "UISP_VERSION" => "#{UISP_VERSION}", "UCRM_VERSION" => "#{UCRM_VERSION}" }
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # TRIGGERS
+    # ------------------------------------------------------------------------------------------------------------------
+
+    config.trigger.after :up do |trigger|
+        trigger.info = "Configuring VSSH for Windows"
+
+        trigger.ruby do |env, machine|
+            key_file_dir=".vagrant/machines/default/virtualbox"
+            if not File.exist?("#{key_file_dir}/private_key")
+                if config = /^\s*IdentityFile\s*(?<key_file>.*)$/.match(`vagrant ssh-config`)
+                    key_file_name=File.basename(config["key_file"])
+                    FileUtils.cp(config["key_file"], key_file_dir)
+                    File.rename("#{key_file_dir}/#{key_file_name}", "#{key_file_dir}/private_key")
+                end
+            end
+        end
+    end
+
 end
