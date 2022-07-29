@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 namespace UCRM\Plugins\Commands\UPM;
 
+use mysql_xdevapi\Warning;
+use Opis\JsonSchema\Errors\ErrorFormatter;
+use Opis\JsonSchema\Exceptions\SchemaException;
+use Opis\JsonSchema\Helper;
 use Opis\JsonSchema\Validator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -152,20 +156,30 @@ final class ValidateCommand extends PluginSpecificCommand
     
     protected function validManifest()
     {
-    
-        $validator = new Validator();
-        $results = $validator->validate(file_get_contents("src/manifest.json"), file_get_contents(PROJECT_PATH."/manifest.schema.json"));
+        $this->io->section("Manifest");
         
+        $validator = new Validator();
+        $data = json_decode(file_get_contents("src/manifest.json"));
+        $schema = file_get_contents(PROJECT_PATH."/manifest.schema.json");
+        
+        $validator->setMaxErrors(10);
+        $results = $validator->validate($data, $schema);
+
         if ($results->hasError())
         {
-            $error = $results->error();
-            print_r($error->message());
-            print_r($error->keyword());
-            
-            //foreach($results->error()->subErrors() as $error)
-            //    print_r($error->message());
+            $formatter = new ErrorFormatter();
+            $this->io->writeln(json_encode(
+                $formatter->format($results->error()),
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+            ));
+            $this->error("Schema errors detected, see output above!", TRUE);
         }
-       
+        
+        // TODO: Compare differences between source manifest.json and bundled manifest.json!
+        
+        
+        
+        
     }
     
     
