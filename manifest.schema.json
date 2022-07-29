@@ -1,6 +1,6 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
-    "$id": "https://github.com/ucrm-plugins/ucrm-plugins/raw/master/manifest.schema.json",
+    "$id": "https://github.com/Ubiquiti-App/UCRM-plugins/raw/master/manifest.schema.json",
     "title": "Plugin Manifest",
     "description": "UCRM Plugin manifest file.",
     "type": "object",
