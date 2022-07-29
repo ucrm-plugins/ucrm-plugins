@@ -1,21 +1,22 @@
 {
-  "require-dev": {
-    "friendsofphp/php-cs-fixer": "^2.15",
-    "symfony/console": "^5.4.8"
-  },
-  "require": {
-    "ext-zip": "*",
-    "ext-json": "*",
-    "ext-pdo": "*",
-    "ext-dom": "*",
-    "ext-simplexml": "*"
-  },
-  "autoload-dev": {
-    "files": [
-      "dev/globals.php"
-    ],
-    "psr-4": {
-      "UCRM\\Plugins\\": "dev/"
+    "require": {
+        "ext-zip": "*",
+        "ext-json": "*",
+        "ext-pdo": "*",
+        "ext-dom": "*",
+        "ext-simplexml": "*"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.15",
+        "symfony/console": "^5.4.8",
+        "php-parallel-lint/php-parallel-lint": "^1.3"
+    },
+    "autoload-dev": {
+        "files": [
+            "dev/globals.php"
+        ],
+        "psr-4": {
+            "UCRM\\Plugins\\": "dev/"
+        }
     }
-  }
 }

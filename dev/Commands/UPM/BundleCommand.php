@@ -3,17 +3,11 @@ declare(strict_types=1);
 
 namespace UCRM\Plugins\Commands\UPM;
 
-//use Composer\CaBundle\CaBundle;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use UCRM\Plugins\Commands\BaseCommand;
-
-//use GuzzleHttp\Client;
-//use GuzzleHttp\Exception\GuzzleException;
-//use GuzzleHttp\RequestOptions;
-
-//use Symfony\Component\Console\Input\InputArgument;
+use UCRM\Plugins\Commands\PluginSpecificCommand;
+use UCRM\Plugins\Support\FileSystem;
 
 /**
  * BundleCommand
@@ -23,7 +17,7 @@ use UCRM\Plugins\Commands\BaseCommand;
  *
  * @final
  */
-final class BundleCommand extends BaseCommand
+final class BundleCommand extends PluginSpecificCommand
 {
     
 
@@ -35,7 +29,7 @@ final class BundleCommand extends BaseCommand
         $this
             ->setName("bundle")
             ->setDescription("Bundles the specified UCRM plugin")
-            ->addArgument("name", InputArgument::OPTIONAL, "The name of the plugin");
+            ->addArgument("name", InputArgument::REQUIRED, "The name of the plugin");
 
    }
 
@@ -45,9 +39,22 @@ final class BundleCommand extends BaseCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
-        $name = $input->getArgument("name");
-
-        //echo plugin_exists("ucrm-client-signup") ? "T" : "F";
+        $this->beforeExecute($input, $output);
+        
+        chdir("src");
+        
+        if (file_exists("composer.json"))
+        {
+            exec("composer install --ansi");
+            exec("composer archive --ansi --file $this->name");
+        }
+    
+        chdir("..");
+        
+        $uri = FileSystem::uri(getcwd()."/$this->name.zip");
+        $this->io->writeln($uri);
+        
+        $this->afterExecute($input, $output);
         
         return self::SUCCESS;
     }

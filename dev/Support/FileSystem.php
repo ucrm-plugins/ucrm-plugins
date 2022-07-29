@@ -24,11 +24,15 @@ final class FileSystem
      *
      * @return string Returns the modified path.
      */
-    public static function path(string $path): string
+    public static function path(string $path, string $separator = DIRECTORY_SEPARATOR): string
     {
-        return rtrim(str_replace(["\\", "/"], DIRECTORY_SEPARATOR, $path), DIRECTORY_SEPARATOR);
+        return rtrim(str_replace(["\\", "/"], $separator, $path), $separator);
     }
     
+    public static function uri(string $path): string
+    {
+        return "file://".(DIRECTORY_SEPARATOR === "\\" ? "/" : "").self::path($path, "/");
+    }
     
     
     public static function execRemoveDirRecursive(string $dir): bool
@@ -105,13 +109,14 @@ final class FileSystem
 
     /** @var string The base path to use when starting recursion and from which to build relative paths. */
     private static string $deleteBase = "";
-
+    
     /**
      * Deletes all content from a directory (recursively).
      *
      * @param string $dir The directory upon which to act.
-     * @param int $count The count of folders/files deleted.
      * @param array $exclusions An optional array of exclusions, relative to $dir.
+     * @param bool $verbose
+     * @param array $counts
      *
      * @return bool Returns TRUE on success (or if the $dir is non-existent), or FALSE on failure.
      */
@@ -184,6 +189,7 @@ final class FileSystem
      * @param string $path
      *
      * @return array
+     * @noinspection PhpUnused
      */
     public static function loadJson(string $path) : array
     {
@@ -205,6 +211,7 @@ final class FileSystem
      * @param int $options
      *
      * @return bool
+     * @noinspection PhpUnused
      */
     public static function saveJson(string $path, array $content, int $options = JSON_PRETTY_PRINT) : bool
     {
@@ -219,9 +226,16 @@ final class FileSystem
 
         return TRUE;
     }
-
-
-    public static function scandir(string $dir): array
+    
+    
+    /**
+     * @param string $dir
+     * @param string $separator
+     * @param bool $absolute
+     *
+     * @return array
+     */
+    public static function scan(string $dir, string $separator = DIRECTORY_SEPARATOR, bool $absolute = FALSE): array
     {
         $result = [];
         foreach(scandir($dir) as $file)
@@ -229,20 +243,28 @@ final class FileSystem
             if ($file === "." || $file === "..")
                 continue;
 
-            $filePath = $dir . DIRECTORY_SEPARATOR . $file;
+            $filePath = $dir . $separator . $file;
 
             if (is_dir($filePath)) {
-                foreach (self::scandir($filePath) as $childFilename) {
-                    $result[] = $file . DIRECTORY_SEPARATOR . $childFilename;
+                foreach (self::scan($filePath, $separator) as $childFilename) {
+                    $result[] = ($absolute ? $dir . $separator : ""). $file . $separator . $childFilename;
                 }
             } else {
-                $result[] = $file;
+                $result[] = ($absolute ? $dir . $separator : "") . $file;
             }
         }
         return $result;
     }
     
-    public static function each(string $dir, callable $func = NULL, bool $absolute = FALSE): array
+    /**
+     * @param string $dir
+     * @param callable|NULL $func
+     * @param string $separator
+     * @param bool $absolute
+     *
+     * @return array
+     */
+    public static function each(string $dir, callable $func = NULL, string $separator = DIRECTORY_SEPARATOR, bool $absolute = FALSE): array
     {
         $func = $func ?? function(string $file): string { return $file; };
         
@@ -252,14 +274,14 @@ final class FileSystem
             if ($file === "." || $file === "..")
                 continue;
             
-            $filePath = $dir . DIRECTORY_SEPARATOR . $file;
+            $filePath = $dir . $separator . $file;
             
             if (is_dir($filePath)) {
-                foreach (self::scandir($filePath) as $childFilename) {
-                    $result[] = $func(($absolute ? $dir . DIRECTORY_SEPARATOR : "") . $file . DIRECTORY_SEPARATOR . $childFilename);
+                foreach (self::scan($filePath, $separator) as $childFilename) {
+                    $result[] = $func(($absolute ? $dir . $separator : "") . $file . $separator . $childFilename);
                 }
             } else {
-                $result[] = $func(($absolute ? $dir . DIRECTORY_SEPARATOR : "") . $file);
+                $result[] = $func(($absolute ? $dir . $separator : "") . $file);
             }
         }
         return $result;
@@ -270,6 +292,7 @@ final class FileSystem
      * @param string $destination
      * @param bool $replace
      * @param bool $verbose
+     * @param array $counts
      *
      * @return false|array
      */

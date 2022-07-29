@@ -24,7 +24,7 @@ function loadCommands(string $path, string $fqns): array
     // Remove the leading or trailing \ from the namespace provided.
     $fqns = trim($fqns, "\\");
     
-    foreach(FileSystem::scandir($path) as $file)
+    foreach(FileSystem::scan($path) as $file)
     {
         // Construct the fully qualified class name.
         $fqcn = $fqns . "\\" . (str_replace(".php", "", $file));

@@ -20,6 +20,7 @@ abstract class BaseCommand extends Command
 {
     protected SymfonyStyle $io;
     protected string $owd;
+    protected string $cwd;
     
     /**
      * @param InputInterface $input
@@ -51,12 +52,21 @@ abstract class BaseCommand extends Command
             die();
     }
     
+    protected function getVendorBin(string $command = ""): string
+    {
+        return FileSystem::path(PROJECT_PATH."/vendor/bin/$command");
+    }
+    
+    protected function chdir(string $dir)
+    {
+        chdir($this->cwd = FileSystem::path($dir));
+    }
     
     
     protected function beforeExecute(InputInterface $input, OutputInterface $output): void
     {
         $this->owd = getcwd();
-        chdir(FileSystem::path(PROJECT_PATH."/plugins/"));
+        $this->chdir(PROJECT_PATH."/plugins/");
     }
     
     protected function afterExecute(InputInterface $input, OutputInterface $output): void

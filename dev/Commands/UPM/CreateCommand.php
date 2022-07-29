@@ -105,9 +105,8 @@ final class CreateCommand extends PluginSpecificCommand
         
         if(file_exists("composer.json"))
         {
-            exec("composer install");
-            exec("composer archive --file $this->name");
-        
+            exec("composer install --ansi");
+            exec("composer archive --ansi --file $this->name");
         }
         
         chdir("..");
