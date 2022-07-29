@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace UCRM\Plugins\Commands\UPM;
 
+use Opis\JsonSchema\Validator;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -44,8 +45,9 @@ final class ValidateCommand extends PluginSpecificCommand
     
         $this->io->writeln("\nValidating Plugin at: $this->cwd");
     
-        $this->requiredFiles([ "README.md", "src/main.php" ]);
+        $this->requiredFiles([ "README.md", "src/main.php", "src/manifest.json" ]);
         $this->validSyntax();
+        $this->validManifest();
         
         $this->io->section("\nSUMMARY");
         $this->io->writeln("No issues found!\n");
@@ -148,6 +150,23 @@ final class ValidateCommand extends PluginSpecificCommand
         
     }
     
+    protected function validManifest()
+    {
+    
+        $validator = new Validator();
+        $results = $validator->validate(file_get_contents("src/manifest.json"), file_get_contents(PROJECT_PATH."/manifest.schema.json"));
+        
+        if ($results->hasError())
+        {
+            $error = $results->error();
+            print_r($error->message());
+            print_r($error->keyword());
+            
+            //foreach($results->error()->subErrors() as $error)
+            //    print_r($error->message());
+        }
+       
+    }
     
     
 }

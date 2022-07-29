@@ -34,6 +34,9 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/polyfill-intl-grapheme" />
       <excludeFolder url="file://$MODULE_DIR$/box/unms/data" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/php-parallel-lint/php-parallel-lint" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/opis/json-schema" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/opis/string" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/opis/uri" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

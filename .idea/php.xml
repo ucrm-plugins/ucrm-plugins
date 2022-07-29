@@ -35,6 +35,9 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
       <path value="$PROJECT_DIR$/vendor/php-parallel-lint/php-parallel-lint" />
+      <path value="$PROJECT_DIR$/vendor/opis/json-schema" />
+      <path value="$PROJECT_DIR$/vendor/opis/string" />
+      <path value="$PROJECT_DIR$/vendor/opis/uri" />
     </include_path>
   </component>
   <component name="PhpProjectServersManager">
