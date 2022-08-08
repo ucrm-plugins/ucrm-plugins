@@ -2,7 +2,7 @@
 
 Currently Supported IDEs:
 - [PhpStorm](#PhpStorm)
-- [VS Code](#VS Code)
+- [VS Code](#VS%20Code)
 
 ## PhpStorm
 
