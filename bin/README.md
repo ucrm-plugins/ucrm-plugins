@@ -1,25 +1,23 @@
-# bin/
+# Commands
 
+The following commands are currently supported:
+- [upm](#upm)
+- [vssh](#vssh)
 
-## vssh
-
-> _**IMPORTANT:** The functionality of the `vssh` command assumes you are using the
-> [Local Development Environment (Vagrant)](../docs/vagrant.md). If you are NOT, then the command will likely fail._
-
-On Windows, the built-in `vagrant ssh` command is VERY slow.  As an alternative, you can use this `vssh` command as an
-alias that runs much more quickly.  It can be called using simply `vssh` to open an interactive secure shell or as
-`vssh <command> [...args]` where the command (with optional arguments) are executed directly using SSH.
-
-> _**NOTE:** This command will not function until after a successful `vagrant up` creates the box and triggers the
-> VSSH Configuration._
-
-<br/>
 
 ## upm
 
 The UCRM Plugin Manager contains some useful commands to help expedite Plugin development.
 
-### `upm bundle <name>`
+The following sub-commands are currently supported:
+- [bundle](#bundle)
+- [create](#create)
+- [exec](#exec)
+
+---
+
+### bundle
+`upm bundle <name>`
 
 Can be used as an alternative to the `pack-plugin.php` script.  The main reason for the alternative is to allow for a
 list of exclusions.
@@ -57,9 +55,10 @@ composer.json
 > _**NOTE:** The `composer archive` command is executed with the `--format=zip` flag automatically and will override
 > the `config.archive-format` even if it is set in the `composer.json` file._
 
-<br/>
+---
 
-### `upm create [options] <name> <template>`
+### create
+`upm create [options] <name> <template>`
 
 Creates a new Plugin, based upon the specified Template. For more information, see the documentation for
 [Templates](../templates/README.md)
@@ -80,9 +79,10 @@ Template to the `plugins/<name>` folder.
 5. Creates PhpStorm specific server mappings, if the `--map` option is specified.
 6. Displays some Plugin specific information.
 
-<br/>
+---
 
-### `upm exec <name> <exec> [...<args>]`
+### exec
+`upm exec <name> <exec> [...<args>]`
 
 Remotely executes a command inside the UCRM container and from within the specified Plugin's folder.
 
@@ -103,3 +103,16 @@ Executes the command using the following steps:
 > _**NOTE: This is most useful for things like `upm exec <name> composer install` after dependencies are added/removed
 > from the `composer.json` file.  We do NOT typically want to synchronize the entire `vendor/` folder between our IDE
 > and the web server, so this is a simple alternative._
+
+
+## vssh
+
+> _**IMPORTANT:** The functionality of the `vssh` command assumes you are using the
+> [Local Development Environment (Vagrant)](../docs/vagrant.md). If you are NOT, then the command will likely fail._
+
+On Windows, the built-in `vagrant ssh` command is VERY slow.  As an alternative, you can use this `vssh` command as an
+alias that runs much more quickly.  It can be called using simply `vssh` to open an interactive secure shell or as
+`vssh <command> [...args]` where the command (with optional arguments) are executed directly using SSH.
+
+> _**NOTE:** This command will not function until after a successful `vagrant up` creates the box and triggers the
+> VSSH Configuration._
