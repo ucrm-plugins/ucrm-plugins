@@ -2,7 +2,7 @@
 
 Currently Supported IDEs:
 - [PhpStorm](#PhpStorm)
-- [VS Code](#VS_Code)
+- [VS Code](#VSCode)
 
 ## PhpStorm
 
@@ -28,13 +28,13 @@ Choose one of the following, depending upon your preferred terminal.
 >
 > _Due to this limitation, the commands below include a fallback in the case of a missing terminal folder or script._
 
-## CMD
+### CMD
 Shell Path
 ```
 cmd /k .terminals\cmd.bat || cls
 ```
 
-## PowerShell 7
+### PowerShell 7
 
 > _**NOTE:** Newer versions of PhpStorm occasionally issue a terminal warning if you attempt to use a PowerShell version
 > prior to v3._
@@ -46,7 +46,7 @@ Shell Path
 pwsh -NoExit -Command ".terminals\powershell.ps1 || cls"
 ```
 
-## Cmder
+### Cmder
 
 Check out _[Cmder](https://github.com/cmderdev/cmder) for the download and instructions._
 
@@ -59,7 +59,7 @@ Shell Path
 cmd /k .terminals\cmder.cmd || cls && %CMDER_ROOT%\vendor\init.bat
 ```
 
-## Git Bash
+### Git Bash
 
 Included with the [Git for Windows](https://gitforwindows.org/) installation.
 
@@ -68,7 +68,7 @@ Shell Path
 C:\Program Files\Git\bin\bash.exe --rcfile .terminals/.bashrc
 ```
 
-## VS Code
+## VSCode
 
 Include the following JSON in your User Settings
 > Ctrl+Shift+P | Preferences: Open User Settings (JSON)
@@ -103,6 +103,10 @@ Then you can include the following in either the same User Settings file above, 
 > Ctrl+Shift+P | Preferences: Open Workspace Settings (JSON)
 
 Choosing the Terminal you want from the options above
+- Command Prompt
+- PowerShell
+- Cmder
+- Git Bash
 
 ```json
 {
