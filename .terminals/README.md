@@ -87,7 +87,7 @@ Include the following JSON in your User Settings
             "icon": "terminal-powershell"
         },
         "Cmder": {
-            "path": [ "${env:windir}\\System32\\cmd.exe" ],
+            "path": [ "${Env:WinDir}\\System32\\cmd.exe" ],
             "args": [ "/k", ".terminals\\cmder_vscode.cmd || cls && %CMDER_ROOT%\\vendor\\bin\\vscode_init.cmd" ]
         },
         "Git Bash": {
