@@ -22,9 +22,9 @@ The following sub-commands are currently supported:
 Can be used as an alternative to the `pack-plugin.php` script.  The main reason for the alternative is to allow for a
 list of exclusions.
 
-| Option / Argument | Alias | Description                                                                 |
-|-------------------|-------|-----------------------------------------------------------------------------|
-| name              |       | The name of the Plugin, also used as the folder name.                       |
+| Option | Description                                                                 |
+|--------|-----------------------------------------------------------------------------|
+| name   | The name of the Plugin, also used as the folder name.                       |
 
 Bundles an existing Plugin using the following steps:
 1. Validates the Plugin `manifest.json` and file/folder structure.
