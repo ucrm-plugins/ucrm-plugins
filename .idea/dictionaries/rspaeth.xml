@@ -8,6 +8,7 @@
       <w>disabledelayedexpansion</w>
       <w>displayname</w>
       <w>dmode</w>
+      <w>enabledelayedexpansion</w>
       <w>fastcgi</w>
       <w>fileutils</w>
       <w>fqns</w>
@@ -22,6 +23,7 @@
       <w>numvcpus</w>
       <w>postgre</w>
       <w>rbconfig</w>
+      <w>rcfile</w>
       <w>setlocal</w>
       <w>spaeth</w>
       <w>templater</w>
@@ -32,6 +34,7 @@
       <w>vmname</w>
       <w>vmware</w>
       <w>vssh</w>
+      <w>windir</w>
     </words>
   </dictionary>
 </component>

@@ -1,4 +1,4 @@
 @ECHO OFF
 SET PATH=%PATH%;%CD%\bin
 SET PATH=%PATH%;%CD%\vendor\bin
-CALL \"%CMDER_ROOT%\vendor\init.bat\"
+%CMDER_ROOT%\vendor\bin\vscode_init.bat
