@@ -103,7 +103,7 @@ Vagrant.configure("2") do |config|
 
     # VirtualBox VM Configuration.
     config.vm.provider "virtualbox" do |vm, override|
-        vm.name = "uisp-dev-#{UISP_VERSION}"
+        vm.name = "#{BOX_HOSTNAME}-#{UISP_VERSION}"
 
         # NOTE: Set the following to suit your needs and based upon available host resources.
         vm.cpus = 1
@@ -128,17 +128,33 @@ Vagrant.configure("2") do |config|
     # TRIGGERS
     # ------------------------------------------------------------------------------------------------------------------
 
-    config.trigger.after :up do |trigger|
+    config.trigger.after [ :up, :reload ] do |trigger|
         trigger.info = "Configuring VSSH for Windows"
 
         trigger.ruby do |env, machine|
-            key_file_dir=".vagrant/machines/default/virtualbox"
-            if not File.exist?("#{key_file_dir}/private_key")
+            #key_file_dir = ".vagrant/machines/default/virtualbox"
+            key_path = File.expand_path("~/.ssh")
+            key_file = "#{BOX_HOSTNAME}_private_key"
+
+            if not File.exist?("#{key_path}/#{key_file}")
                 if config = /^\s*IdentityFile\s*(?<key_file>.*)$/.match(`vagrant ssh-config`)
                     key_file_name=File.basename(config["key_file"])
-                    FileUtils.cp(config["key_file"], key_file_dir)
-                    File.rename("#{key_file_dir}/#{key_file_name}", "#{key_file_dir}/private_key")
+                    FileUtils.cp(config["key_file"], key_path)
+                    File.rename("#{key_path}/vagrant_private_key", "#{key_path}/#{key_file}")
                 end
+            end
+        end
+    end
+
+    config.trigger.after [ :halt, :destroy ] do |trigger|
+        trigger.info = "Configuring VSSH for Windows"
+
+        trigger.ruby do |env, machine|
+            key_path = File.expand_path("~/.ssh")
+            key_file = "#{BOX_HOSTNAME}_private_key"
+
+            if File.exist?("#{key_path}/#{key_file}")
+                File.delete("#{key_path}/#{key_file}")
             end
         end
     end

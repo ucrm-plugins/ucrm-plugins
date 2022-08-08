@@ -73,7 +73,7 @@ C:\Program Files\Git\bin\bash.exe --rcfile .terminals/.bashrc
 Include the following JSON in your User Settings
 > Ctrl+Shift+P | Preferences: Open User Settings (JSON)
 
-```json
+```
 {
     "terminal.integrated.profiles.windows": {
         "Command Prompt": {
@@ -108,7 +108,7 @@ Choosing the Terminal you want from the options above
 - Cmder
 - Git Bash
 
-```json
+```
 {
     "terminal.integrated.defaultProfile.windows": "PowerShell"
 }
