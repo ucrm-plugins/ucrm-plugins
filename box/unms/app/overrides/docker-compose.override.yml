@@ -11,13 +11,14 @@ services:
             - public
         ports:
             - "5432:5432"
+    # NOTES: The UCRM Version is automatically updated in the build provisioner.
     ucrm:
-        image: ubnt/unms-crm:3.4.6-xdebug
+        image: ubnt/unms-crm:3.4.7-xdebug
         build:
             context: ./overrides/ucrm
             dockerfile: Dockerfile
             args:
-              UCRM_VERSION: 3.4.6
+              UCRM_VERSION: 3.4.7
         volumes:
             - ./overrides/ucrm/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
             - ./overrides/ucrm/xdebug_params:/etc/nginx/xdebug_params

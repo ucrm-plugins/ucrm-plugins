@@ -33,6 +33,15 @@ echo "export UISP_VERSION=\"$UISP_VERSION\""    >> $profile/box.sh
 echo "export UCRM_VERSION=\"$UCRM_VERSION\""    >> $profile/box.sh
 echo "export UISP_ENVIRONMENT=\"development\""  >> $profile/box.sh
 
+PGPASSWORD=$(awk -F "=" '/UCRM_POSTGRES_PASSWORD/ {print $2}' /home/unms/app/unms.conf | tr -d '"')
+PGUSER=$(awk -F "=" '/UCRM_POSTGRES_USER/ {print $2}' /home/unms/app/unms.conf | tr -d '"')
+PGDATABASE=$(awk -F "=" '/UCRM_POSTGRES_DB/ {print $2}' /home/unms/app/unms.conf | tr -d '"')
+
+echo "export PGPASSWORD=\"$PGPASSWORD\""        >> $profile/box.sh
+echo "export PGUSER=\"$PGUSER\""                >> $profile/box.sh
+echo "export PGDATABASE=\"$PGDATABASE\""        >> $profile/box.sh
+echo "export PGHOST=\"localhost\""              >> $profile/box.sh
+
 # FUTURE: Add any other system-wide environment variables here!
 
 # Double check permissions and source the new values.

@@ -1,38 +1,68 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# The Vagrant configuration for a UISP Development Box with major changes to the default installation of UISP.
-#
-# @author Ryan Spaeth <rspaeth@spaethtech.com>
-# @copyright 2022 Spaeth Technologies Inc.
-
-# Load Default Config
-base = "./box/Vagrantfile"
-load base if File.exists?(base)
-
 Vagrant.configure("2") do |config|
 
+    config.vagrant.plugins = [ "vagrant-hostmanager" ]
+
     # ------------------------------------------------------------------------------------------------------------------
-    # CONFIGURATION
+    # CONFIGURATION (STATIC)
     # ------------------------------------------------------------------------------------------------------------------
 
-    BOX_HOSTNAME                            = "uisp-dev"
-    BOX_ADDRESS                             = "192.168.56.10"
-    DNS_ALIASES                             = [ "vagrant" ]
-    ROOT_PASSWORD                           = "vagrant"
-    UISP_VERSION                            = "1.4.7"
-    UCRM_VERSION                            = getUcrmVersion UISP_VERSION
+    # NOTE: The following values can be overridden, as desired:
+    BOX_HOSTNAME  = "uisp-dev"
+    BOX_ADDRESS   = "192.168.50.10"
+    DNS_ALIASES   = [ "vagrant" ]
+    ROOT_PASSWORD = "vagrant"
+    UISP_VERSION  = "1.4.7"
+
+    # Attempt to automatically determine the UCRM version based on the UISP version provided.
+    # WATCH: Currently the UCRM version is ALWAYS exactly 2 major versions ahead.
+    UCRM_VERSION = UISP_VERSION.gsub(/^(\d+)/) { |capture| (capture.to_i + 2).to_s }
+
+    # Load Default Config
+    #base = "./box/Vagrantfile"
+    #load base if File.exists?(base)
 
     # ------------------------------------------------------------------------------------------------------------------
     # NETWORKING
     # ------------------------------------------------------------------------------------------------------------------
 
-    config.vm.hostname                      = BOX_HOSTNAME
-    config.hostmanager.aliases              = DNS_ALIASES
+    # The hostmanager plugin alters the hosts file on both the host machine and any/all of the guest boxes to include
+    # the box hostname and any aliases provided above.
+    config.hostmanager.enabled = true
+    config.hostmanager.manage_host = true
+    config.hostmanager.manage_guest = true
+    config.hostmanager.ignore_private_ip = false
+    config.hostmanager.include_offline = false
+
+    config.vm.hostname = "#{BOX_HOSTNAME}"
+    config.hostmanager.aliases = DNS_ALIASES
+
+    # NOTE: It is preferable to use private networking here for several notable reasons:
+    # - Security, especially since we default to insecure passwords on the guest.
+    # - UISP does not allow localhost for server name, so we can provide an IP or alias instead for testing public URLs.
+    # - Easier configuration of Xdebug communication with the local machine.
+    # - Segregation, in cases where developers may have multiple development environments on the same machine.
+    # - Also, since hostmanager does not work on reload/halt, this prevents the need for repeated hosts file changes.
+
+    # Set the VM network type to private and assign a static IP address.
+    config.vm.network "private_network", ip: "#{BOX_ADDRESS}"
+
+    # Forward the necessary ports to the guest.
+    config.vm.network "forwarded_port", guest:   80, host:   80, host_ip: "127.0.0.1"
+    config.vm.network "forwarded_port", guest:  443, host:  443, host_ip: "127.0.0.1"
+    config.vm.network "forwarded_port", guest: 2055, host: 2055, host_ip: "127.0.0.1"
+
+    # Forward any of our override ports to the guest.
+    config.vm.network "forwarded_port", guest: 5432, host: 5432, host_ip: "127.0.0.1"
 
     # ------------------------------------------------------------------------------------------------------------------
     # FILE SYSTEM
     # ------------------------------------------------------------------------------------------------------------------
+
+    # Disable the default folder.
+    config.vm.synced_folder ".", "/vagrant", disabled: true
 
     # Synced folder containing any desired Docker Compose overrides.
     config.vm.synced_folder "./box/unms/app/overrides", "/home/unms/app/overrides", owner: "unms", group: "root"
@@ -51,6 +81,7 @@ Vagrant.configure("2") do |config|
     # The following are examples of boxes added this way:
     # - ucrm-plugins/uisp-1.4.4 (virtualbox, 0)
     # - ucrm-plugins/uisp-1.4.5 (virtualbox, 0)
+    # - ucrm-plugins/uisp-1.4.6 (virtualbox, 0)
     #
     # Boxes downloaded from Vagrant Cloud differ in that their names do not contain the version and instead an actual
     # version is provided.
@@ -58,6 +89,7 @@ Vagrant.configure("2") do |config|
     # The following are examples of boxes added from Vagrant Cloud:
     # - ucrm-plugins/uisp (virtualbox, 1.4.4)
     # - ucrm-plugins/uisp (virtualbox, 1.4.5)
+    # - ucrm-plugins/uisp (virtualbox, 1.4.6)
     #
     # The following code attempts to determine the correct box version to use, in cases where it is already cached.  If
     # the code fails to find a valid box, locally, it will then fail over to trying Vagrant Cloud.
@@ -73,8 +105,10 @@ Vagrant.configure("2") do |config|
     # PROVIDERS
     # ------------------------------------------------------------------------------------------------------------------
 
-    # VirtualBox
+    # VirtualBox VM Configuration.
     config.vm.provider "virtualbox" do |vm, override|
+        vm.name = "#{BOX_HOSTNAME}-#{UISP_VERSION}"
+
         # NOTE: Set the following to suit your needs and based upon available host resources.
         vm.cpus = 1
         vm.memory = 4096
@@ -84,33 +118,15 @@ Vagrant.configure("2") do |config|
     # PROVISIONERS
     # ------------------------------------------------------------------------------------------------------------------
 
-    # Unset any provisioners used in the base box configuration!
-    config.vm.provision "users",    type: "shell", path: nil, inline: ""
-    config.vm.provision "network",  type: "shell", path: nil, inline: ""
-    config.vm.provision "firewall", type: "shell", path: nil, inline: ""
-    config.vm.provision "install",  type: "shell", path: nil, inline: ""
-
-    PROVISION_DIR = "./box/vagrant/provisioning"
-
     # env: Always run the environment provisioner, to keep changes updated in the ENV and files.
     config.vm.provision "environment", type: "shell", keep_color: true, run: "always",
-        path: "#{PROVISION_DIR}/environment.sh",
+        path: "./box/vagrant/provisioning/environment.sh",
         env: { "UISP_VERSION" => "#{UISP_VERSION}", "UCRM_VERSION" => "#{UCRM_VERSION}" }
 
     # build: This provisioner is responsible for building an updated version of the overrides.
     config.vm.provision "build", type: "shell", keep_color: true,
-        path: "#{PROVISION_DIR}/build.sh"
+        path: "./box/vagrant/provisioning/build.sh"
         #env: { "UISP_VERSION" => "#{UISP_VERSION}", "UCRM_VERSION" => "#{UCRM_VERSION}" }
-
-    # build: This provisioner is responsible for building an updated version of the overrides.
-    config.vm.provision "postgres", type: "shell", keep_color: true,
-        path: "#{PROVISION_DIR}/postgres.sh"
-        #env: { "UISP_VERSION" => "#{UISP_VERSION}", "UCRM_VERSION" => "#{UCRM_VERSION}" }
-
-    # Provision file/folder permissions...
-    config.vm.provision "permissions", type: "shell", keep_color: true,
-        path: "#{PROVISION_DIR}/permissions.sh"
-        #env: { }
 
     # ------------------------------------------------------------------------------------------------------------------
     # TRIGGERS

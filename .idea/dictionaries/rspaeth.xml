@@ -1,6 +1,7 @@
 <component name="ProjectDictionaryState">
   <dictionary name="rspaeth">
     <words>
+      <w>chgrp</w>
       <w>chpasswd</w>
       <w>cmds</w>
       <w>compliancy</w>
@@ -21,6 +22,10 @@
       <w>memsize</w>
       <w>mware</w>
       <w>numvcpus</w>
+      <w>pgdatabase</w>
+      <w>pghost</w>
+      <w>pgpassword</w>
+      <w>pguser</w>
       <w>postgre</w>
       <w>rbconfig</w>
       <w>rcfile</w>

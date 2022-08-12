@@ -1,23 +1,49 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-require "rbconfig"
+# The Vagrant configuration for a UISP Base Box with minimal changes to the default installation of UISP.
+#
+# @author Ryan Spaeth <rspaeth@spaethtech.com>
+# @copyright 2022 Spaeth Technologies Inc.
 
 Vagrant.configure("2") do |config|
+
+    config.vagrant.plugins = [ "vagrant-hostmanager" ]
 
     # ------------------------------------------------------------------------------------------------------------------
     # CONFIGURATION
     # ------------------------------------------------------------------------------------------------------------------
 
-    # Override the following defaults as desired:
+    BOX_HOSTNAME    = "uisp"
+    BOX_ADDRESS     = "192.168.56.10"
+    DNS_ALIASES     = [ "vagrant" ]
     ROOT_PASSWORD   = "vagrant"
-    UISP_VERSION    = "1.4.6"
+    UISP_VERSION    = "1.4.7"
+    UCRM_VERSION    = getUcrmVersion UISP_VERSION
 
     # ------------------------------------------------------------------------------------------------------------------
     # NETWORKING
     # ------------------------------------------------------------------------------------------------------------------
 
-    config.vm.hostname = "uisp"
+    # The hostmanager plugin alters the hosts file on both the host machine and any/all of the guest boxes to include
+    # the box hostname and any aliases provided above.
+    config.hostmanager.enabled              = true
+    config.hostmanager.manage_host          = true
+    config.hostmanager.manage_guest         = true
+    config.hostmanager.ignore_private_ip    = false
+    config.hostmanager.include_offline      = false
+
+    config.vm.hostname                      = BOX_HOSTNAME
+    config.hostmanager.aliases              = DNS_ALIASES
+
+    # NOTE: It is preferable to use private networking here for several notable reasons:
+    # - Security, especially since we default to insecure passwords on the guest.
+    # - UISP does not allow localhost for server name, so we can provide an IP or alias instead for testing public URLs.
+    # - Easier configuration of Xdebug communication with the local machine.
+    # - Segregation, in cases where developers may have multiple development environments on the same machine.
+    # - Also, since hostmanager does not work on reload/halt, this prevents the need for repeated hosts file changes.
+
+    config.vm.network "private_network", ip: BOX_ADDRESS
 
     # ------------------------------------------------------------------------------------------------------------------
     # FILE SYSTEM
@@ -39,9 +65,7 @@ Vagrant.configure("2") do |config|
 
     # VirtualBox
     config.vm.provider "virtualbox" do |vm|
-        vm.name = "uisp-#{UISP_VERSION}"
-
-        # NOTE: Set the following to suit your needs and based upon available host resources.
+        vm.name = "#{BOX_HOSTNAME}-#{UISP_VERSION}"
         vm.cpus = 1
         vm.memory = 2048
     end
@@ -49,23 +73,19 @@ Vagrant.configure("2") do |config|
     # VMware
     # NOTE: Issues when packaging the box, more work later.
     #config.vm.provider "vmware_desktop" do |vm|
-    #    #vm.gui = true
-    #    vm.vmx["displayname"] = "uisp-#{UISP_VERSION}"
-    #
-    #    # NOTE: Set the following to suit your needs and based upon available host resources.
-    #    vm.vmx["memsize"] = "4096"
-    #    vm.vmx["numvcpus"] = "1"
+    #   #vm.gui = true
+    #   vm.vmx["displayname"] = "uisp-#{UISP_VERSION}"
+    #   vm.vmx["memsize"] = "4096"
+    #   vm.vmx["numvcpus"] = "1"
     #end
 
     # Hyper-V
-    # NOTE: Issues with synced folders, more work later.
+    # NOTE: Some issues that need to be resolved, maybe later?
     #config.vm.provider "hyperv" do |vm, override|
     #    vm.vmname = "uisp-#{UISP_VERSION}"
-    #
-    #    # NOTE: Set the following to suit your needs and based upon available host resources.
     #    vm.cpus = "1"
-    #    vm.memory = "4096"
-    #    vm.maxmemory = "8192"
+    #    vm.memory = "3072"
+    #    vm.maxmemory = "4096"
     #
     #    # NOTE: This is used to skip the Switch prompt, change as needed; OR simply remove completely to be prompted.
     #    override.vm.network "private_network", bridge: "Default Switch"
@@ -75,28 +95,33 @@ Vagrant.configure("2") do |config|
     # PROVISIONERS
     # ------------------------------------------------------------------------------------------------------------------
 
+    PROVISION_DIR = "./vagrant/provisioning/base"
+
     # Provision the Users...
     config.vm.provision "users", type: "shell", keep_color: true,
-        path: "./vagrant/provisioning/base/users.sh",
+        path: "#{PROVISION_DIR}/users.sh",
         env: { "ROOT_PASSWORD" => "#{ROOT_PASSWORD}" }
 
     # Provision the Network...
     config.vm.provision "network", type: "shell", keep_color: true,
-        path: "./vagrant/provisioning/base/network.sh",
+        path: "#{PROVISION_DIR}/network.sh",
         env: { "IPV6_DISABLE" => "all,default,lo,eth0" }
 
     # Provision the Firewall...
     config.vm.provision "firewall", type: "shell", keep_color: true,
-        path: "./vagrant/provisioning/base/firewall.sh",
+        path: "#{PROVISION_DIR}/firewall.sh",
         env: { }
 
     # Provision the UISP installation...
     config.vm.provision "install", type: "shell", keep_color: true,
-        path: "./vagrant/provisioning/base/install.sh",
+        path: "#{PROVISION_DIR}/install.sh",
         env: { "UISP_VERSION" => "#{UISP_VERSION}" }
 
-    # Provision file/folder permissions...
-    config.vm.provision "permissions", type: "shell", keep_color: true,
-        path: "./vagrant/provisioning/base/permissions.sh",
-        env: { }
+end
+
+
+# Attempt to automatically determine the UCRM version based on the UISP version provided.
+# WATCH: Currently the UCRM version is ALWAYS exactly 2 major versions ahead.
+def getUcrmVersion (uispVersion)
+    uispVersion.gsub(/^(\d+)/) { |capture| (capture.to_i + 2).to_s }
 end
