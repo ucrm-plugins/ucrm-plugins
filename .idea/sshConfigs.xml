@@ -3,9 +3,6 @@
   <component name="SshConfigs">
     <configs>
       <sshConfig authType="PASSWORD" host="uisp-dev" id="dab6d08f-a01b-4e75-a2e2-32abf1fb614d" port="22" nameFormat="DESCRIPTIVE" username="vagrant" useOpenSSHConfig="true" />
-      <sshConfig authType="PASSWORD" connectionConfig="{&quot;serverAliveInterval&quot;:300}" id="097b65ef-7a91-4e2a-a733-747ee0e61bca" port="22" customName="testing" nameFormat="CUSTOM" useOpenSSHConfig="true">
-        <option name="customName" value="testing" />
-      </sshConfig>
     </configs>
   </component>
 </project>
