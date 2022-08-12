@@ -160,7 +160,7 @@ final class ValidateCommand extends PluginSpecificCommand
         
         $validator = new Validator();
         $data = json_decode(file_get_contents("src/manifest.json"));
-        $schema = file_get_contents(PROJECT_PATH."/manifest.schema.json");
+        $schema = file_get_contents(PROJECT_DIR."/manifest.schema.json");
         
         $validator->setMaxErrors(10);
         $results = $validator->validate($data, $schema);

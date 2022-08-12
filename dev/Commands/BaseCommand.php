@@ -54,7 +54,7 @@ abstract class BaseCommand extends Command
     
     protected function getVendorBin(string $command = ""): string
     {
-        return FileSystem::path(PROJECT_PATH."/vendor/bin/$command");
+        return FileSystem::path(PROJECT_DIR."/vendor/bin/$command");
     }
     
     protected function chdir(string $dir)
@@ -66,7 +66,7 @@ abstract class BaseCommand extends Command
     protected function beforeExecute(InputInterface $input, OutputInterface $output): void
     {
         $this->owd = getcwd();
-        $this->chdir(PROJECT_PATH."/plugins/");
+        $this->chdir(PROJECT_DIR."/plugins/");
     }
     
     protected function afterExecute(InputInterface $input, OutputInterface $output): void

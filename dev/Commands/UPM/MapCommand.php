@@ -47,19 +47,19 @@ class MapCommand extends BaseCommand
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         $owd = getcwd();
-        chdir(FileSystem::path(PROJECT_PATH."/plugins/"));
+        chdir(FileSystem::path(PROJECT_DIR."/plugins/"));
         
         $name = $input->getArgument("name");
         
         if (!preg_match(self::NAMING_PATTERN, $name))
             $this->error("The Plugin's name is invalid, please adhere to ".self::NAMING_PATTERN, TRUE);
         
-        if (!file_exists($existing = FileSystem::path(PROJECT_PATH."/plugins/$name")))
+        if (!file_exists($existing = FileSystem::path(PROJECT_DIR."/plugins/$name")))
         {
             $this->error("A Plugin with that name could not be found at: $existing", TRUE);
         }
         
-        if (file_exists($box = FileSystem::path(PROJECT_PATH."/box/vagrant/env/box.conf")))
+        if (file_exists($box = FileSystem::path(PROJECT_DIR."/box/vagrant/env/box.conf")))
         {
             $ini = parse_ini_file($box);
             $host = array_key_exists("HOSTNAME", $ini) ? $ini["HOSTNAME"] : "localhost";
@@ -78,7 +78,7 @@ class MapCommand extends BaseCommand
         }
         
         
-        if (!file_exists($php = FileSystem::path(PROJECT_PATH."/.idea/php.xml")))
+        if (!file_exists($php = FileSystem::path(PROJECT_DIR."/.idea/php.xml")))
             $this->error("File .idea/php.xml could not be found!", TRUE);
         
         $project = simplexml_load_file($php);
@@ -167,7 +167,7 @@ class MapCommand extends BaseCommand
     
         // TODO: Create any missing www/ files, as this command can be run on any of the plugins???
     
-        if (!file_exists($www = FileSystem::path(PROJECT_PATH."/plugins/$name/www")))
+        if (!file_exists($www = FileSystem::path(PROJECT_DIR."/plugins/$name/www")))
             mkdir($www);
             
         if (!file_exists($public = FileSystem::path("$www/public.php")))

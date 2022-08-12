@@ -43,7 +43,7 @@ final class ExecCommand extends PluginSpecificCommand
     {
         $this->beforeExecute($input, $output);
     
-        if (!file_exists($existing = FileSystem::path(PROJECT_PATH."/plugins/$this->name")))
+        if (!file_exists($existing = FileSystem::path(PROJECT_DIR."/plugins/$this->name")))
             $this->error("A Plugin with that name could not be found locally at: $existing", TRUE);
         
         $this->command = $input->getArgument("exec");

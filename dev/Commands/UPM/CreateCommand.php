@@ -56,7 +56,7 @@ final class CreateCommand extends PluginSpecificCommand
         $this->map = $input->getOption("map");
         $this->force = $input->getOption("force");
         
-        if (file_exists($existing = FileSystem::path(PROJECT_PATH."/plugins/$this->name")))
+        if (file_exists($existing = FileSystem::path(PROJECT_DIR."/plugins/$this->name")))
         {
             if (!$this->force)
                 $this->error("A Plugin with that name already exists at: $existing", TRUE);
@@ -68,10 +68,10 @@ final class CreateCommand extends PluginSpecificCommand
             }
         }
         
-        if ($path = realpath(PROJECT_PATH."/templates/$this->template"))
+        if ($path = realpath(PROJECT_DIR."/templates/$this->template"))
         {
             $this->io->writeln("Template found, locally, duplicating...");
-            FileSystem::copyDir($path, FileSystem::path(PROJECT_PATH."/plugins/$this->name"), TRUE, TRUE);
+            FileSystem::copyDir($path, FileSystem::path(PROJECT_DIR."/plugins/$this->name"), TRUE, TRUE);
             
         }
         else
@@ -95,7 +95,7 @@ final class CreateCommand extends PluginSpecificCommand
     
         $this->io->writeln("Replacing template variables and executing commands...");
         
-        $modified = Templater::replace(FileSystem::path(PROJECT_PATH."/plugins/$this->name/src/"), [
+        $modified = Templater::replace(FileSystem::path(PROJECT_DIR."/plugins/$this->name/src/"), [
             "UCRM_PLUGIN_NAME" => $input->getArgument("name"),
             "UCRM_PLUGIN_AUTHOR" => Git::getAuthor(),
         ]);
@@ -120,7 +120,7 @@ final class CreateCommand extends PluginSpecificCommand
             EOF
         );
         
-        if (file_exists($box = FileSystem::path(PROJECT_PATH."/box/vagrant/env/box.conf")))
+        if (file_exists($box = FileSystem::path(PROJECT_DIR."/box/vagrant/env/box.conf")))
         {
             $ini = parse_ini_file($box);
             $host = array_key_exists("HOSTNAME", $ini) ? $ini["HOSTNAME"] : "localhost";
@@ -138,9 +138,9 @@ final class CreateCommand extends PluginSpecificCommand
             $ip = "127.0.0.1";
         }
         
-        $zip = dirname(str_replace("\\", "/", FileSystem::path(PROJECT_PATH."/plugins/$this->name/$this->name.zip")));
-        $dir = FileSystem::path(PROJECT_PATH);
-        $doc = str_replace("\\", "/", FileSystem::path(PROJECT_PATH."/docs/vagrant.md"));
+        $zip = dirname(str_replace("\\", "/", FileSystem::path(PROJECT_DIR."/plugins/$this->name/$this->name.zip")));
+        $dir = FileSystem::path(PROJECT_DIR);
+        $doc = str_replace("\\", "/", FileSystem::path(PROJECT_DIR."/docs/vagrant.md"));
     
         if ($this->map)
             exec("upm map $this->name");
