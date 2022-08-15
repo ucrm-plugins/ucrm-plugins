@@ -16,12 +16,16 @@ Vagrant.configure("2") do |config|
     # CONFIGURATION
     # ------------------------------------------------------------------------------------------------------------------
 
-    BOX_HOSTNAME                            = "uisp-dev"
-    BOX_ADDRESS                             = "192.168.56.10"
-    DNS_ALIASES                             = [ "vagrant" ]
-    ROOT_PASSWORD                           = "vagrant"
-    UISP_VERSION                            = "1.4.7"
-    UCRM_VERSION                            = getUcrmVersion UISP_VERSION
+    # NOTE: The following values can be overridden, as desired:
+    BOX_HOSTNAME  = "uisp-dev"
+    BOX_ADDRESS   = "192.168.50.10"
+    DNS_ALIASES   = [ "vagrant" ]
+    ROOT_PASSWORD = "vagrant"
+    UISP_VERSION  = "1.4.6"
+
+    # Attempt to automatically determine the UCRM version based on the UISP version provided.
+    # WATCH: Currently the UCRM version is ALWAYS exactly 2 major versions ahead.
+    UCRM_VERSION = UISP_VERSION.gsub(/^(\d+)/) { |capture| (capture.to_i + 2).to_s }
 
     # ------------------------------------------------------------------------------------------------------------------
     # NETWORKING
