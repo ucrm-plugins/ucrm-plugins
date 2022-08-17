@@ -16,23 +16,20 @@ Vagrant.configure("2") do |config|
     # CONFIGURATION
     # ------------------------------------------------------------------------------------------------------------------
 
-    # NOTE: The following values can be overridden, as desired:
-    BOX_HOSTNAME  = "uisp-dev"
-    BOX_ADDRESS   = "192.168.50.10"
-    DNS_ALIASES   = [ "vagrant" ]
-    ROOT_PASSWORD = "vagrant"
-    UISP_VERSION  = "1.4.6"
-
-    # Attempt to automatically determine the UCRM version based on the UISP version provided.
-    # WATCH: Currently the UCRM version is ALWAYS exactly 2 major versions ahead.
-    UCRM_VERSION = UISP_VERSION.gsub(/^(\d+)/) { |capture| (capture.to_i + 2).to_s }
+    PROJECT_DIR     = "./"
+    BOX_HOSTNAME    = "uisp-dev"
+    BOX_ADDRESS     = "192.168.56.10"
+    DNS_ALIASES     = [ "#{BOX_HOSTNAME}.local" ]
+    ROOT_PASSWORD   = "vagrant"
+    UISP_VERSION    = "1.4.7"
+    UCRM_VERSION    = UISP.getUcrmVersion(UISP_VERSION)
 
     # ------------------------------------------------------------------------------------------------------------------
     # NETWORKING
     # ------------------------------------------------------------------------------------------------------------------
 
-    config.vm.hostname                      = BOX_HOSTNAME
-    config.hostmanager.aliases              = DNS_ALIASES
+    config.vm.hostname = BOX_HOSTNAME
+    config.hostmanager.aliases = DNS_ALIASES
 
     # ------------------------------------------------------------------------------------------------------------------
     # FILE SYSTEM
@@ -80,9 +77,26 @@ Vagrant.configure("2") do |config|
     # VirtualBox
     config.vm.provider "virtualbox" do |vm, override|
         # NOTE: Set the following to suit your needs and based upon available host resources.
+        vm.name = "#{BOX_HOSTNAME}-#{UISP_VERSION}"
         vm.cpus = 1
         vm.memory = 4096
     end
+
+    # VMware
+    config.vm.provider "vmware_desktop" do |vm, override|
+        vm.gui = true
+        vm.vmx["displayname"] = "#{BOX_HOSTNAME}-#{UISP_VERSION}"
+        vm.vmx["memsize"] = "4096"
+        vm.vmx["numvcpus"] = "1"
+
+        # Do NOT Change the following unless you know what you're doing!
+        #vm.vmx["ethernet0.pcislotnumber"] = "32"
+        #vm.vmx["ethernet1.pcislotnumber"] = "33"
+
+        #NETWORK_NAME = OS.windows? ? "VMnet1" : "vmnet1"
+        #override.vm.network "private_network", type: "dhcp", name: NETWORK_NAME, adapter: 1
+    end
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # PROVISIONERS
@@ -120,35 +134,34 @@ Vagrant.configure("2") do |config|
     # TRIGGERS
     # ------------------------------------------------------------------------------------------------------------------
 
-    config.trigger.after [ :up, :reload ] do |trigger|
-        trigger.info = "Configuring VSSH for Windows"
-
-        trigger.ruby do |env, machine|
-            #key_file_dir = ".vagrant/machines/default/virtualbox"
-            key_path = File.expand_path("~/.ssh")
-            key_file = "#{BOX_HOSTNAME}_private_key"
-
-            if not File.exist?("#{key_path}/#{key_file}")
-                if config = /^\s*IdentityFile\s*(?<key_file>.*)$/.match(`vagrant ssh-config`)
-                    key_file_name=File.basename(config["key_file"])
-                    FileUtils.cp(config["key_file"], key_path)
-                    File.rename("#{key_path}/vagrant_private_key", "#{key_path}/#{key_file}")
-                end
-            end
-        end
-    end
-
-    config.trigger.after [ :halt, :destroy ] do |trigger|
-        trigger.info = "Configuring VSSH for Windows"
-
-        trigger.ruby do |env, machine|
-            key_path = File.expand_path("~/.ssh")
-            key_file = "#{BOX_HOSTNAME}_private_key"
-
-            if File.exist?("#{key_path}/#{key_file}")
-                File.delete("#{key_path}/#{key_file}")
-            end
-        end
-    end
+#     config.trigger.after [ :up, :reload ] do |trigger|
+#         trigger.info = "Configuring VSSH for Windows"
+#
+#         trigger.ruby do |env, machine|
+#             key_path = File.expand_path("~/.ssh")
+#             key_file = "#{BOX_HOSTNAME}_private_key"
+#
+#             if not File.exist?("#{key_path}/#{key_file}")
+#                 if config = /^\s*IdentityFile\s*(?<key_file>.*)$/.match(`vagrant ssh-config`)
+#                     key_file_name=File.basename(config["key_file"])
+#                     FileUtils.cp(config["key_file"], key_path)
+#                     File.rename("#{key_path}/private_key", "#{key_path}/#{key_file}")
+#                 end
+#             end
+#         end
+#     end
+#
+#     config.trigger.after [ :halt, :destroy ] do |trigger|
+#         trigger.info = "Configuring VSSH for Windows"
+#
+#         trigger.ruby do |env, machine|
+#             key_path = File.expand_path("~/.ssh")
+#             key_file = "#{BOX_HOSTNAME}_private_key"
+#
+#             if File.exist?("#{key_path}/#{key_file}")
+#                 File.delete("#{key_path}/#{key_file}")
+#             end
+#         end
+#     end
 
 end

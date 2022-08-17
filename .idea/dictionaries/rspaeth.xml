@@ -1,6 +1,7 @@
 <component name="ProjectDictionaryState">
   <dictionary name="rspaeth">
     <words>
+      <w>bccwin</w>
       <w>chgrp</w>
       <w>chpasswd</w>
       <w>cmds</w>
@@ -18,10 +19,15 @@
       <w>hostmanager</w>
       <w>hyperv</w>
       <w>idekey</w>
+      <w>keyscan</w>
       <w>maxmemory</w>
       <w>memsize</w>
+      <w>mnet</w>
+      <w>mswin</w>
       <w>mware</w>
+      <w>nistp</w>
       <w>numvcpus</w>
+      <w>pcislotnumber</w>
       <w>pgdatabase</w>
       <w>pghost</w>
       <w>pgpassword</w>
@@ -36,7 +42,9 @@
       <w>ucrm</w>
       <w>uisp</w>
       <w>unms</w>
+      <w>vboxnet</w>
       <w>vmname</w>
+      <w>vmnet</w>
       <w>vmware</w>
       <w>vssh</w>
       <w>windir</w>

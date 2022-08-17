@@ -1,10 +1,12 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
 
 # The Vagrant configuration for a UISP Base Box with minimal changes to the default installation of UISP.
 #
 # @author Ryan Spaeth <rspaeth@spaethtech.com>
 # @copyright 2022 Spaeth Technologies Inc.
+
+require_relative "./vagrant/modules/os.rb"
+require_relative "./vagrant/modules/ssh.rb"
+require_relative "./vagrant/modules/uisp.rb"
 
 Vagrant.configure("2") do |config|
 
@@ -14,12 +16,13 @@ Vagrant.configure("2") do |config|
     # CONFIGURATION
     # ------------------------------------------------------------------------------------------------------------------
 
+    PROJECT_DIR     = "../"
     BOX_HOSTNAME    = "uisp"
     BOX_ADDRESS     = "192.168.56.10"
-    DNS_ALIASES     = [ "vagrant" ]
+    DNS_ALIASES     = [ "#{BOX_HOSTNAME}.local" ]
     ROOT_PASSWORD   = "vagrant"
     UISP_VERSION    = "1.4.7"
-    UCRM_VERSION    = getUcrmVersion UISP_VERSION
+    UCRM_VERSION    = UISP.getUcrmVersion(UISP_VERSION)
 
     # ------------------------------------------------------------------------------------------------------------------
     # NETWORKING
@@ -64,32 +67,14 @@ Vagrant.configure("2") do |config|
     # ------------------------------------------------------------------------------------------------------------------
 
     # VirtualBox
-    config.vm.provider "virtualbox" do |vm|
+    config.vm.provider "virtualbox" do |vm, override|
         vm.name = "#{BOX_HOSTNAME}-#{UISP_VERSION}"
         vm.cpus = 1
-        vm.memory = 2048
+        vm.memory = 4096
+
+        #NETWORK_NAME = OS.windows? ? "VirtualBox Host-Only Ethernet Adapter" : "vboxnet1"
+        #override.vm.network "private_network", type: "dhcp", bridge: NETWORK_NAME, adapter: 1
     end
-
-    # VMware
-    # NOTE: Issues when packaging the box, more work later.
-    #config.vm.provider "vmware_desktop" do |vm|
-    #   #vm.gui = true
-    #   vm.vmx["displayname"] = "uisp-#{UISP_VERSION}"
-    #   vm.vmx["memsize"] = "4096"
-    #   vm.vmx["numvcpus"] = "1"
-    #end
-
-    # Hyper-V
-    # NOTE: Some issues that need to be resolved, maybe later?
-    #config.vm.provider "hyperv" do |vm, override|
-    #    vm.vmname = "uisp-#{UISP_VERSION}"
-    #    vm.cpus = "1"
-    #    vm.memory = "3072"
-    #    vm.maxmemory = "4096"
-    #
-    #    # NOTE: This is used to skip the Switch prompt, change as needed; OR simply remove completely to be prompted.
-    #    override.vm.network "private_network", bridge: "Default Switch"
-    #end
 
     # ------------------------------------------------------------------------------------------------------------------
     # PROVISIONERS
@@ -117,11 +102,41 @@ Vagrant.configure("2") do |config|
         path: "#{PROVISION_DIR}/install.sh",
         env: { "UISP_VERSION" => "#{UISP_VERSION}" }
 
+    # ------------------------------------------------------------------------------------------------------------------
+    # TRIGGERS
+    # ------------------------------------------------------------------------------------------------------------------
+
+    config.trigger.after :up, :reload do |trigger|
+        trigger.info = "Configuring VSSH for Windows"
+        trigger.ruby do |env, machine|
+            SSH.copyConfig(BOX_HOSTNAME, BOX_ADDRESS)
+            SSH.updateScript("#{PROJECT_DIR}/bin", BOX_HOSTNAME)
+            #SSH.copyPrivateKey(BOX_HOSTNAME)
+            #SSH.updateKnownHosts(BOX_HOSTNAME)
+        end
+    end
+
+    config.trigger.after :halt, :destroy do |trigger|
+        trigger.info = "Configuring VSSH for Windows"
+        trigger.ruby do |env, machine|
+            SSH.deleteConfig(BOX_HOSTNAME)
+            #SSH.deletePrivateKey(BOX_HOSTNAME)
+            #SSH.updateKnownHosts(BOX_HOSTNAME, true)
+        end
+    end
+
 end
 
 
-# Attempt to automatically determine the UCRM version based on the UISP version provided.
-# WATCH: Currently the UCRM version is ALWAYS exactly 2 major versions ahead.
-def getUcrmVersion (uispVersion)
-    uispVersion.gsub(/^(\d+)/) { |capture| (capture.to_i + 2).to_s }
-end
+
+
+
+
+
+
+
+
+
+
+
+
