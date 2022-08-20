@@ -22,11 +22,14 @@ $suffix = [];
 
 switch($command)
 {
-    case "php":
-        // Nothing special
+    case "bash":
+        // bash specific
         break;
     case "composer":
         $prefix = [ "--ansi" ];
+        break;
+    case "php":
+        // php specific
         break;
     case "robo":
         $prefix = [ "--ansi" ];
@@ -35,8 +38,8 @@ switch($command)
             $prefix[] = "--load-from $roboFile";
         break;
     default:
-
-        break;
+        // Anything else...
+        die("Command not yet implemented!");
 }
 
 
@@ -80,7 +83,7 @@ for ($i = 0; $i < count($argv); $i++)
 
 passthru("$command ".implode(" ", $prefix)." ".implode(" ", $argv)." ".implode(" ", $suffix));
 
-
+#region FUNCTIONS
 
 // as per RFC 3986
 // @see https://www.rfc-editor.org/rfc/rfc3986#section-5.2.4
@@ -165,3 +168,7 @@ function php2win(string $path): string
 {
     return str_replace([PHP_WORKING_DIR, "/"], [WIN_PROJECT_DIR, "\\"], $path);
 }
+
+
+
+#endregion
