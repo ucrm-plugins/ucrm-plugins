@@ -20,6 +20,13 @@
       <w>hyperv</w>
       <w>idekey</w>
       <w>keyscan</w>
+      <w>libbz</w>
+      <w>libc</w>
+      <w>libgmp</w>
+      <w>libicu</w>
+      <w>libpng</w>
+      <w>libpq</w>
+      <w>libzip</w>
       <w>maxmemory</w>
       <w>memsize</w>
       <w>mnet</w>
@@ -32,11 +39,18 @@
       <w>pghost</w>
       <w>pgpassword</w>
       <w>pguser</w>
+      <w>phpize</w>
+      <w>pkgconf</w>
       <w>postgre</w>
       <w>rbconfig</w>
       <w>rcfile</w>
+      <w>robo</w>
       <w>setlocal</w>
       <w>spaeth</w>
+      <w>spaethtech</w>
+      <w>sysvmsg</w>
+      <w>sysvsem</w>
+      <w>sysvshm</w>
       <w>templater</w>
       <w>ubnt</w>
       <w>ucrm</w>

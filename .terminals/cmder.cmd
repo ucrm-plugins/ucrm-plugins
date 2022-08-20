@@ -1,4 +1,3 @@
 @ECHO OFF
-SET PATH=%PATH%;%CD%\bin
-SET PATH=%PATH%;%CD%\vendor\bin
+CALL %~dp0\cmd.bat
 %CMDER_ROOT%\vendor\init.bat
