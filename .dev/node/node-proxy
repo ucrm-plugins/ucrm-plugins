@@ -1,0 +1,116 @@
+#!/usr/bin/env node
+// noinspection NpmUsedModulesInstalled, JSUnusedLocalSymbols
+
+"use strict";
+
+// MODULES
+const path      = require("path");
+const fs        = require("fs");
+const execSync  = require("child_process").execSync;
+
+// ENVIRONMENT
+const NODE_WORKING_DIR  = process.env.NODE_WORKING_DIR  // Defined in Docker Image
+const WIN_PROJECT_DIR   = process.env.WIN_PROJECT_DIR   // Passed during Command execution
+const WIN_CURRENT_DIR   = process.env.WIN_CURRENT_DIR   // Passed during Command execution
+
+// ARGUMENTS
+const node = process.argv[0];
+const file = process.argv[1];
+const exec = process.argv[2];
+const args = process.argv.slice(3);
+
+let prefix = [];
+let suffix = [];
+let allowedErrorCodes = [];
+
+// Determine the equivalent current directory in the container.
+const work = NODE_WORKING_DIR + "/" + (WIN_CURRENT_DIR
+    .replace(WIN_PROJECT_DIR + "\\", "")
+    .replaceAll("\\", "/"));
+
+// And change to it for the remainder of the process execution.
+process.chdir(work);
+
+switch(exec)
+{
+    case "node":
+        // Node
+        break;
+    case "npm":
+        // NPM
+        // NOTE: We allow an error code of 1 for this command, as NPM by itself returns 1.
+        allowedErrorCodes.push(1);
+        break;
+    default:
+        // Likely, a command added by the end-user developer.
+        break;
+
+}
+
+
+// Loop through all passed arguments...
+for (let i = 0; i < args.length; i++)
+{
+    // IF the current argument calls for evaluation of inline JS code...
+    if ((args[i] === "-e" || args[i] === "--eval") && (i + 1) < args.length)
+    {
+        // ...THEN escape the code (in the next argument) as best we can and skip past it!
+        args[i + 1] = "\"" + args[++i].replaceAll("\"", "\\\"") + "\"";
+        continue;
+    }
+
+    // IF the current argument contains a \ or / at any position...
+    if (args[i].includes("\\") || args[i].includes("/"))
+    {
+        // ...THEN we are going to attempt to determine if it is a path!
+
+        // Create a collection of possible paths.
+        let paths = [];
+
+        // In cases where it could be an absolute path in the container's filesystem.
+        // NOTE: This also works for relative paths, as we should be in the same working directory as the host.
+        paths.push(args[i].replaceAll("\\", "/"));
+
+        // In cases where it could be an absolute path on the host's filesystem.
+        paths.push(args[i]
+            .replaceAll("/", "\\")
+            .replace(WIN_PROJECT_DIR, NODE_WORKING_DIR)
+            .replaceAll("\\", "/")
+        );
+
+        // Loop through all the possible paths...
+        for(let p in paths)
+        {
+            // Attempt to resolve any relative or non-canonical paths.
+            let real = path.resolve(paths[p]);
+
+            // IF the file exists...
+            if (fs.existsSync(real))
+            {
+                // C=Alter the argument to be the corrected (absolute) path!
+                args[i] = real;
+                break;
+            }
+        }
+
+    }
+
+}
+
+try
+{
+    execSync(`${exec} ${prefix.join(" ")} ${args.join(" ")} ${suffix.join(" ")}`, {
+        stdio: "inherit"
+    });
+}
+catch (err)
+{
+    // If the specific command allows is not expecting this error, then show the error!
+    if (!allowedErrorCodes.includes(err.status))
+        console.log(err);
+}
+
+
+//process.exit();
+
+//console.log("After");

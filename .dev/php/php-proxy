@@ -39,7 +39,8 @@ switch($command)
         break;
     default:
         // Anything else...
-        die("Command not yet implemented!");
+        //die("Command not yet implemented!");
+        break;
 }
 
 

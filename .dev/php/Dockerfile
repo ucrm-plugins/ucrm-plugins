@@ -28,6 +28,10 @@ RUN apt-get update -y \
     && apt-get install -y curl git subversion unzip \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+### PHPUNIT
+RUN composer global require phpunit/phpunit \
+    && ln -s ~/.composer/vendor/bin/phpunit /usr/local/bin/phpunit
+
 ### ROBO
 RUN composer global require consolidation/robo \
     && ln -s ~/.composer/vendor/bin/robo /usr/local/bin/robo
@@ -40,7 +44,7 @@ ENV PHP_WORKING_DIR=/opt/project
 RUN mkdir -p ${PHP_WORKING_DIR}
 WORKDIR ${PHP_WORKING_DIR}
 
-RUN ln -s ${PHP_WORKING_DIR}/.php/php-proxy /usr/local/bin/php-proxy
+RUN ln -s ${PHP_WORKING_DIR}/.dev/php/php-proxy /usr/local/bin/php-proxy
 
 VOLUME [ "${PHP_WORKING_DIR}" ]
 

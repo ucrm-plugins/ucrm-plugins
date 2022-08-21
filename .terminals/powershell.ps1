@@ -3,7 +3,8 @@ $ProjectDir = Resolve-Path -Path "$PSScriptRoot\.."
 
 # Add any relative paths we want added here...
 $paths = @(
-".php\bin",
+".dev\node\bin",
+".dev\php\bin",
 "bin"
 #"vendor\bin"
 )

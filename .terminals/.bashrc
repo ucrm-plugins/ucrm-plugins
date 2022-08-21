@@ -23,6 +23,7 @@ resolve_relative_path() (
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 export PROJECT_DIR=$( resolve_relative_path "$SCRIPT_DIR"/.. )
-export PATH="$PROJECT_DIR/.php/bin:$PATH"
+export PATH="$PROJECT_DIR/.dev/node/bin:$PATH"
+export PATH="$PROJECT_DIR/.dev/php/bin:$PATH"
 export PATH="$PROJECT_DIR/bin:$PATH"
 #export PATH="$PROJECT_DIR/vendor/bin:$PATH"
