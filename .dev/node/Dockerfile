@@ -31,16 +31,10 @@ RUN npm install -g yo \
 ### Gulp
 RUN npm install -g gulp
 
-
 ### CLEANUP
 #RUN rm -rf /var/lib/apt/lists/*
 
-
-
+### PROXY
 RUN ln -s ${WORKING_DIR}/.dev/node/node-proxy /usr/local/bin/node-proxy
 
 VOLUME [ "${WORKING_DIR}" ]
-
-#ENTRYPOINT [ "node" ]
-#ENTRYPOINT [ "/bin/bash" ]
-#CMD [ "docker-php" ]

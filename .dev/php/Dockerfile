@@ -3,6 +3,11 @@ FROM php:${VERSION}
 
 MAINTAINER Ryan Spaeth <rspaeth@spaethtech.com>
 
+### WORKING
+ENV WORKING_DIR=/opt/project
+RUN mkdir -p ${WORKING_DIR}
+WORKDIR ${WORKING_DIR}
+
 ### PHP EXTENSIONS
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -39,15 +44,9 @@ RUN composer global require consolidation/robo \
 ### CLEANUP
 RUN rm -rf /var/lib/apt/lists/*
 
-### WORKING
-ENV WORKING_DIR=/opt/project
-RUN mkdir -p ${WORKING_DIR}
-WORKDIR ${WORKING_DIR}
-
+### PROXY
 RUN ln -s ${WORKING_DIR}/.dev/php/php-proxy /usr/local/bin/php-proxy
 
 VOLUME [ "${WORKING_DIR}" ]
 
 ENTRYPOINT [ "php" ]
-#ENTRYPOINT [ "/bin/bash" ]
-#CMD [ "docker-php" ]
