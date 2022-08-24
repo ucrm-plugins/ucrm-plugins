@@ -17,7 +17,7 @@ require_once __DIR__ . "/../vendor/autoload.php";
 function loadCommands(string $path, string $fqns): array
 {
     $commands = [];
-
+    
     if (!($path = realpath($path)))
         return $commands;
 
@@ -26,6 +26,8 @@ function loadCommands(string $path, string $fqns): array
     
     foreach(FileSystem::scan($path) as $file)
     {
+        $file = str_replace("/", "\\", $file);
+        
         // Construct the fully qualified class name.
         $fqcn = $fqns . "\\" . (str_replace(".php", "", $file));
 

@@ -1,29 +1,46 @@
 #!/usr/bin/env bash
 
-resolve_relative_path() (
-    # If the path is a directory, we just need to 'cd' into it and print the new path.
-    if [ -d "$1" ]; then
-        cd "$1" || return 1
-        pwd
-    # If the path points to anything else, like a file or FIFO
-    elif [ -e "$1" ]; then
-        # Strip '/file' from '/dir/file'
-        # We only change the directory if the name doesn't match for the cases where
-        # we were passed something like 'file' without './'
-        if [ ! "${1%/*}" = "$1" ]; then
-            cd "${1%/*}" || return 1
-        fi
-        # Strip all leading slashes upto the filename
-        echo "$(pwd)/${1##*/}"
-    else
-        return 1 # Failure, neither file nor directory exists.
-    fi
-)
+if [[ "$(uname)" != MINGW64_NT* ]]; then
+    echo "The included .bashrc script can only be used with Cmder on Windows!"
+else
+    # Set the directory of this script.
+    _BASHRC_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
+    # Set the project directory.
+    PROJECT_DIR=$(realpath "$_BASHRC_DIR"/..)
 
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-export PROJECT_DIR=$( resolve_relative_path "$SCRIPT_DIR"/.. )
-export PATH="$PROJECT_DIR/.dev/node/bin:$PATH"
-export PATH="$PROJECT_DIR/.dev/php/bin:$PATH"
-export PATH="$PROJECT_DIR/bin:$PATH"
-#export PATH="$PROJECT_DIR/vendor/bin:$PATH"
+    # Set any additional directories with executables.
+    ARR_BIN_DIR=(
+        .dev/node/bin
+        .dev/php/bin
+        bin
+    )
+
+    # Export the project directory for later use.
+    export PROJECT_DIR=$PROJECT_DIR
+
+    # Loop through each additional directory...
+    for BIN in "${ARR_BIN_DIR[@]}"; do
+
+        # Add the current bin directory to the PATH env.
+        export PATH="$PROJECT_DIR/$BIN:$PATH"
+
+        # Loop through each BAT file in the directory
+        for i in "$PROJECT_DIR/$BIN"/*.bat; do
+
+            # IF the file does not exist, THEN move on to the next file!
+            [ -f "$i" ] || break
+
+            # Get the current file's name.
+            file_ext=$(basename -- "$i")
+            filename="${file_ext%.*}"
+
+            # And alias the command (by name) to it's BAT file.
+            ## shellcheck disable=SC2139,SC2086
+            #alias $filename="$filename.bat"
+
+            #cp "$PROJECT_DIR/$BIN/$filename".bat "$PROJECT_DIR/$BIN/$filename"
+            #chmod +x "$PROJECT_DIR/$BIN/$filename"
+        done
+    done
+fi

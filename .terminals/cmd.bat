@@ -1,6 +1,11 @@
 @ECHO OFF
-SET PROJECT_DIR=%~dp0\..
+
+PUSHD %~dp0..
+SET PROJECT_DIR=%CD%
+POPD
+
 SET PATH=%PROJECT_DIR%\.dev\node\bin;%PATH%
 SET PATH=%PROJECT_DIR%\.dev\php\bin;%PATH%
 SET PATH=%PROJECT_DIR%\bin;%PATH%
 ::SET PATH=%PROJECT_DIR%\vendor\bin;%PATH%
+

@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 
 const UCRM_MAX_PLUGIN_URL_LENGTH = 255;

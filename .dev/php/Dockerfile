@@ -1,5 +1,5 @@
-ARG PHP_VERSION=7.4.26
-FROM php:${PHP_VERSION}
+ARG VERSION=7.4.26
+FROM php:${VERSION}
 
 MAINTAINER Ryan Spaeth <rspaeth@spaethtech.com>
 
@@ -40,13 +40,13 @@ RUN composer global require consolidation/robo \
 RUN rm -rf /var/lib/apt/lists/*
 
 ### WORKING
-ENV PHP_WORKING_DIR=/opt/project
-RUN mkdir -p ${PHP_WORKING_DIR}
-WORKDIR ${PHP_WORKING_DIR}
+ENV WORKING_DIR=/opt/project
+RUN mkdir -p ${WORKING_DIR}
+WORKDIR ${WORKING_DIR}
 
-RUN ln -s ${PHP_WORKING_DIR}/.dev/php/php-proxy /usr/local/bin/php-proxy
+RUN ln -s ${WORKING_DIR}/.dev/php/php-proxy /usr/local/bin/php-proxy
 
-VOLUME [ "${PHP_WORKING_DIR}" ]
+VOLUME [ "${WORKING_DIR}" ]
 
 ENTRYPOINT [ "php" ]
 #ENTRYPOINT [ "/bin/bash" ]

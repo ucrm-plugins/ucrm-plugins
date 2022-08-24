@@ -3,13 +3,13 @@
 declare(strict_types=1);
 
 // Defined in the Docker Image and set in the container
-define("PHP_WORKING_DIR", getenv("PHP_WORKING_DIR"));
+define("WORKING_DIR", getenv("WORKING_DIR"));
 
 // Defined during Command execution, per Project, from the host
-define("WIN_PROJECT_DIR", str_replace("/", "\\", getenv("WIN_PROJECT_DIR")));
-define("WIN_CURRENT_DIR", str_replace("/", "\\", getenv("WIN_CURRENT_DIR")));
+define("PROJECT_DIR", str_replace("/", "\\", getenv("PROJECT_DIR")));
+define("CURRENT_DIR", str_replace("/", "\\", getenv("CURRENT_DIR")));
 
-#require_once PHP_WORKING_DIR."/vendor/autoload.php";
+#require_once WORKING_DIR."/vendor/autoload.php";
 
 #use UCRM\Plugins\Support\FileSystem;
 
@@ -33,7 +33,7 @@ switch($command)
         break;
     case "robo":
         $prefix = [ "--ansi" ];
-        $roboFile = win2php(WIN_CURRENT_DIR."/RoboFile.php");
+        $roboFile = win2php(CURRENT_DIR."/RoboFile.php");
         if (file_exists($roboFile))
             $prefix[] = "--load-from $roboFile";
         break;
@@ -64,11 +64,11 @@ for ($i = 0; $i < count($argv); $i++)
         //$paths[] = FileSystem::canonical($arg, "\\");
         //$paths[] = FileSystem::canonical(WIN_CURRENT_DIR . "\\" . $arg, "\\");
         $paths[] = canonical($arg, "\\");
-        $paths[] = canonical(WIN_CURRENT_DIR . "\\" . $arg, "\\");
+        $paths[] = canonical(CURRENT_DIR . "\\" . $arg, "\\");
 
         foreach($paths as $path)
         {
-            $real = str_replace([WIN_PROJECT_DIR, "\\"], [PHP_WORKING_DIR, "/"], $path);
+            $real = str_replace([PROJECT_DIR, "\\"], [WORKING_DIR, "/"], $path);
             
             if (file_exists($real))
             {
@@ -160,14 +160,14 @@ function canonical(string $path, string $separator = DIRECTORY_SEPARATOR)
 
 function win2php(string $path): string
 {
-    return str_replace([WIN_PROJECT_DIR, "\\"], [PHP_WORKING_DIR,"/"], $path);
+    return str_replace([PROJECT_DIR, "\\"], [WORKING_DIR,"/"], $path);
 }
 
 
 
 function php2win(string $path): string
 {
-    return str_replace([PHP_WORKING_DIR, "/"], [WIN_PROJECT_DIR, "\\"], $path);
+    return str_replace([WORKING_DIR, "/"], [PROJECT_DIR, "\\"], $path);
 }
 
 

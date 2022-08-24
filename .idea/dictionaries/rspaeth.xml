@@ -11,6 +11,8 @@
       <w>displayname</w>
       <w>dmode</w>
       <w>enabledelayedexpansion</w>
+      <w>errexit</w>
+      <w>errtrace</w>
       <w>fastcgi</w>
       <w>fileutils</w>
       <w>fqns</w>
@@ -33,13 +35,16 @@
       <w>mswin</w>
       <w>mware</w>
       <w>nistp</w>
+      <w>nounset</w>
       <w>numvcpus</w>
+      <w>pathconv</w>
       <w>pcislotnumber</w>
       <w>pgdatabase</w>
       <w>pghost</w>
       <w>pgpassword</w>
       <w>pguser</w>
       <w>phpize</w>
+      <w>pipefail</w>
       <w>pkgconf</w>
       <w>postgre</w>
       <w>rbconfig</w>
@@ -62,6 +67,7 @@
       <w>vmware</w>
       <w>vssh</w>
       <w>windir</w>
+      <w>xtrace</w>
     </words>
   </dictionary>
 </component>

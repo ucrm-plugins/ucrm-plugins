@@ -1,0 +1,2 @@
+# There is now a parent .gitignore for templates, so the standard "ignores" can be omitted here in favor of more
+# specific rules.

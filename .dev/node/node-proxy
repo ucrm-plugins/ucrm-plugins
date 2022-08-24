@@ -9,9 +9,9 @@ const fs        = require("fs");
 const execSync  = require("child_process").execSync;
 
 // ENVIRONMENT
-const NODE_WORKING_DIR  = process.env.NODE_WORKING_DIR  // Defined in Docker Image
-const WIN_PROJECT_DIR   = process.env.WIN_PROJECT_DIR   // Passed during Command execution
-const WIN_CURRENT_DIR   = process.env.WIN_CURRENT_DIR   // Passed during Command execution
+const WORKING_DIR   = process.env.WORKING_DIR   // Defined in Docker Image
+const PROJECT_DIR   = process.env.PROJECT_DIR   // Passed during Command execution
+const CURRENT_DIR   = process.env.CURRENT_DIR   // Passed during Command execution
 
 // ARGUMENTS
 const node = process.argv[0];
@@ -19,20 +19,24 @@ const file = process.argv[1];
 const exec = process.argv[2];
 const args = process.argv.slice(3);
 
-let prefix = [];
-let suffix = [];
-let allowedErrorCodes = [];
-
 // Determine the equivalent current directory in the container.
-const work = NODE_WORKING_DIR + "/" + (WIN_CURRENT_DIR
-    .replace(WIN_PROJECT_DIR + "\\", "")
-    .replaceAll("\\", "/"));
+const work = WORKING_DIR + CURRENT_DIR.replace(PROJECT_DIR, "").replaceAll("\\", "/");
 
 // And change to it for the remainder of the process execution.
 process.chdir(work);
 
+let commands = [];
+let prefix = [];
+let suffix = [];
+let allowedErrorCodes = [];
+
 switch(exec)
 {
+    case "gulp":
+        // Gulp
+        // NOTE: We allow an error code of 1 for this command, as gGulp by itself returns 1.
+        allowedErrorCodes.push(1);
+        break;
     case "node":
         // Node
         break;
@@ -40,6 +44,17 @@ switch(exec)
         // NPM
         // NOTE: We allow an error code of 1 for this command, as NPM by itself returns 1.
         allowedErrorCodes.push(1);
+        break;
+    case "yo":
+        // Yeoman
+        commands.push(`cd ${WORKING_DIR}/generators/ucrm-plugin && npm link`)
+
+        // NOTE: We allow an error code of 1 for this command, as Yeoman by itself returns 1.
+        allowedErrorCodes.push(1);
+
+        //if(args.length === 0)
+        //    prefix.push("--no-insight");
+
         break;
     default:
         // Likely, a command added by the end-user developer.
@@ -74,7 +89,7 @@ for (let i = 0; i < args.length; i++)
         // In cases where it could be an absolute path on the host's filesystem.
         paths.push(args[i]
             .replaceAll("/", "\\")
-            .replace(WIN_PROJECT_DIR, NODE_WORKING_DIR)
+            .replace(PROJECT_DIR, WORKING_DIR)
             .replaceAll("\\", "/")
         );
 
@@ -97,11 +112,11 @@ for (let i = 0; i < args.length; i++)
 
 }
 
+commands.push(`${exec} ${prefix.join(" ")} ${args.join(" ")} ${suffix.join(" ")}`);
+
 try
 {
-    execSync(`${exec} ${prefix.join(" ")} ${args.join(" ")} ${suffix.join(" ")}`, {
-        stdio: "inherit"
-    });
+    execSync(commands.join(" && "), { stdio: "inherit" });
 }
 catch (err)
 {

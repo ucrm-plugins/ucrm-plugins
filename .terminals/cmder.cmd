@@ -1,3 +1,3 @@
 @ECHO OFF
-CALL %~dp0\cmd.bat
+CALL %~dp0cmd.bat
 %CMDER_ROOT%\vendor\init.bat
