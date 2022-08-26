@@ -18,10 +18,10 @@
     },
     "autoload-dev": {
         "files": [
-            "dev/globals.php"
+            ".dev/upm/src/globals.php"
         ],
         "psr-4": {
-            "UCRM\\Plugins\\": "dev/"
+            "UCRM\\Plugins\\": ".dev/upm/src"
         }
     }
 }

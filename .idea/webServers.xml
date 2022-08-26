@@ -3,7 +3,7 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="d85a2372-bbd1-427b-8783-a271733c5c17" name="vagrant" url="https://uisp-dev">
-        <fileTransfer rootFolder="/home/vagrant" accessType="SFTP" host="uisp-dev" port="22" sshConfigId="dab6d08f-a01b-4e75-a2e2-32abf1fb614d" sshConfig="vagrant@uisp-dev:22 password">
+        <fileTransfer rootFolder="/home/unms/data/ucrm/ucrm" accessType="SFTP" host="uisp-dev" port="22" sshConfigId="eede4f97-3b03-42d4-8515-543ddc0ab20a" sshConfig="vagrant@uisp-dev:22 agent" authAgent="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

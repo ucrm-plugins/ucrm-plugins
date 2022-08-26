@@ -9,9 +9,9 @@ if (php_sapi_name() !== "cli")
     exit;
 
 require_once __DIR__ . "/../../vendor/autoload.php";
-require_once __DIR__ . "/../../dev/commands.php";
+require_once __DIR__ . "/src/commands.php";
 
-const UPM_COMMAND_PATH = __DIR__ . "/../../dev/Commands/UPM";
+const UPM_COMMAND_PATH = __DIR__ . "/src/Commands/UPM";
 const UPM_COMMAND_FQNS = "UCRM\\Plugins\\Commands\\UPM";
 
 // Create the Application.

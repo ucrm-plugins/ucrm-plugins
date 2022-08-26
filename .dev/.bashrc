@@ -13,7 +13,8 @@ else
     ARR_BIN_DIR=(
         .dev/node/bin
         .dev/php/bin
-        bin
+        .dev/upm/bin
+        .dev/vssh/bin
     )
 
     # Export the project directory for later use.

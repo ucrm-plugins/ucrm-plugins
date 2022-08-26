@@ -1,7 +1,7 @@
 #!/bin/bash
 
 app=/home/unms/app
-env=/home/vagrant/env
+env=/src/ucrm-plugins/box/vagrant/env
 profile=/etc/profile.d
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -16,10 +16,10 @@ rm -f $env/{box,unms}.conf
 cp $app/unms.conf $env/unms.conf
 
 # Get the Box's IP information.
-ipv4=`ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1`
-ipv6=`ip addr show eth1 | grep "inet6\b" | awk '{print $2}' | cut -d/ -f1`
+ipv4=$(ip addr show eth1 | grep "inet\b" | awk '{print $2}' | cut -d/ -f1)
+ipv6=$(ip addr show eth1 | grep "inet6\b" | awk '{print $2}' | cut -d/ -f1)
 
-echo 'HOSTNAME="'`hostname`'"' >> $env/box.conf
+echo "HOSTNAME=\"$(hostname)\"" >> $env/box.conf
 echo "IP=\"$ipv4\"" >> $env/box.conf
 
 # Make sure ownership and permissions are correct.
@@ -28,23 +28,36 @@ chown -R vagrant:vagrant $env
 # ----------------------------------------------------------------------------------------------------------------------
 # ENVIRONMENT VARIABLES
 # ----------------------------------------------------------------------------------------------------------------------
+
+PGPASSWORD=$(awk -F "=" '/UCRM_POSTGRES_PASSWORD/ {print $2}' $app/unms.conf | tr -d '"')
+PGUSER=$(awk -F "=" '/UCRM_POSTGRES_USER/ {print $2}' $app/unms.conf | tr -d '"')
+PGDATABASE=$(awk -F "=" '/UCRM_POSTGRES_DB/ {print $2}' $app/unms.conf | tr -d '"')
+
 rm -f $profile/box.sh
-echo "export UISP_VERSION=\"$UISP_VERSION\""    >> $profile/box.sh
-echo "export UCRM_VERSION=\"$UCRM_VERSION\""    >> $profile/box.sh
-echo "export UISP_ENVIRONMENT=\"development\""  >> $profile/box.sh
 
-PGPASSWORD=$(awk -F "=" '/UCRM_POSTGRES_PASSWORD/ {print $2}' /home/unms/app/unms.conf | tr -d '"')
-PGUSER=$(awk -F "=" '/UCRM_POSTGRES_USER/ {print $2}' /home/unms/app/unms.conf | tr -d '"')
-PGDATABASE=$(awk -F "=" '/UCRM_POSTGRES_DB/ {print $2}' /home/unms/app/unms.conf | tr -d '"')
+cat << EOF >> $profile/box.sh
+export UISP_VERSION="$UISP_VERSION"
+export UCRM_VERSION="$UCRM_VERSION"
+export UISP_ENVIRONMENT="development"
+export PGPASSWORD="$PGPASSWORD"
+export PGUSER="$PGUSER"
+export PGDATABASE="$PGDATABASE"
+export PGHOST="localhost"
+EOF
+#echo "export UISP_VERSION=\"$UISP_VERSION\""    >> $profile/box.sh
+#echo "export UCRM_VERSION=\"$UCRM_VERSION\""    >> $profile/box.sh
+#echo "export UISP_ENVIRONMENT=\"development\""  >> $profile/box.sh
 
-echo "export PGPASSWORD=\"$PGPASSWORD\""        >> $profile/box.sh
-echo "export PGUSER=\"$PGUSER\""                >> $profile/box.sh
-echo "export PGDATABASE=\"$PGDATABASE\""        >> $profile/box.sh
-echo "export PGHOST=\"localhost\""              >> $profile/box.sh
+#echo "export PGPASSWORD=\"$PGPASSWORD\""        >> $profile/box.sh
+#echo "export PGUSER=\"$PGUSER\""                >> $profile/box.sh
+#echo "export PGDATABASE=\"$PGDATABASE\""        >> $profile/box.sh
+#echo "export PGHOST=\"localhost\""              >> $profile/box.sh
 
 # FUTURE: Add any other system-wide environment variables here!
 
 # Double check permissions and source the new values.
 chown root:root $profile/box.sh
 chmod +x $profile/box.sh
+
+# shellcheck disable=SC1090
 source $profile/box.sh

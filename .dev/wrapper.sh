@@ -59,6 +59,7 @@ declare -a ARGS=(
     --env "CURRENT_DIR=$CURRENT_DIR"
     --env "WORKING_DIR=$MOUNT_DIR"
     --volume "$PROJECT_DIR:$MOUNT_DIR"
+    #--volume "$PROJECT_DIR/.dev/.ssh/config:/root/.ssh/config"
     --workdir "$MOUNT_DIR"
     --name "$IMAGE_CMD-$IMAGE_TAG"
 )
@@ -68,4 +69,3 @@ for i in "${ARGS[@]}"
 do
    DOCKER_ARGS="$DOCKER_ARGS $i"
 done
-

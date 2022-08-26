@@ -1,117 +1,118 @@
 
 module SSH
+    @@machine = {}
 
-
-    def SSH.copyConfig (host, ip = nil)
-
-        sshPath = File.expand_path("~/.ssh")
-        configFile = "#{sshPath}/vagrant_#{host}.cfg"
-        hostRegEx = /^Host (.*)$/
-
-        SSH.deleteConfig(host)
-
-        sshInfo = `vagrant ssh-config`
-        if config = sshInfo.match(hostRegEx)
-            sshInfo = sshInfo.gsub(/^Host (.*)$/, "Host #{host}")
-            sshInfo = sshInfo.gsub(/^  HostName (.*)$/, "  HostName " + (ip ? ip : host))
-            sshInfo = sshInfo.gsub(/^  Port (.*)$/, "  Port 22")
-
-            File.open(configFile, "w") { |file| file.puts sshInfo }
-        else
-            # Something went wrong!
-        end
-
+    def self.setMachine(value)
+        @@machine = value
     end
 
-    def SSH.deleteConfig (host = "uisp-dev")
-
-        sshPath = File.expand_path("~/.ssh")
-        configFile = "#{sshPath}/vagrant_#{host}.cfg"
-
-        # Delete any previous config file.
-        if File.exist?(configFile)
-            File.delete(configFile)
-        end
-
+    def self.getMachine()
+        @@machine
     end
 
-    def SSH.updateScript(path, host = "uisp-dev")
-
-        scriptFile = "#{path}/vssh.bat"
-
-        if File.exist?(scriptFile)
-            contents = File.read(scriptFile)
-            contents = contents.gsub(/^SET SSH_HOST=(.*)$/, "SET SSH_HOST=#{host}")
-            File.open(scriptFile, "w") { |file| file.puts contents }
-        end
-
+    def SSH.log(message)
+        name = @@machine ? @@machine.name : "default"
+        puts "    #{name}: #{message}"
     end
 
-
-
-    def SSH.copyPrivateKey (hostname)
-        keyPath = File.expand_path("~/.ssh")
-        keyFile = "#{keyPath}/#{hostname}_private_key"
-        sshInfo = `vagrant ssh-config`
-        configFile = "#{keyPath}/config_#{hostname}"
-
-        if config = /^Host (.*)$/.match(`vagrant ssh-config`)
-            File.open(configFile, "w") { |file| file.puts config }
-
-
-        end
-
-        # Delete any previous key file.
-        if File.exist?(keyFile)
-            File.delete(keyFile)
-        end
-
-        if config = /^\s*IdentityFile\s*(?<IdentityFile>.*)$/.match(`vagrant ssh-config`)
-            FileUtils.cp(config["IdentityFile"], keyPath)
-            filename = File.basename(config["IdentityFile"])
-            File.rename("#{keyPath}/#{filename}", "#{keyPath}/#{keyFile}")
-        end
-
-
-
+    def SSH.sshPath()
+        File.expand_path("~/.ssh")
     end
 
-    def SSH.deletePrivateKey (hostname)
-        keyPath = File.expand_path("~/.ssh")
-        keyFile = "#{hostname}_private_key"
-
-        if File.exist?("#{keyPath}/#{keyFile}")
-            File.delete("#{keyPath}/#{keyFile}")
-        end
+    def SSH.sshInfo()
+        SSH.log("Querying 'ssh-config'...")
+        `vagrant ssh-config`
     end
 
-    def SSH.updateKnownHosts (host, delete = false)
+    def SSH.updateConfig(host = nil, name = nil, user = nil, port = nil)
+        file = "#{SSH.sshPath()}/config"
+        info = SSH.sshInfo()
 
-        hostsFile = File.expand_path("~/.ssh/known_hosts")
-        hostRegEx = /^(?<hosts>[^\s]*#{Regexp.escape(host)},?[^\s]*)\s+(?<type>ecdsa-sha2-nistp256)\s+(?<key>.*=)$/
-        scanRegEx = /^.*(?<type>ecdsa-sha2-nistp256)\s+(?<key>.*=)$/
+        # Modify the config as specified...
+        if info.match(/^Host (.*)$/)
+            host ||= info.match(/^Host (.*)$/).captures[0]
+            name ||= info.match(/^  HostName (.*)$/).captures[0]
+            user ||= info.match(/^  User (.*)$/).captures[0]
+            port ||= info.match(/^  Port (.*)$/).captures[0]
 
-        if File.exist?(hostsFile)
-            #ssh-keyscan -t ecdsa -H uisp-dev
+            info = info
+                .gsub(/^Host (.*)$/, "Host #{host}")
+                .gsub(/^  HostName (.*)$/, "  HostName #{name}")
+                .gsub(/^  User (.*)$/, "  User #{user}")
+                .gsub(/^  Port (.*)$/, "  Port #{port}")
+        end
 
-            contents = File.read(hostsFile)
+        #puts host, name, user, port
 
-            if delete
-                newContents = contents.gsub(hostRegEx, "")
-            else
-                if scanInfo = scanRegEx.match(`ssh-keyscan -t ecdsa -H #{host}`)
-                    key = scanInfo["key"]
-                    newContents = text.gsub(hostRegEx, "#{host} ecdsa-sha2-nistp256 #{key}")
+        contents = ""
+        found = false
+
+        # IF an SSH config file already exists...
+        if File.exist?(file)
+            # ...THEN read the current config's contents.
+            contents = File.read(file)
+
+            # Loop through each config block...
+            contents = contents.gsub(/(?<=^)(\S.*?)(?=^\S|\Z)/ms) do |m|
+                if m.match(/^Host #{host}/)
+                    #puts "    #{SSH.getMachine().name}: [SSH] Updating '#{host}'..."
+                    SSH.log("Updating '#{host}'...")
+                    found = true
+                    info
+                else
+                    m
                 end
             end
 
-            if (newContents != contents)
-                File.open(hostsFile, "w") { |file| file.puts newContents }
-                #puts newContents
+            if not found
+                SSH.log("Adding '#{host}'...")
+                contents += info
             end
-
+        else
+            # ...OTHERWISE, create one!
+            SSH.log("Creating 'config' file...")
+            SSH.log("Adding '#{host}'...")
+            contents = info
         end
 
+        File.open(file, "wb") { |f| f.puts contents }
+    end
+
+    def SSH.deleteConfig (host)
+        file = "#{SSH.sshPath()}/config"
+
+        contents = ""
+        found = false
+
+        # IF an SSH config file already exists...
+        if File.exist?(file)
+            # ...THEN read the current config's contents.
+            contents = File.read(file)
+
+            # Loop through each config block...
+            contents = contents.gsub(/(?<=^)(\S.*?)(?=^\S|\Z)/ms) do |m|
+                if m.match(/^Host #{host}/)
+                    SSH.log("Deleting '#{host}'...")
+                    found = true
+                    ""
+                else
+                    m
+                end
+            end
+        else
+            # ...OTHERWISE, nothing to do!
+        end
+
+        File.open(file, "wb") { |f| f.puts contents }
+    end
+
+    def SSH.updateScript(file, key, value)
+        if File.exist?(file)
+            SSH.log("Updating 'vssh'...")
+            contents = File.read(file)
+            contents = contents.gsub(/^#{key}=(.*)$/, "#{key}=#{value}")
+            File.open(file, "wb") { |f| f.puts contents }
+        end
     end
 
 end

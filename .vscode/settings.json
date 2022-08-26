@@ -1,0 +1,21 @@
+{
+    "terminal.integrated.profiles.windows": {
+        "Git Bash": {
+            "source": "Git Bash",
+            "args": [ "--rcfile", ".dev/.bashrc" ]
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+
+    
+    "php.debug.executablePath": "C:/dev/php/lib/php/7.4.27-nts/php.exe",
+    "php.debug.ideKey": "VSCODE",
+    
+
+    "composer.executablePath": "X:\\My Drive\\Development\\PhpStorm\\Libraries\\Composer\\composer.bat",
+
+    "cSpell.userWords": [
+        "UISP",
+        "UCRM"
+    ],
+}

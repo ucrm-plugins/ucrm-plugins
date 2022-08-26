@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use UCRM\Plugins\Support\FileSystem;
 
-require_once __DIR__ . "/../vendor/autoload.php";
+require_once __DIR__ . "/../../../vendor/autoload.php";
 
 /**
  * Loads all commands from the specified path, given the specified namespace.

@@ -24,9 +24,14 @@ Vagrant.configure("2") do |config|
     UISP_VERSION    = "1.4.7"
     UCRM_VERSION    = UISP.getUcrmVersion(UISP_VERSION)
 
+    GIT_USER_NAME   = "Ryan Spaeth"
+    GIT_USER_EMAIL  = "rspaeth@spaethtech.com"
+
     # ------------------------------------------------------------------------------------------------------------------
     # NETWORKING
     # ------------------------------------------------------------------------------------------------------------------
+
+    config.vm.network "private_network", ip: BOX_ADDRESS
 
     config.vm.hostname = BOX_HOSTNAME
     config.hostmanager.aliases = DNS_ALIASES
@@ -36,11 +41,13 @@ Vagrant.configure("2") do |config|
     # ------------------------------------------------------------------------------------------------------------------
 
     # Synced folder containing any desired Docker Compose overrides.
-    config.vm.synced_folder "./box/unms/app/overrides", "/home/unms/app/overrides", owner: "unms", group: "root"
+    #config.vm.synced_folder "./box/unms/app/overrides", "/home/unms/app/overrides", owner: "unms", group: "root"
 
     # Synced folder specifically for getting sensitive information back from the guest system.
-    config.vm.synced_folder "./box/vagrant/env", "/home/vagrant/env"
-    config.vm.synced_folder "./box/vagrant/scripts/ucrm", "/home/vagrant/scripts/ucrm"
+    #config.vm.synced_folder "./box/vagrant/env", "/home/vagrant/env"
+    #config.vm.synced_folder "./box/vagrant/scripts/ucrm", "/home/vagrant/scripts/ucrm"
+
+    config.vm.synced_folder ".", "/src/ucrm-plugins"
 
     # ------------------------------------------------------------------------------------------------------------------
     # BASE BOX
@@ -82,20 +89,20 @@ Vagrant.configure("2") do |config|
         vm.memory = 4096
     end
 
-    # VMware
-    config.vm.provider "vmware_desktop" do |vm, override|
-        vm.gui = true
-        vm.vmx["displayname"] = "#{BOX_HOSTNAME}-#{UISP_VERSION}"
-        vm.vmx["memsize"] = "4096"
-        vm.vmx["numvcpus"] = "1"
-
-        # Do NOT Change the following unless you know what you're doing!
-        #vm.vmx["ethernet0.pcislotnumber"] = "32"
-        #vm.vmx["ethernet1.pcislotnumber"] = "33"
-
-        #NETWORK_NAME = OS.windows? ? "VMnet1" : "vmnet1"
-        #override.vm.network "private_network", type: "dhcp", name: NETWORK_NAME, adapter: 1
-    end
+#     # VMware
+#     config.vm.provider "vmware_desktop" do |vm, override|
+#         vm.gui = true
+#         vm.vmx["displayname"] = "#{BOX_HOSTNAME}-#{UISP_VERSION}"
+#         vm.vmx["memsize"] = "4096"
+#         vm.vmx["numvcpus"] = "1"
+#
+#         # Do NOT Change the following unless you know what you're doing!
+#         #vm.vmx["ethernet0.pcislotnumber"] = "32"
+#         #vm.vmx["ethernet1.pcislotnumber"] = "33"
+#
+#         #NETWORK_NAME = OS.windows? ? "VMnet1" : "vmnet1"
+#         #override.vm.network "private_network", type: "dhcp", name: NETWORK_NAME, adapter: 1
+#     end
 
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -129,6 +136,12 @@ Vagrant.configure("2") do |config|
     config.vm.provision "permissions", type: "shell", keep_color: true,
         path: "#{PROVISION_DIR}/permissions.sh"
         #env: { }
+
+    # Provision tools...
+    config.vm.provision "tools", type: "shell", keep_color: true,
+        path: "#{PROVISION_DIR}/tools.sh"
+        env: { "GIT_USER_NAME" => "#{GIT_USER_NAME}", "GIT_USER_EMAIL" => "#{GIT_USER_EMAIL}"  }
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # TRIGGERS

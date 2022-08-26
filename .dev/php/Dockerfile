@@ -28,6 +28,10 @@ RUN pecl install apcu \
 RUN pecl install ds \
     && docker-php-ext-enable ds
 
+# XDEBUG
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
 ### COMPOSER
 RUN apt-get update -y \
     && apt-get install -y curl git subversion unzip \
@@ -47,6 +51,6 @@ RUN rm -rf /var/lib/apt/lists/*
 ### PROXY
 RUN ln -s ${WORKING_DIR}/.dev/php/php-proxy /usr/local/bin/php-proxy
 
-VOLUME [ "${WORKING_DIR}" ]
+VOLUME [ "${WORKING_DIR}", "~/.ssh/config" ]
 
 ENTRYPOINT [ "php" ]
