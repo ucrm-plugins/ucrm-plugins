@@ -1,6 +1,5 @@
 
 # NOTES:
-# - This file is symlinked, so all paths in this file need to either be absolute or relative to "/home/unms/app/".
 # - The version in the 'image' name and the 'UCRM_VERSION' arg will be updated by the 'build' provisioner, as needed.
 
 version: "2"

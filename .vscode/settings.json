@@ -7,15 +7,61 @@
     },
     "terminal.integrated.defaultProfile.windows": "Git Bash",
 
-    
+
     "php.debug.executablePath": "C:/dev/php/lib/php/7.4.27-nts/php.exe",
     "php.debug.ideKey": "VSCODE",
-    
+
 
     "composer.executablePath": "X:\\My Drive\\Development\\PhpStorm\\Libraries\\Composer\\composer.bat",
 
-    "cSpell.userWords": [
+    "cSpell.words": [
+        "UNMS",
         "UISP",
         "UCRM"
     ],
+
+    "cSpell.customDictionaries": {
+        "bash": {
+            "name": "bash",
+            "path": "${workspaceFolder:ucrm-plugins}/.dev/.cspell/bash.dic",
+            "addWords": false,
+            "scope": "workspace"
+        },
+        "cmder": {
+            "name": "cmder",
+            "path": "${workspaceFolder:ucrm-plugins}/.dev/.cspell/cmder.dic",
+            "addWords": false,
+            "scope": "workspace"
+        },
+        "nginx": {
+            "name": "nginx",
+            "path": "${workspaceFolder:ucrm-plugins}/.dev/.cspell/nginx.dic",
+            "addWords": false,
+            "scope": "workspace"
+        },
+        "php": {
+            "name": "php",
+            "path": "${workspaceFolder:ucrm-plugins}/.dev/.cspell/php.dic",
+            "addWords": false,
+            "scope": "workspace"
+        },
+        "postgres": {
+            "name": "postgres",
+            "path": "${workspaceFolder:ucrm-plugins}/.dev/.cspell/postgres.dic",
+            "addWords": false,
+            "scope": "workspace"
+        },
+        "ssh": {
+            "name": "ssh",
+            "path": "${workspaceFolder:ucrm-plugins}/.dev/.cspell/ssh.dic",
+            "addWords": false,
+            "scope": "workspace"
+        },
+        "travis": {
+            "name": "travis",
+            "path": "${workspaceFolder:ucrm-plugins}/.dev/.cspell/travis.dic",
+            "addWords": false,
+            "scope": "workspace"
+        }
+    }
 }

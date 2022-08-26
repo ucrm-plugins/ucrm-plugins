@@ -137,44 +137,17 @@ Vagrant.configure("2") do |config|
         path: "#{PROVISION_DIR}/permissions.sh"
         #env: { }
 
-    # Provision tools...
-    config.vm.provision "tools", type: "shell", keep_color: true,
-        path: "#{PROVISION_DIR}/tools.sh"
+    # Provision PHP...
+    config.vm.provision "php", type: "shell", keep_color: true,
+        path: "#{PROVISION_DIR}/php.sh"
         env: { "GIT_USER_NAME" => "#{GIT_USER_NAME}", "GIT_USER_EMAIL" => "#{GIT_USER_EMAIL}"  }
 
+    # Provision NodeJS...
+    config.vm.provision "node", type: "shell", keep_color: true,
+        path: "#{PROVISION_DIR}/node.sh"
+        env: {}
 
-    # ------------------------------------------------------------------------------------------------------------------
-    # TRIGGERS
-    # ------------------------------------------------------------------------------------------------------------------
 
-#     config.trigger.after [ :up, :reload ] do |trigger|
-#         trigger.info = "Configuring VSSH for Windows"
-#
-#         trigger.ruby do |env, machine|
-#             key_path = File.expand_path("~/.ssh")
-#             key_file = "#{BOX_HOSTNAME}_private_key"
-#
-#             if not File.exist?("#{key_path}/#{key_file}")
-#                 if config = /^\s*IdentityFile\s*(?<key_file>.*)$/.match(`vagrant ssh-config`)
-#                     key_file_name=File.basename(config["key_file"])
-#                     FileUtils.cp(config["key_file"], key_path)
-#                     File.rename("#{key_path}/private_key", "#{key_path}/#{key_file}")
-#                 end
-#             end
-#         end
-#     end
-#
-#     config.trigger.after [ :halt, :destroy ] do |trigger|
-#         trigger.info = "Configuring VSSH for Windows"
-#
-#         trigger.ruby do |env, machine|
-#             key_path = File.expand_path("~/.ssh")
-#             key_file = "#{BOX_HOSTNAME}_private_key"
-#
-#             if File.exist?("#{key_path}/#{key_file}")
-#                 File.delete("#{key_path}/#{key_file}")
-#             end
-#         end
-#     end
+
 
 end

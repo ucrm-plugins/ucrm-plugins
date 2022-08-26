@@ -10,6 +10,7 @@
             "request": "launch",
             "port": 9003,
             "pathMappings": {
+                // Plugin: testing
                 "/data/ucrm/data/plugins/testing": "${workspaceFolder}/plugins/testing/src",
                 "/usr/src/ucrm/web/_plugins/testing": "${workspaceFolder}/plugins/testing/www"
             }

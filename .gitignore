@@ -1,12 +1,12 @@
-/.php_cs.cache
-/node_modules/
-/vendor/
+.php_cs.cache
+node_modules/
+vendor/
 
 # JetBrains IDE
 # NOTE: Handled directly by .idea/.gitignore
 
 # Vagrant Metadata
-/.vagrant/
+.vagrant/
 
 # Any and all .env files!
-/**/*.env
+**/*.env

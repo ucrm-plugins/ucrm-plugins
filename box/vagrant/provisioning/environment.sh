@@ -44,14 +44,6 @@ export PGUSER="$PGUSER"
 export PGDATABASE="$PGDATABASE"
 export PGHOST="localhost"
 EOF
-#echo "export UISP_VERSION=\"$UISP_VERSION\""    >> $profile/box.sh
-#echo "export UCRM_VERSION=\"$UCRM_VERSION\""    >> $profile/box.sh
-#echo "export UISP_ENVIRONMENT=\"development\""  >> $profile/box.sh
-
-#echo "export PGPASSWORD=\"$PGPASSWORD\""        >> $profile/box.sh
-#echo "export PGUSER=\"$PGUSER\""                >> $profile/box.sh
-#echo "export PGDATABASE=\"$PGDATABASE\""        >> $profile/box.sh
-#echo "export PGHOST=\"localhost\""              >> $profile/box.sh
 
 # FUTURE: Add any other system-wide environment variables here!
 
@@ -59,5 +51,4 @@ EOF
 chown root:root $profile/box.sh
 chmod +x $profile/box.sh
 
-# shellcheck disable=SC1090
 source $profile/box.sh
