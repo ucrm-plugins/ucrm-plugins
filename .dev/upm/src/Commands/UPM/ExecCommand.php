@@ -51,7 +51,7 @@ final class ExecCommand extends PluginSpecificCommand
         
         
         
-        passthru("vssh sudo docker exec -t ucrm /scripts/plugin-command.sh $this->name $this->command $this->args");
+        passthru("sudo docker exec -t ucrm /scripts/plugin-command.sh $this->name $this->command $this->args");
     
         $this->afterExecute($input, $output);
         

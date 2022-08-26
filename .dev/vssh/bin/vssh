@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+SSH_PATH=~/.ssh/config
+SSH_HOST=uisp-dev
+
+ssh -F "$SSH_PATH" "$SSH_HOST" "$@"

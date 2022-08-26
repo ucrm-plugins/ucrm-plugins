@@ -1,5 +1,5 @@
 .vagrant/
 *.box
 
-vagrant/env/*
-!vagrant/env/README.md
+/vagrant/.env/*
+!/vagrant/.env/README.md
