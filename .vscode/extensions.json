@@ -1,7 +1,11 @@
 {
     "recommendations": [
         "natizyskunk.sftp",
-        "xdebug.php-debug",
+        "felixfbecker.php-debug",
+        "editorconfig.editorconfig",
+        "ms-azuretools.vscode-docker",
+        "streetsidesoftware.code-spell-checker",
+        "ikappas.composer",
         "bmewburn.vscode-intelephense-client"
     ]
 }

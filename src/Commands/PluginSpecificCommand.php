@@ -19,25 +19,25 @@ use UCRM\Plugins\Support\FileSystem;
 abstract class PluginSpecificCommand extends BaseCommand
 {
     protected const NAMING_PATTERN = "/^[a-z][_a-z\d-]*$/";
-    
+
     protected string $name;
-    
-    
+
+
     protected function beforeExecute(InputInterface $input, OutputInterface $output): void
     {
         parent::beforeExecute($input, $output);
-    
+
         $this->name = $input->getArgument("name");
-    
+
         if (!preg_match(self::NAMING_PATTERN, $this->name))
             $this->error("The Plugin's name is invalid, please adhere to ".self::NAMING_PATTERN, TRUE);
-    
+
         if (file_exists($this->name) && is_dir($this->name))
             $this->chdir("$this->cwd/$this->name");
-        
-        
-        
+
+
+
     }
-    
-    
+
+
 }

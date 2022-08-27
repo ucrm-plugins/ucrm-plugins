@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace UCRM\Plugins\Commands\UPM;
 
-use mysql_xdevapi\Warning;
 use Opis\JsonSchema\Errors\ErrorFormatter;
 use Opis\JsonSchema\Exceptions\SchemaException;
 use Opis\JsonSchema\Helper;
@@ -46,35 +45,35 @@ final class ValidateCommand extends PluginSpecificCommand
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         $this->beforeExecute($input, $output);
-    
+
         $this->io->writeln("\nValidating Plugin at: $this->cwd");
-    
+
         $this->requiredFiles([ "README.md", "src/main.php", "src/manifest.json" ]);
         $this->validSyntax();
         $this->validManifest();
-        
+
         $this->io->section("\nSUMMARY");
         $this->io->writeln("No issues found!\n");
-        
+
         $this->afterExecute($input, $output);
-        
+
         return self::SUCCESS;
     }
-    
-    
+
+
     protected function requiredFiles(array $files)
     {
         $this->io->section("Required Files");
-    
+
         $missing = [];
-    
+
         if (file_exists(FileSystem::path("$this->cwd/src/composer.json"))
             && ! file_exists($lock = FileSystem::path("$this->cwd/src/composer.lock")))
         {
             $missing[] = $lock;
             $this->io->writeln("Missing: src/composer.lock");
         }
-        
+
         foreach($files as $file)
         {
             if(!file_exists($path = FileSystem::path("$this->cwd/$file")))
@@ -83,19 +82,19 @@ final class ValidateCommand extends PluginSpecificCommand
                 $this->io->writeln("Missing: $file");
             }
         }
-        
+
         if ($missing)
             $this->error("One or more required files are missing, see output above!", TRUE);
-    
+
         $this->io->writeln("Required files found!");
     }
-    
+
     protected function validSyntax()
     {
         $this->io->section("PHP Syntax");
-        
+
         $errors = 0;
-        
+
         FileSystem::each($this->cwd,
             function(string $file) use (&$errors)
             {
@@ -105,63 +104,63 @@ final class ValidateCommand extends PluginSpecificCommand
                 {
                     $output = [];
                     $result = 0;
-    
+
                     $this->io->writeln($file);
-                    
+
                     exec("php -l $file", $output, $result);
-    
+
                     if ($result !== 0)
                     {
                         $errors++;
                         $this->io->newLine();
                     }
                 }
-                
+
             },
             "/"
         );
-        
+
         if ($errors)
             $this->error("Syntax errors detected, see output above!", TRUE);
-        
+
     }
-    
+
     protected function validSyntaxParallel()
     {
         $this->io->section("PHP Syntax");
-        
+
         if (!file_exists($this->getVendorBin("parallel-lint")))
             $this->error("Missing dependency: 'php-parallel-lint/php-parallel-lint'", TRUE);
-    
+
         $cmd = "\"" . $this->getVendorBin("parallel-lint") ."\"";
         $args = "--show-deprecated --colors";
-    
+
         $exclusions = [
             "www",
             "src/vendor"
         ];
-    
+
         $ignore = "";
-    
+
         foreach($exclusions as $exclusion)
             $ignore .= "--exclude $exclusion ";
-    
+
         $result = 0;
         passthru("$cmd $args $ignore .", $result);
-    
+
         if ($result !== 0)
             $this->error("Syntax errors detected, see output above!", TRUE);
-        
+
     }
-    
+
     protected function validManifest()
     {
         $this->io->section("Manifest");
-        
+
         $validator = new Validator();
         $data = json_decode(file_get_contents("src/manifest.json"));
         $schema = file_get_contents(PROJECT_DIR."/manifest.schema.json");
-        
+
         $validator->setMaxErrors(10);
         $results = $validator->validate($data, $schema);
 
@@ -174,13 +173,13 @@ final class ValidateCommand extends PluginSpecificCommand
             ));
             $this->error("Schema errors detected, see output above!", TRUE);
         }
-        
+
         // TODO: Compare differences between source manifest.json and bundled manifest.json!
-        
-        
-        
-        
+
+
+
+
     }
-    
-    
+
+
 }

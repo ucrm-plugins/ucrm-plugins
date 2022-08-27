@@ -19,7 +19,7 @@ use UCRM\Plugins\Support\FileSystem;
  */
 final class BundleCommand extends PluginSpecificCommand
 {
-    
+
 
     /**
      * @inheritDoc
@@ -40,22 +40,22 @@ final class BundleCommand extends PluginSpecificCommand
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         $this->beforeExecute($input, $output);
-        
+
         chdir("src");
-        
+
         if (file_exists("composer.json"))
         {
             exec("composer install --ansi");
             exec("composer archive --ansi --file $this->name");
         }
-    
+
         chdir("..");
-        
+
         $uri = FileSystem::uri(getcwd()."/$this->name.zip");
         $this->io->writeln($uri);
-        
+
         $this->afterExecute($input, $output);
-        
+
         return self::SUCCESS;
     }
 

@@ -3,6 +3,8 @@
 if [[ "$(uname)" != MINGW64_NT* ]]; then
     echo "The included .bashrc script can only be used with Cmder on Windows!"
 else
+    # WINDOWS...
+
     # Set the directory of this script.
     _BASHRC_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
@@ -13,8 +15,8 @@ else
     ARR_BIN_DIR=(
         .dev/node/bin
         .dev/php/bin
-        .dev/upm/bin
         .dev/vssh/bin
+        bin
     )
 
     # Export the project directory for later use.

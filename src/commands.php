@@ -1,9 +1,9 @@
-<?php /** @noinspection PhpUnused */
+<?php /** @noinspection PhpUnused cspell:ignore FQNS FQCN */
 declare(strict_types=1);
 
 use UCRM\Plugins\Support\FileSystem;
 
-require_once __DIR__ . "/../../../vendor/autoload.php";
+require_once __DIR__ . "/../vendor/autoload.php";
 
 /**
  * Loads all commands from the specified path, given the specified namespace.
@@ -17,17 +17,17 @@ require_once __DIR__ . "/../../../vendor/autoload.php";
 function loadCommands(string $path, string $fqns): array
 {
     $commands = [];
-    
+
     if (!($path = realpath($path)))
         return $commands;
 
     // Remove the leading or trailing \ from the namespace provided.
     $fqns = trim($fqns, "\\");
-    
+
     foreach(FileSystem::scan($path) as $file)
     {
         $file = str_replace("/", "\\", $file);
-        
+
         // Construct the fully qualified class name.
         $fqcn = $fqns . "\\" . (str_replace(".php", "", $file));
 

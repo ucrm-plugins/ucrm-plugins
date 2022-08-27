@@ -16,6 +16,9 @@ systemctl start code-server@$RUN_AS
 
 code-server -r /src/ucrm-plugins --ignore-last-opened
 
+# Docker fixes!
+usermod -aG docker vagrant
+chmod 666 /var/run/docker.sock
 
 
 apt-get install -y nginx

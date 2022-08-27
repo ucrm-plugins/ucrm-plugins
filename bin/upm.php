@@ -1,5 +1,5 @@
 #!/usr/bin/env php
-<?php
+<?php // cspell:ignore FQNS
 declare(strict_types=1);
 
 use Symfony\Component\Console\Application;
@@ -8,10 +8,10 @@ use Symfony\Component\Console\Application;
 if (php_sapi_name() !== "cli")
     exit;
 
-require_once __DIR__ . "/../../vendor/autoload.php";
-require_once __DIR__ . "/src/commands.php";
+require_once __DIR__ . "/../vendor/autoload.php";
+require_once __DIR__ . "/../src/commands.php";
 
-const UPM_COMMAND_PATH = __DIR__ . "/src/Commands/UPM";
+const UPM_COMMAND_PATH = __DIR__ . "/../src/Commands/UPM";
 const UPM_COMMAND_FQNS = "UCRM\\Plugins\\Commands\\UPM";
 
 // Create the Application.

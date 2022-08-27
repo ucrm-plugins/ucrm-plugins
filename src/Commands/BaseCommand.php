@@ -21,7 +21,7 @@ abstract class BaseCommand extends Command
     protected SymfonyStyle $io;
     protected string $owd;
     protected string $cwd;
-    
+
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
@@ -32,8 +32,8 @@ abstract class BaseCommand extends Command
     {
         $this->io = new SymfonyStyle($input, $output);
     }
-    
-    
+
+
     /**
      * Fixes some formatting issues with the built-in error() function.
      *
@@ -47,32 +47,32 @@ abstract class BaseCommand extends Command
         $this->io->newLine();
         $this->io->writeln("<error> [ERROR] $message</>");
         $this->io->newLine();
-        
+
         if($die)
             die();
     }
-    
+
     protected function getVendorBin(string $command = ""): string
     {
         return FileSystem::path(PROJECT_DIR."/vendor/bin/$command");
     }
-    
+
     protected function chdir(string $dir)
     {
         chdir($this->cwd = FileSystem::path($dir));
     }
-    
-    
+
+
     protected function beforeExecute(InputInterface $input, OutputInterface $output): void
     {
         $this->owd = getcwd();
         $this->chdir(PROJECT_DIR."/plugins/");
     }
-    
+
     protected function afterExecute(InputInterface $input, OutputInterface $output): void
     {
         chdir($this->owd);
     }
 
-    
+
 }

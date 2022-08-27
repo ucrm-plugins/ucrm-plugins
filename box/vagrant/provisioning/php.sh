@@ -41,13 +41,16 @@ php "$COMPOSER_SETUP" --install-dir=/usr/local/bin --filename=composer && rm "$C
 
 apt-get install -y git
 
-git config --global user.name "#{GIT_USER_NAME}"
-git config --global user.email "#{GIT_USER_EMAIL}"
+# IMPORTANT: Have the user do this manually to be sure of the correct information.
+# Code Server will prompt before allowing the first commit!
+#git config --global user.name "#{GIT_USER_NAME}"
+#git config --global user.email "#{GIT_USER_EMAIL}"
 
+
+# Added ./vendor/bin to the PATH instead!
 ### PHPUNIT
-composer global require --dev phpunit/phpunit \
-    && ln -s ~/.config/composer/vendor/bin/phpunit /usr/local/bin/phpunit
-
+#composer global require --dev phpunit/phpunit \
+#    && ln -s ~/.config/composer/vendor/bin/phpunit /usr/local/bin/phpunit
 ### ROBO
-composer global require --dev consolidation/robo \
-    && ln -s ~/.config/composer/vendor/bin/robo /usr/local/bin/robo
+#composer global require --dev consolidation/robo \
+#    && ln -s ~/.config/composer/vendor/bin/robo /usr/local/bin/robo

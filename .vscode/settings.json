@@ -1,74 +1,195 @@
 {
-    "terminal.integrated.profiles.windows": {
-        "Git Bash": {
-            "source": "Git Bash",
-            "args": [ "--rcfile", ".dev/.bashrc" ]
-        }
+    //
+    // TERMINAL (Moving to Code Server)
+    //
+    // "terminal.integrated.profiles.windows": {
+    //     "Git Bash": {
+    //         "source": "Git Bash",
+    //         "args": [ "--rcfile", ".dev/.bashrc" ]
+    //     }
+    // },
+    // "terminal.integrated.defaultProfile.windows": "Git Bash",
+
+    //
+    // ENVIRONMENT
+    //
+    "terminal.integrated.env.linux": {
+        "PATH": "/src/ucrm-plugins/bin:/src/ucrm-plugins/vendor/bin:${env:PATH}",
+        "PROJECT_DIR": "/src/ucrm-plugins"
     },
-    "terminal.integrated.defaultProfile.windows": "Git Bash",
 
+    //
+    // EDITOR
+    //
+    "workbench.colorTheme": "Default Dark+",
+    "explorer.compactFolders": false,
 
-    "php.debug.executablePath": "C:/dev/php/lib/php/7.4.27-nts/php.exe",
+    //
+    // GIT
+    //
+    "git.confirmSync": false,
+    "git.autofetch": true,
+
+    //
+    // PHP Debug
+    //
+    "php.debug.executablePath": "/usr/bin/php",
     "php.debug.ideKey": "VSCODE",
 
-    "composer.executablePath": "X:\\My Drive\\Development\\PhpStorm\\Libraries\\Composer\\composer.bat",
+    //
+    // COMPOSER
+    //
+    "composer.executablePath": "/usr/bin/composer",
 
-
-
-    "cSpell.words": [
-        "UNMS",
-        "UISP",
-        "UCRM"
+    //
+    // INTELIPHENSE
+    //
+    "intelephense.environment.phpVersion": "7.4",
+    "intelephense.files.associations": [
+        "*.php",
+        "*.phtml"
+    ],
+    "intelephense.stubs": [
+        "apache",
+        "bcmath",
+        "bz2",
+        "calendar",
+        "com_dotnet",
+        "Core",
+        "ctype",
+        "curl",
+        "date",
+        "dba",
+        "dom",
+        "enchant",
+        "exif",
+        "FFI",
+        "fileinfo",
+        "filter",
+        "fpm",
+        "ftp",
+        "gd",
+        "gettext",
+        "gmp",
+        "hash",
+        "iconv",
+        "imap",
+        "intl",
+        "json",
+        "ldap",
+        "libxml",
+        "mbstring",
+        "meta",
+        "mysqli",
+        "oci8",
+        "odbc",
+        "openssl",
+        "pcntl",
+        "pcre",
+        "PDO",
+        "pdo_ibm",
+        "pdo_mysql",
+        "pdo_pgsql",
+        "pdo_sqlite",
+        "pgsql",
+        "Phar",
+        "posix",
+        "pspell",
+        "readline",
+        "Reflection",
+        "session",
+        "shmop",
+        "SimpleXML",
+        "snmp",
+        "soap",
+        "sockets",
+        "sodium",
+        "SPL",
+        "sqlite3",
+        "standard",
+        "superglobals",
+        "sysvmsg",
+        "sysvsem",
+        "sysvshm",
+        "tidy",
+        "tokenizer",
+        "xdebug",
+        "xml",
+        "xmlreader",
+        "xmlrpc",
+        "xmlwriter",
+        "xsl",
+        "Zend OPcache",
+        "zip",
+        "zlib"
     ],
 
+    //
+    // FILE ASSOCIATIONS
+    //
+    "files.associations": {
+        "*.module": "php"
+    },
+
+    //
+    // CSPELL
+    //
+    "cSpell.words": [],
     "cSpell.customDictionaries": {
         "bash": {
             "name": "bash",
-            "path": "${workspaceFolder:ucrm-plugins}/.dev/.cspell/bash.dic",
+            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/bash.dic",
             "addWords": false,
             "scope": "workspace"
         },
         "cmder": {
             "name": "cmder",
-            "path": "${workspaceFolder:ucrm-plugins}/.dev/.cspell/cmder.dic",
+            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/cmder.dic",
             "addWords": false,
             "scope": "workspace"
         },
         "nginx": {
             "name": "nginx",
-            "path": "${workspaceFolder:ucrm-plugins}/.dev/.cspell/nginx.dic",
+            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/nginx.dic",
             "addWords": false,
             "scope": "workspace"
         },
         "php": {
             "name": "php",
-            "path": "${workspaceFolder:ucrm-plugins}/.dev/.cspell/php.dic",
-            "addWords": false,
+            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/php.dic",
+            "addWords": true,
             "scope": "workspace"
         },
         "postgres": {
             "name": "postgres",
-            "path": "${workspaceFolder:ucrm-plugins}/.dev/.cspell/postgres.dic",
+            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/postgres.dic",
             "addWords": false,
             "scope": "workspace"
         },
         "spaethtech": {
             "name": "spaethtech",
-            "path": "${workspaceFolder:ucrm-plugins}/.dev/.cspell/spaethtech.dic",
+            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/spaethtech.dic",
             "addWords": false,
             "scope": "workspace"
         },
         "ssh": {
             "name": "ssh",
-            "path": "${workspaceFolder:ucrm-plugins}/.dev/.cspell/ssh.dic",
+            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/ssh.dic",
             "addWords": false,
             "scope": "workspace"
         },
         "travis": {
             "name": "travis",
-            "path": "${workspaceFolder:ucrm-plugins}/.dev/.cspell/travis.dic",
+            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/travis.dic",
+            "addWords": false,
+            "scope": "workspace"
+        },
+        "ubiquiti": {
+            "name": "ubiquiti",
+            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/ubiquiti.dic",
             "addWords": false,
             "scope": "workspace"
         }
     }
+
 }
