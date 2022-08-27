@@ -11,8 +11,9 @@
     "php.debug.executablePath": "C:/dev/php/lib/php/7.4.27-nts/php.exe",
     "php.debug.ideKey": "VSCODE",
 
-
     "composer.executablePath": "X:\\My Drive\\Development\\PhpStorm\\Libraries\\Composer\\composer.bat",
+
+
 
     "cSpell.words": [
         "UNMS",
@@ -48,6 +49,12 @@
         "postgres": {
             "name": "postgres",
             "path": "${workspaceFolder:ucrm-plugins}/.dev/.cspell/postgres.dic",
+            "addWords": false,
+            "scope": "workspace"
+        },
+        "spaethtech": {
+            "name": "spaethtech",
+            "path": "${workspaceFolder:ucrm-plugins}/.dev/.cspell/spaethtech.dic",
             "addWords": false,
             "scope": "workspace"
         },

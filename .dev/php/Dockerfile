@@ -1,7 +1,7 @@
 ARG VERSION=7.4.26
 FROM php:${VERSION}
 
-MAINTAINER Ryan Spaeth <rspaeth@spaethtech.com>
+LABEL maintainer="Ryan Spaeth <rspaeth@spaethtech.com>"
 
 ### WORKING
 ENV WORKING_DIR=/opt/project

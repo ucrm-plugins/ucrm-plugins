@@ -134,19 +134,23 @@ Vagrant.configure("2") do |config|
 
     # Provision file/folder permissions...
     config.vm.provision "permissions", type: "shell", keep_color: true,
-        path: "#{PROVISION_DIR}/permissions.sh"
-        #env: { }
+        path: "#{PROVISION_DIR}/permissions.sh",
+        env: {}
 
     # Provision PHP...
     config.vm.provision "php", type: "shell", keep_color: true,
-        path: "#{PROVISION_DIR}/php.sh"
+        path: "#{PROVISION_DIR}/php.sh",
         env: { "GIT_USER_NAME" => "#{GIT_USER_NAME}", "GIT_USER_EMAIL" => "#{GIT_USER_EMAIL}"  }
 
     # Provision NodeJS...
     config.vm.provision "node", type: "shell", keep_color: true,
-        path: "#{PROVISION_DIR}/node.sh"
+        path: "#{PROVISION_DIR}/node.sh",
         env: {}
 
+    # Provision NodeJS...
+    config.vm.provision "code", type: "shell", keep_color: true,
+       path: "#{PROVISION_DIR}/code.sh",
+       env: { "BOX_HOSTNAME" => "#{BOX_HOSTNAME}" }
 
 
 

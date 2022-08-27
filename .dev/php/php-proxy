@@ -48,19 +48,19 @@ switch($command)
 for ($i = 0; $i < count($argv); $i++)
 {
     $arg = &$argv[$i];
-    
+
     if ($arg === "-r" && ($i + 1) < count($argv))
     {
         $next = &$argv[$i + 1];
         $next = "\"".str_replace("\"", "\\\"", $next)."\"";
         $i++;
     }
-    
+
     // IF the argument contains a \ or / at any position...
     if (strpos($arg, "\\") !== FALSE || strpos($arg, "/") !== FALSE)
     {
         $paths = [];
-        
+
         //$paths[] = FileSystem::canonical($arg, "\\");
         //$paths[] = FileSystem::canonical(WIN_CURRENT_DIR . "\\" . $arg, "\\");
         $paths[] = canonical($arg, "\\");
@@ -69,7 +69,7 @@ for ($i = 0; $i < count($argv); $i++)
         foreach($paths as $path)
         {
             $real = str_replace([PROJECT_DIR, "\\"], [WORKING_DIR, "/"], $path);
-            
+
             if (file_exists($real))
             {
                 $arg = $real;
@@ -77,14 +77,14 @@ for ($i = 0; $i < count($argv); $i++)
             }
         }
     }
-    
+
     // NOTE: Do any other fix-ups here?
-    
+
 }
 
 passthru("$command ".implode(" ", $prefix)." ".implode(" ", $argv)." ".implode(" ", $suffix));
 
-#region FUNCTIONS
+
 
 // as per RFC 3986
 // @see https://www.rfc-editor.org/rfc/rfc3986#section-5.2.4
@@ -130,7 +130,7 @@ function canonical(string $path, string $separator = DIRECTORY_SEPARATOR)
                     ($prefix = $path) == '/..'
                 ) {
                     $path = '/' . substr($path, strlen($prefix));
-                    $output = substr($output, 0, strrpos($output, '/'));
+                    $output = substr($output, 0, strpos($output, '/'));
                 } else
 
                     // D.  if the input buffer consists only of "." or "..", then remove
@@ -170,6 +170,3 @@ function php2win(string $path): string
     return str_replace([WORKING_DIR, "/"], [PROJECT_DIR, "\\"], $path);
 }
 
-
-
-#endregion

@@ -3,3 +3,9 @@ robo
 mbstring
 xdebug
 ondrej
+getenv
+setenv
+autoload
+strpos
+strlen
+passthru
