@@ -3,4 +3,4 @@
 #BIN_TARGET="$PROJECT_DIR/bin/upm.php"
 #COMPOSER_RUNTIME_BIN_DIR="$PROJECT_DIR/vendor/bin"
 
-php "$PROJECT_DIR/bin/.upm/upm.php" --ansi "$@"
+php "$PROJECT_DIR/dev/bin/.upm/upm.php" --ansi "$@"

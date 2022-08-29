@@ -12,7 +12,7 @@ else
     # Set any directories to be added to $PATH...
     ARR_BIN_DIR=(
         vendor/bin
-        bin
+        dev/bin
     )
 
     # Loop through each additional directory...

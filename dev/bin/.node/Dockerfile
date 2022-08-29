@@ -35,6 +35,6 @@ RUN npm install -g gulp
 #RUN rm -rf /var/lib/apt/lists/*
 
 ### PROXY
-RUN ln -s ${WORKING_DIR}/bin/.node/node-proxy /usr/local/bin/node-proxy
+RUN ln -s ${WORKING_DIR}/dev/bin/.node/node-proxy /usr/local/bin/node-proxy
 
 VOLUME [ "${WORKING_DIR}" ]

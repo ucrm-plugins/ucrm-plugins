@@ -49,7 +49,7 @@ RUN composer global require consolidation/robo \
 RUN rm -rf /var/lib/apt/lists/*
 
 ### PROXY
-RUN ln -s ${WORKING_DIR}/bin/.php/php-proxy /usr/local/bin/php-proxy
+RUN ln -s ${WORKING_DIR}/dev/bin/.php/php-proxy /usr/local/bin/php-proxy
 
 VOLUME [ "${WORKING_DIR}" ]
 

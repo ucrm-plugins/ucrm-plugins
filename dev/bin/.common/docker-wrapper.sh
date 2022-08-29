@@ -8,7 +8,7 @@ if [[ "$(uname)" = MINGW64_NT* ]]; then
 fi
 
 # Set the project directory.
-PROJECT_DIR=$(realpath "$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"/../..)
+PROJECT_DIR=$(realpath "$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"/../../..)
 CURRENT_DIR=$(pwd)
 
 LOWER_CMD=$(echo "$1" | tr "[:upper:]" "[:lower:]")
@@ -19,7 +19,7 @@ IMAGE_CMD=
 IMAGE_TAG=
 
 shopt -s dotglob
-read -ra DIRS -d "" <<<"$(ls -d "$PROJECT_DIR"/bin/*/)"
+read -ra DIRS -d "" <<<"$(ls -d "$PROJECT_DIR"/dev/bin/*/)"
 for i in "${DIRS[@]}"
 do
     DIR="${i%/}"
@@ -42,7 +42,7 @@ if [ "$IMAGE_ORG" == ""  ] || [ "$IMAGE_CMD" == ""  ] || [ "$IMAGE_TAG" == ""  ]
     exit
 fi
 
-cd "$PROJECT_DIR/bin/.$IMAGE_CMD" || exit
+cd "$PROJECT_DIR/dev/bin/.$IMAGE_CMD" || exit
 
 DOCKER_NAME="$IMAGE_ORG/$IMAGE_CMD:$IMAGE_TAG"
 
