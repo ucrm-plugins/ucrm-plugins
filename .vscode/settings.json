@@ -1,4 +1,6 @@
 {
+    "security.workspace.trust.enabled": false,
+
     //
     // TERMINAL (Moving to Code Server)
     //

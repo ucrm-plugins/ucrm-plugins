@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-INCLUDE_DIR=$(realpath "$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"/../..)
-
-# shellcheck disable=SC1090
-source "$INCLUDE_DIR"/wrapper.sh php
-
-# shellcheck disable=SC2086
-docker run $DOCKER_ARGS $DOCKER_NAME $PROXY_BIN robo --ansi "$@"

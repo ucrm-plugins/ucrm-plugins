@@ -6,26 +6,32 @@
 # @author Ryan Spaeth <rspaeth@spaethtech.com>
 # @copyright 2022 Spaeth Technologies Inc.
 
+PROJECT_DIR = File.expand_path("./")
+
 # Load Default Config
-base = "./box/Vagrantfile"
-load base if File.exists?(base)
+#base = "#{PROJECT_DIR}/vagrant/Vagrantfile"
+#load base if File.exists?(base)
+load "#{PROJECT_DIR}/vagrant/Vagrantfile"
 
-Vagrant.configure("2") do |config|
+# ----------------------------------------------------------------------------------------------------------------------
+# CONFIGURATION
+# ----------------------------------------------------------------------------------------------------------------------
 
-    # ------------------------------------------------------------------------------------------------------------------
-    # CONFIGURATION
-    # ------------------------------------------------------------------------------------------------------------------
+BOX_HOSTNAME    = "uisp-dev"
+BOX_ADDRESS     = "192.168.56.10"
+DNS_ALIASES     = [ "#{BOX_HOSTNAME}.local" ]
+ROOT_PASSWORD   = "vagrant"
+UISP_VERSION    = "1.4.7"
+UCRM_VERSION    = UISP.getUcrmVersion(UISP_VERSION)
 
-    PROJECT_DIR     = "./"
-    BOX_HOSTNAME    = "uisp-dev"
-    BOX_ADDRESS     = "192.168.56.10"
-    DNS_ALIASES     = [ "#{BOX_HOSTNAME}.local" ]
-    ROOT_PASSWORD   = "vagrant"
-    UISP_VERSION    = "1.4.7"
-    UCRM_VERSION    = UISP.getUcrmVersion(UISP_VERSION)
+GIT_USER_NAME   = "Ryan Spaeth"
+GIT_USER_EMAIL  = "rspaeth@spaethtech.com"
 
-    GIT_USER_NAME   = "Ryan Spaeth"
-    GIT_USER_EMAIL  = "rspaeth@spaethtech.com"
+# ----------------------------------------------------------------------------------------------------------------------
+# VAGRANT
+# ----------------------------------------------------------------------------------------------------------------------
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     # ------------------------------------------------------------------------------------------------------------------
     # NETWORKING
@@ -147,11 +153,17 @@ Vagrant.configure("2") do |config|
         path: "#{PROVISION_DIR}/node.sh",
         env: {}
 
+    # Provision VSCode Server...
+    config.vm.provision "code-server", type: "shell", keep_color: true, run: "never",
+        path: "#{PROVISION_DIR}/code-server.sh",
+        env: {
+            "BIND_ADDR" => "0.0.0.0:8080",
+            "WORKSPACE" => "/src/ucrm-plugins"
+        }
+
     # Provision NodeJS...
-    config.vm.provision "code", type: "shell", keep_color: true,
-       path: "#{PROVISION_DIR}/code.sh",
-       env: { "BOX_HOSTNAME" => "#{BOX_HOSTNAME}" }
-
-
+    config.vm.provision "no-ip", type: "shell", keep_color: true, run: "never",
+        path: "#{PROVISION_DIR}/no-ip.sh",
+        env: {}
 
 end

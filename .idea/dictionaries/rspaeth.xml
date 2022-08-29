@@ -10,6 +10,7 @@
       <w>disabledelayedexpansion</w>
       <w>displayname</w>
       <w>dmode</w>
+      <w>dotglob</w>
       <w>enabledelayedexpansion</w>
       <w>errexit</w>
       <w>errtrace</w>
@@ -31,6 +32,7 @@
       <w>libzip</w>
       <w>maxmemory</w>
       <w>memsize</w>
+      <w>mkcert</w>
       <w>mnet</w>
       <w>mswin</w>
       <w>mware</w>
@@ -63,11 +65,13 @@
       <w>ucrm</w>
       <w>uisp</w>
       <w>unms</w>
+      <w>vagrantcloud</w>
       <w>vboxnet</w>
       <w>vmname</w>
       <w>vmnet</w>
       <w>vmware</w>
       <w>vssh</w>
+      <w>vultr</w>
       <w>windir</w>
       <w>xtrace</w>
     </words>

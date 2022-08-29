@@ -1,0 +1,148 @@
+
+# The Vagrant configuration for a UISP Base Box with minimal changes to the default installation of UISP.
+#
+# @author Ryan Spaeth <rspaeth@spaethtech.com>
+# @copyright 2022 Spaeth Technologies Inc.
+
+PROJECT_DIR = File.expand_path("../")
+VAGRANT_DIR = File.expand_path("./")
+
+require_relative "./modules/os.rb"
+require_relative "./modules/ssh.rb"
+require_relative "./modules/uisp.rb"
+
+# ----------------------------------------------------------------------------------------------------------------------
+# CONFIGURATION
+# ----------------------------------------------------------------------------------------------------------------------
+
+BOX_HOSTNAME    = "uisp"
+BOX_ADDRESS     = "192.168.56.10"
+DNS_ALIASES     = [ "#{BOX_HOSTNAME}.local" ]
+ROOT_PASSWORD   = "vagrant"
+UISP_VERSION    = "1.4.7"
+UCRM_VERSION    = UISP.getUcrmVersion(UISP_VERSION)
+
+# ----------------------------------------------------------------------------------------------------------------------
+# VAGRANT
+# ----------------------------------------------------------------------------------------------------------------------
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+
+    config.vagrant.plugins = [ "vagrant-hostmanager" ]
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # NETWORKING
+    # ------------------------------------------------------------------------------------------------------------------
+
+    # The hostmanager plugin alters the hosts file on both the host machine and any/all of the guest boxes to include
+    # the box hostname and any aliases provided above.
+    config.hostmanager.enabled              = true
+    config.hostmanager.manage_host          = true
+    config.hostmanager.manage_guest         = true
+    config.hostmanager.ignore_private_ip    = false
+    config.hostmanager.include_offline      = false
+
+    config.vm.hostname                      = BOX_HOSTNAME
+    config.hostmanager.aliases              = DNS_ALIASES
+
+    # NOTE: It is preferable to use private networking here for several notable reasons:
+    # - Security, especially since we default to insecure passwords on the guest.
+    # - UISP does not allow localhost for server name, so we can provide an IP or alias instead for testing public URLs.
+    # - Easier configuration of Xdebug communication with the local machine.
+    # - Segregation, in cases where developers may have multiple development environments on the same machine.
+    # - Also, since hostmanager does not work on reload/halt, this prevents the need for repeated hosts file changes.
+
+    config.vm.network "private_network", ip: BOX_ADDRESS
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # FILE SYSTEM
+    # ------------------------------------------------------------------------------------------------------------------
+
+    # Disable the default synced folder.
+    config.vm.synced_folder ".", "/vagrant", disabled: true
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # BASE BOX
+    # ------------------------------------------------------------------------------------------------------------------
+
+    # Use an Ubuntu base box.
+    config.vm.box = "bento/ubuntu-20.04"
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # PROVIDERS
+    # ------------------------------------------------------------------------------------------------------------------
+
+    # VirtualBox
+    config.vm.provider "virtualbox" do |vm, override|
+        vm.name = "#{BOX_HOSTNAME}-#{UISP_VERSION}"
+        vm.cpus = 1
+        vm.memory = 4096
+    end
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # PROVISIONERS
+    # ------------------------------------------------------------------------------------------------------------------
+
+    PROVISION_DIR = "#{PROJECT_DIR}/vagrant/provisioning/base"
+
+    # Provision the Users...
+    config.vm.provision "users", type: "shell", keep_color: true,
+        path: "#{PROVISION_DIR}/users.sh",
+        env: { "ROOT_PASSWORD" => "#{ROOT_PASSWORD}" }
+
+    # Provision the Network...
+    config.vm.provision "network", type: "shell", keep_color: true,
+        path: "#{PROVISION_DIR}/network.sh",
+        env: { "IPV6_DISABLE" => "all,default,lo,eth0" }
+
+    # Provision the Firewall...
+    config.vm.provision "firewall", type: "shell", keep_color: true,
+        path: "#{PROVISION_DIR}/firewall.sh",
+        env: { }
+
+    # Provision the UISP installation...
+    config.vm.provision "install", type: "shell", keep_color: true,
+        path: "#{PROVISION_DIR}/install.sh",
+        env: { "UISP_VERSION" => "#{UISP_VERSION}" }
+
+    # ------------------------------------------------------------------------------------------------------------------
+    # TRIGGERS
+    # ------------------------------------------------------------------------------------------------------------------
+
+    config.trigger.after :up, :reload do |trigger|
+        trigger.info = "Configuring VSSH for Windows"
+        trigger.ruby do |env, machine|
+            SSH.setMachine(machine)
+            SSH.updateConfig(BOX_HOSTNAME, BOX_ADDRESS, "vagrant", "22")
+            SSH.updateScript("#{PROJECT_DIR}/bin/vssh", "SSH_PATH", "~/.ssh/config")
+            SSH.updateScript("#{PROJECT_DIR}/bin/vssh", "SSH_HOST", BOX_HOSTNAME)
+
+            File.open("#{VAGRANT_DIR}/build_version", "wb") { |f| f.puts UISP_VERSION }
+        end
+    end
+
+    config.trigger.after :halt, :destroy do |trigger|
+        trigger.info = "Configuring VSSH for Windows"
+        trigger.ruby do |env, machine|
+            SSH.setMachine(machine)
+            SSH.deleteConfig(BOX_HOSTNAME)
+        end
+    end
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
