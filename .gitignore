@@ -10,3 +10,5 @@ vendor/
 
 # Any and all .env files!
 **/*.env
+
+.bash_installed

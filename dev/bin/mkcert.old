@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+PROJECT_DIR=$(realpath "$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"/..)
+CURRENT_DIR=$(pwd)
+
+#mkdir -p "$PROJECT_DIR"/dev/bin/.mkcert
+
+# IF we are running this script from within Git Bash for Windows...
+if [[ "$(uname)" = MINGW64_NT* ]]; then
+    #GIT_USR_BIN=$(realpath "$PROGRAMFILES"/Git/usr/bin)
+
+    if [ ! -f /usr/bin/mkcert.exe ]; then
+        # cURL in Git Bash seems to not be able to download to hidden directories
+        #cd "$PROJECT_DIR"/dev/bin/.mkcert && curl -JL https://dl.filippo.io/mkcert/latest?for=windows/amd64 -o mkcert.exe
+        #cd "$CURRENT_DIR" || exit
+        echo "Installing mkcert into Git Bash..."
+        curl -sJL https://dl.filippo.io/mkcert/latest?for=windows/amd64 -o /usr/bin/mkcert.exe
+    fi
+
+    # NOTE: Otherwise paths starting with / are prefixed with "C:\Program Files\Git"
+    export MSYS_NO_PATHCONV=1
+fi
+
+# TODO: Test on Linux/OSX?
+
+/usr/bin/mkcert "$@"

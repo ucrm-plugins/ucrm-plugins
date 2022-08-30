@@ -41,4 +41,21 @@ else
             #chmod +x "$PROJECT_DIR/$BIN/$filename"
         done
     done
+
+#    if [ ! -f /usr/bin/mkcert.exe ]; then
+#        echo "Installing mkcert into Git Bash..."
+#        curl -sJL https://dl.filippo.io/mkcert/latest?for=windows/amd64 -o /usr/bin/mkcert.exe
+#    fi
+
+
+
+#    rm -f .bash_installed
+#
+#    for i in /usr/bin/*; do
+#        if [[ $i =~ /usr/bin/([^\.]*)$ ]] || [[ $i =~ /usr/bin/(.*).exe$ ]]; then
+#            echo "${BASH_REMATCH[1]}" >> .bash_installed
+#        fi
+#    done
+
+
 fi

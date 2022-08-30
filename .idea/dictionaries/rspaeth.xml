@@ -6,6 +6,7 @@
       <w>chpasswd</w>
       <w>cmds</w>
       <w>compliancy</w>
+      <w>dcmake</w>
       <w>degit</w>
       <w>disabledelayedexpansion</w>
       <w>displayname</w>
@@ -19,6 +20,7 @@
       <w>fqns</w>
       <w>gcstats</w>
       <w>gsub</w>
+      <w>hashi</w>
       <w>hostmanager</w>
       <w>hyperv</w>
       <w>idekey</w>
@@ -49,8 +51,10 @@
       <w>pipefail</w>
       <w>pkgconf</w>
       <w>postgre</w>
+      <w>programfiles</w>
       <w>rbconfig</w>
       <w>rcfile</w>
+      <w>readlines</w>
       <w>robo</w>
       <w>rspaeth</w>
       <w>setlocal</w>
@@ -74,6 +78,7 @@
       <w>vultr</w>
       <w>windir</w>
       <w>xtrace</w>
+      <w>zstd</w>
     </words>
   </dictionary>
 </component>

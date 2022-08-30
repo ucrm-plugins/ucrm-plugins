@@ -5,3 +5,6 @@ build_version
 
 /vagrant/.env/*
 !/vagrant/.env/README.md
+
+certs/*
+!certs/README.md

@@ -3,12 +3,12 @@
 set -e
 
 PROJECT_DIR=$(realpath "$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"/..)
-VAGRANT_DIR="$PROJECT_DIR"/vagrant
+VAGRANT_DIR="$PROJECT_DIR/vagrant"
 
 # Working Directory
-cd "$VAGRANT_DIR" || exit
+cd "$PROJECT_DIR" || exit
 
-UISP_VERSION=$(cat "${VAGRANT_DIR}"/build_version)
+UISP_VERSION=$(cat "${VAGRANT_DIR}/build_version")
 
 ARGS=()
 if [ -f .env ]; then
@@ -27,17 +27,12 @@ vagrant cloud publish \
     --force \
     ucrm-plugins/uisp "$UISP_VERSION" \
     virtualbox \
-    uisp-"$UISP_VERSION".box
+    "$VAGRANT_DIR/uisp-$UISP_VERSION.box"
 
-#vagrant cloud provider upload uisp-plugins/uisp PROVIDER 1.4.5 uisp-1.4.5-PROVIDER.box
-exit
-
-vagrant cloud auth logout
+#vagrant cloud auth logout
 
 # Remove the running "build" box.
 vagrant destroy --force
 
 # And optionally delete the package file and metadata.
-rm -f uisp-1.4.5-PROVIDER.box
-rm -rf .vagrant/
-rm -f uisp-"$UISP_VERSION".box
+rm -f "$VAGRANT_DIR/uisp-$UISP_VERSION.box"

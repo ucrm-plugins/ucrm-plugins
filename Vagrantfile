@@ -1,169 +1,260 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
 
-# The Vagrant configuration for a UISP Development Box with major changes to the default installation of UISP.
+# The Vagrant configuration for a UISP Base Box with minimal changes to the default installation of UISP.
 #
 # @author Ryan Spaeth <rspaeth@spaethtech.com>
 # @copyright 2022 Spaeth Technologies Inc.
 
-PROJECT_DIR = File.expand_path("./")
+VAGRANT_FILE_VER    = "2"
+HOST_PROJECT_DIR    = File.expand_path("./")
+VBOX_PROJECT_DIR    = "/src/ucrm-plugins"
+HOST_VAGRANT_DIR    = File.expand_path("./vagrant")
 
-# Load Default Config
-#base = "#{PROJECT_DIR}/vagrant/Vagrantfile"
-#load base if File.exists?(base)
-load "#{PROJECT_DIR}/vagrant/Vagrantfile"
+require_relative    "#{HOST_VAGRANT_DIR}/modules/os.rb"
+require_relative    "#{HOST_VAGRANT_DIR}/modules/ssh.rb"
+require_relative    "#{HOST_VAGRANT_DIR}/modules/uisp.rb"
+
+PROVISIONING_DIR    = "#{HOST_VAGRANT_DIR}/provisioning"
+CERTIFICATES_DIR    = "#{HOST_VAGRANT_DIR}/certs"
 
 # ----------------------------------------------------------------------------------------------------------------------
 # CONFIGURATION
 # ----------------------------------------------------------------------------------------------------------------------
 
-BOX_HOSTNAME    = "uisp-dev"
-BOX_ADDRESS     = "192.168.56.10"
-DNS_ALIASES     = [ "#{BOX_HOSTNAME}.local" ]
-ROOT_PASSWORD   = "vagrant"
-UISP_VERSION    = "1.4.7"
-UCRM_VERSION    = UISP.getUcrmVersion(UISP_VERSION)
-
-GIT_USER_NAME   = "Ryan Spaeth"
-GIT_USER_EMAIL  = "rspaeth@spaethtech.com"
+BOX_HOSTNAME        = "uisp-dev"
+BOX_ADDRESS         = "192.168.56.10"
+DNS_ALIASES         = [ "#{BOX_HOSTNAME}.local" ]
+ROOT_PASSWORD       = "vagrant"
+UISP_VERSION        = "1.4.7"
+UCRM_VERSION        = UISP.getUcrmVersion(UISP_VERSION)
 
 # ----------------------------------------------------------------------------------------------------------------------
 # VAGRANT
 # ----------------------------------------------------------------------------------------------------------------------
 
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+Vagrant.configure(VAGRANT_FILE_VER) do |config|
+
+    config.vagrant.plugins = [ "vagrant-hostmanager" ]
 
     # ------------------------------------------------------------------------------------------------------------------
     # NETWORKING
     # ------------------------------------------------------------------------------------------------------------------
 
-    config.vm.network "private_network", ip: BOX_ADDRESS
+    # The hostmanager plugin alters the hosts file on both the host machine and any/all of the guest boxes to include
+    # the box hostname and any aliases provided above.
+    config.hostmanager.enabled              = true
+    config.hostmanager.manage_host          = true
+    config.hostmanager.manage_guest         = true
+    config.hostmanager.ignore_private_ip    = false
+    config.hostmanager.include_offline      = false
 
-    config.vm.hostname = BOX_HOSTNAME
-    config.hostmanager.aliases = DNS_ALIASES
+    config.vm.hostname                      = BOX_HOSTNAME
+    config.hostmanager.aliases              = DNS_ALIASES
+
+    # NOTE: It is preferable to use private networking here for several notable reasons:
+    # - Security, especially since we default to insecure passwords on the guest.
+    # - UISP does not allow localhost for server name, so we can provide an IP or alias instead for testing public URLs.
+    # - Easier configuration of Xdebug communication with the local machine.
+    # - Segregation, in cases where developers may have multiple development environments on the same machine.
+    # - Also, since hostmanager does not work on reload/halt, this prevents the need for repeated hosts file changes.
+
+    config.vm.network "private_network", ip: BOX_ADDRESS
 
     # ------------------------------------------------------------------------------------------------------------------
     # FILE SYSTEM
     # ------------------------------------------------------------------------------------------------------------------
 
-    # Synced folder containing any desired Docker Compose overrides.
-    #config.vm.synced_folder "./box/unms/app/overrides", "/home/unms/app/overrides", owner: "unms", group: "root"
+    # Disable the default synced folder.
+    config.vm.synced_folder ".", "/vagrant", disabled: true
 
-    # Synced folder specifically for getting sensitive information back from the guest system.
-    #config.vm.synced_folder "./box/vagrant/env", "/home/vagrant/env"
-    #config.vm.synced_folder "./box/vagrant/scripts/ucrm", "/home/vagrant/scripts/ucrm"
-
-    config.vm.synced_folder ".", "/src/ucrm-plugins"
+    # And sync our entire project.
+    config.vm.synced_folder "#{HOST_PROJECT_DIR}", "#{VBOX_PROJECT_DIR}"
 
     # ------------------------------------------------------------------------------------------------------------------
     # BASE BOX
     # ------------------------------------------------------------------------------------------------------------------
 
-    # When a local package is added to the box cache, the version is always 0.  To alleviate any version issues from
-    # this, we simply append the version to the box name when adding it from a local package.
-    #
-    # The following are examples of boxes added this way:
-    # - ucrm-plugins/uisp-1.4.4 (virtualbox, 0)
-    # - ucrm-plugins/uisp-1.4.5 (virtualbox, 0)
-    #
-    # Boxes downloaded from Vagrant Cloud differ in that their names do not contain the version and instead an actual
-    # version is provided.
-    #
-    # The following are examples of boxes added from Vagrant Cloud:
-    # - ucrm-plugins/uisp (virtualbox, 1.4.4)
-    # - ucrm-plugins/uisp (virtualbox, 1.4.5)
-    #
-    # The following code attempts to determine the correct box version to use, in cases where it is already cached.  If
-    # the code fails to find a valid box, locally, it will then fail over to trying Vagrant Cloud.
-
-    if `vagrant box list`.match(/^ucrm-plugins\/uisp-#{UISP_VERSION.gsub(".", "\\.")}\s*\(virtualbox, 0\)$/m)
-        config.vm.box = "ucrm-plugins/uisp-#{UISP_VERSION}"
-    else
-        config.vm.box = "ucrm-plugins/uisp"
-        config.vm.box_version = "#{UISP_VERSION}"
-    end
+    config.vm.box = "bento/ubuntu-20.04"
 
     # ------------------------------------------------------------------------------------------------------------------
     # PROVIDERS
     # ------------------------------------------------------------------------------------------------------------------
 
     # VirtualBox
-    config.vm.provider "virtualbox" do |vm, override|
-        # NOTE: Set the following to suit your needs and based upon available host resources.
+    config.vm.provider :virtualbox do |vm, override|
         vm.name = "#{BOX_HOSTNAME}-#{UISP_VERSION}"
         vm.cpus = 1
         vm.memory = 4096
     end
 
-#     # VMware
-#     config.vm.provider "vmware_desktop" do |vm, override|
-#         vm.gui = true
-#         vm.vmx["displayname"] = "#{BOX_HOSTNAME}-#{UISP_VERSION}"
-#         vm.vmx["memsize"] = "4096"
-#         vm.vmx["numvcpus"] = "1"
-#
-#         # Do NOT Change the following unless you know what you're doing!
-#         #vm.vmx["ethernet0.pcislotnumber"] = "32"
-#         #vm.vmx["ethernet1.pcislotnumber"] = "33"
-#
-#         #NETWORK_NAME = OS.windows? ? "VMnet1" : "vmnet1"
-#         #override.vm.network "private_network", type: "dhcp", name: NETWORK_NAME, adapter: 1
-#     end
-
+    # NOTE: Both Hyper-V and VMware have numerous issues preventing a completely functioning system, so they have been
+    # abandoned for the time being!
 
     # ------------------------------------------------------------------------------------------------------------------
     # PROVISIONERS
     # ------------------------------------------------------------------------------------------------------------------
 
-    # Unset any provisioners used in the base box configuration!
-    config.vm.provision "users",    type: "shell", path: nil, inline: ""
-    config.vm.provision "network",  type: "shell", path: nil, inline: ""
-    config.vm.provision "firewall", type: "shell", path: nil, inline: ""
-    config.vm.provision "install",  type: "shell", path: nil, inline: ""
+    # Provision the Users...
+    config.vm.provision :users,
+        type: :shell,
+        keep_color: true,
+        path: "#{PROVISIONING_DIR}/users.sh",
+        env: { "ROOT_PASSWORD" => "#{ROOT_PASSWORD}" }
 
-    PROVISION_DIR = "./box/vagrant/provisioning"
+    # Provision the Network...
+    config.vm.provision :network,
+        type: :shell,
+        keep_color: true,
+        path: "#{PROVISIONING_DIR}/network.sh",
+        env: { "IPV6_DISABLE" => "all,default,lo,eth0" }
+
+    # Provision the Firewall...
+    config.vm.provision :firewall,
+        type: :shell,
+        keep_color: true,
+        path: "#{PROVISIONING_DIR}/firewall.sh",
+        env: {}
+
+    # Provision the UISP installation...
+    config.vm.provision :uisp,
+        type: :shell,
+        keep_color: true,
+        path: "#{PROVISIONING_DIR}/uisp.sh",
+        env: {
+            "UISP_VERSION" => "#{UISP_VERSION}",
+            "BOX_HOSTNAME" => "#{BOX_HOSTNAME}",
+            "BOX_CERT_DIR" => "#{VBOX_PROJECT_DIR}/vagrant/certs"
+        }
 
     # env: Always run the environment provisioner, to keep changes updated in the ENV and files.
-    config.vm.provision "environment", type: "shell", keep_color: true, run: "always",
-        path: "#{PROVISION_DIR}/environment.sh",
+    config.vm.provision :environment,
+        type: :shell,
+        keep_color: true,
+        run: :always,
+        path: "#{PROVISIONING_DIR}/environment.sh",
         env: { "UISP_VERSION" => "#{UISP_VERSION}", "UCRM_VERSION" => "#{UCRM_VERSION}" }
 
     # build: This provisioner is responsible for building an updated version of the overrides.
-    config.vm.provision "build", type: "shell", keep_color: true,
-        path: "#{PROVISION_DIR}/build.sh"
-        #env: { "UISP_VERSION" => "#{UISP_VERSION}", "UCRM_VERSION" => "#{UCRM_VERSION}" }
+    config.vm.provision :overrides,
+        type: :shell,
+        keep_color: true,
+        path: "#{PROVISIONING_DIR}/overrides.sh",
+        env: {}
 
     # build: This provisioner is responsible for building an updated version of the overrides.
-    config.vm.provision "postgres", type: "shell", keep_color: true,
-        path: "#{PROVISION_DIR}/postgres.sh"
-        #env: { "UISP_VERSION" => "#{UISP_VERSION}", "UCRM_VERSION" => "#{UCRM_VERSION}" }
+    config.vm.provision :postgres,
+        type: :shell,
+        keep_color: true,
+        path: "#{PROVISIONING_DIR}/postgres.sh",
+        env: {}
 
     # Provision file/folder permissions...
-    config.vm.provision "permissions", type: "shell", keep_color: true,
-        path: "#{PROVISION_DIR}/permissions.sh",
+    config.vm.provision :permissions,
+        type: :shell,
+        keep_color: true,
+        path: "#{PROVISIONING_DIR}/permissions.sh",
         env: {}
 
     # Provision PHP...
-    config.vm.provision "php", type: "shell", keep_color: true,
-        path: "#{PROVISION_DIR}/php.sh",
-        env: { "GIT_USER_NAME" => "#{GIT_USER_NAME}", "GIT_USER_EMAIL" => "#{GIT_USER_EMAIL}"  }
+    config.vm.provision :php,
+        type: :shell,
+        keep_color: true,
+        path: "#{PROVISIONING_DIR}/php.sh",
+        env: {}
 
     # Provision NodeJS...
-    config.vm.provision "node", type: "shell", keep_color: true,
-        path: "#{PROVISION_DIR}/node.sh",
+    config.vm.provision :node,
+        type: :shell,
+        keep_color: true,
+        path: "#{PROVISIONING_DIR}/node.sh",
         env: {}
 
     # Provision VSCode Server...
-    config.vm.provision "code-server", type: "shell", keep_color: true, run: "never",
-        path: "#{PROVISION_DIR}/code-server.sh",
+    config.vm.provision :code_server,
+        type: :shell,
+        keep_color: true,
+        #run: :never,
+        path: "#{PROVISIONING_DIR}/code-server.sh",
         env: {
-            "BIND_ADDR" => "0.0.0.0:8080",
-            "WORKSPACE" => "/src/ucrm-plugins"
+            "BOX_HOSTNAME" => "#{BOX_HOSTNAME}",
+            "WORKSPACE" => "#{VBOX_PROJECT_DIR}"
         }
 
-    # Provision NodeJS...
-    config.vm.provision "no-ip", type: "shell", keep_color: true, run: "never",
-        path: "#{PROVISION_DIR}/no-ip.sh",
-        env: {}
+    # ------------------------------------------------------------------------------------------------------------------
+    # TRIGGERS
+    # ------------------------------------------------------------------------------------------------------------------
+
+    config.trigger.before :up do |trigger|
+        trigger.info = "Configuring SSL for #{BOX_HOSTNAME}"
+        trigger.ruby do |env, machine|
+            # NOTE: The conditional command should result in one of the following conditions:
+            # - /usr/bin/mkcert on linux or Windows (via the Git Bash shell)
+            # - /c/HashiCorp/Vagrant/embedded/usr/bin/mkcert on Windows (via Vagrant's embedded shell)
+            # - OR an empty string which should trigger the installation of mkcert
+            if `which mkcert 2>/dev/null` == ""
+                if OS.windows?
+                    puts "Installing mkcert on Windows (in Vagrant's embedded shell)..."
+                    MKCERT_URL = "https://dl.filippo.io/mkcert/latest?for=windows/amd64"
+                    `wget -q --show-progress #{MKCERT_URL} -O /usr/bin/mkcert.exe`
+                else
+                    puts "Installing mkcert on Linux..."
+                    MKCERT_URL = "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
+                    `wget -q --show-progress #{MKCERT_URL} -O /usr/bin/mkcert`
+                end
+            end
+
+            # Install the local CA in the trust store.
+            `mkcert -install`
+
+            CRT_SANS=DNS_ALIASES.join(" ")
+            CRT_FILE="#{CERTIFICATES_DIR}/#{BOX_HOSTNAME}.crt"
+            KEY_FILE="#{CERTIFICATES_DIR}/#{BOX_HOSTNAME}.key"
+
+            if (not File.exists?(CRT_FILE)) or (not File.exists?(KEY_FILE))
+                puts "Generating SSL Certificates for local development..."
+                `mkcert -cert-file #{CRT_FILE} -key-file #{KEY_FILE} #{BOX_HOSTNAME} #{CRT_SANS}`
+            end
+        end
+    end
+
+    config.trigger.after :destroy do |trigger|
+        trigger.info = "Configuring SSL for #{BOX_HOSTNAME}"
+        trigger.ruby do |env, machine|
+            #`rm #{CERTIFICATES_DIR}/*.{crt,key}`
+        end
+    end
+
+    config.trigger.after :up, :reload do |trigger|
+        trigger.info = "Configuring VSSH for Windows"
+        trigger.ruby do |env, machine|
+            SSH.setMachine(machine)
+            SSH.updateConfig(BOX_HOSTNAME, BOX_ADDRESS, "vagrant", "22")
+            #SSH.updateScript("#{HOST_PROJECT_DIR}/dev/bin/vssh", "SSH_PATH", "~/.ssh/config")
+            SSH.updateScript("#{HOST_PROJECT_DIR}/dev/bin/vssh", "SSH_HOST", BOX_HOSTNAME)
+
+            File.open("#{HOST_VAGRANT_DIR}/build_version", "wb") { |f| f.puts UISP_VERSION }
+        end
+    end
+
+    config.trigger.after :halt, :destroy do |trigger|
+        trigger.info = "Configuring VSSH for Windows"
+        trigger.ruby do |env, machine|
+            SSH.setMachine(machine)
+            SSH.deleteConfig(BOX_HOSTNAME)
+        end
+    end
 
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
