@@ -1,7 +1,7 @@
 #!/bin/bash
 
 app=/home/unms/app
-env=/src/ucrm-plugins/box/vagrant/env
+env=/src/ucrm-plugins/env
 profile=/etc/profile.d
 
 # ----------------------------------------------------------------------------------------------------------------------

@@ -12,3 +12,7 @@ vendor/
 **/*.env
 
 .bash_installed
+certs/
+
+env/*
+!env/README.md
