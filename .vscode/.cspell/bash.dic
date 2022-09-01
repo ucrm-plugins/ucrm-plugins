@@ -1,3 +1,7 @@
 mkdir
 inet
 realpath
+MSYS_NO_PATHCONV
+mkcert
+shopt
+dotglob

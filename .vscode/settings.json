@@ -1,16 +1,12 @@
 {
-    "security.workspace.trust.enabled": false,
-
-    //
-    // TERMINAL (Moving to Code Server)
-    //
-    // "terminal.integrated.profiles.windows": {
-    //     "Git Bash": {
-    //         "source": "Git Bash",
-    //         "args": [ "--rcfile", ".dev/.bashrc" ]
-    //     }
-    // },
-    // "terminal.integrated.defaultProfile.windows": "Git Bash",
+    "terminal.integrated.profiles.windows": {
+        "Git Bash": {
+            "source": "Git Bash",
+            "args": [ "--rcfile", ".bashrc" ],
+            "env": {}
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
 
     //
     // ENVIRONMENT
@@ -125,73 +121,31 @@
         "zip",
         "zlib"
     ],
+    "intelephense.telemetry.enabled": false,
+    "intelephense.format.enable": true,
+    "intelephense.completion.triggerParameterHints": true,
+    "intelephense.completion.insertUseDeclaration": true,
+    "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true,
+    "intelephense.trace.server": "messages",
+    "intelephense.files.exclude": [
+        "**/.git/**",
+        "**/.svn/**",
+        "**/.hg/**",
+        "**/CVS/**",
+        "**/.DS_Store/**",
+        "**/node_modules/**",
+        "**/bower_components/**",
+        "**/storage",
+        "**/storage/**",
+        "**/tests/**",
+        "**/resources/views/**",
+        "**/database/migrations/**",
+        "**/storage/framework/views/**",
+        "_ide_helper.php",
+        "_ide_helper_models"
+    ],
 
-    //
-    // FILE ASSOCIATIONS
-    //
-    "files.associations": {
-        "*.module": "php"
-    },
 
-    //
-    // CSPELL
-    //
-    "cSpell.words": [],
-    "cSpell.customDictionaries": {
-        "bash": {
-            "name": "bash",
-            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/bash.dic",
-            "addWords": false,
-            "scope": "workspace"
-        },
-        "cmder": {
-            "name": "cmder",
-            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/cmder.dic",
-            "addWords": false,
-            "scope": "workspace"
-        },
-        "nginx": {
-            "name": "nginx",
-            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/nginx.dic",
-            "addWords": false,
-            "scope": "workspace"
-        },
-        "php": {
-            "name": "php",
-            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/php.dic",
-            "addWords": true,
-            "scope": "workspace"
-        },
-        "postgres": {
-            "name": "postgres",
-            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/postgres.dic",
-            "addWords": false,
-            "scope": "workspace"
-        },
-        "spaethtech": {
-            "name": "spaethtech",
-            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/spaethtech.dic",
-            "addWords": false,
-            "scope": "workspace"
-        },
-        "ssh": {
-            "name": "ssh",
-            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/ssh.dic",
-            "addWords": false,
-            "scope": "workspace"
-        },
-        "travis": {
-            "name": "travis",
-            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/travis.dic",
-            "addWords": false,
-            "scope": "workspace"
-        },
-        "ubiquiti": {
-            "name": "ubiquiti",
-            "path": "${workspaceFolder:ucrm-plugins}/.vscode/.cspell/ubiquiti.dic",
-            "addWords": false,
-            "scope": "workspace"
-        }
-    }
+
 
 }

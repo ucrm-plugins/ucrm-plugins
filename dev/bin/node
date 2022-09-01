@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 INCLUDE_DIR=$(realpath "$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"/.common)
 
-# shellcheck disable=SC1090
+# shellcheck disable=SC1090,SC1091
 source "$INCLUDE_DIR"/docker-wrapper.sh node
 
 # shellcheck disable=SC2086

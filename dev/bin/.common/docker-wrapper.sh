@@ -29,6 +29,7 @@ do
 
         ENV="$DIR"/environment.ini
         if [ -f "$ENV" ]; then
+            # shellcheck disable=SC1090
             source <(grep "=" "$ENV")
         else
             echo "Could not find an environment.ini for the $CMD command!"

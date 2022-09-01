@@ -1,0 +1,85 @@
+{
+    "gitignoreRoot": "../",
+    "useGitignore": true,
+    "dictionaries": [
+        "bash",
+        "cmder",
+        "docker",
+        "nginx",
+        "php",
+        "postgres",
+        "shellcheck",
+        "spaethtech",
+        "ssh",
+        "travis",
+        "ubiquiti"
+    ],
+    "dictionaryDefinitions": [
+        {
+            "name": "bash",
+            "path": ".cspell/bash.dic",
+            "addWords": true,
+            "scope": "workspace"
+        },
+        {
+            "name": "cmder",
+            "path": ".cspell/cmder.dic",
+            "addWords": false,
+            "scope": "workspace"
+        },
+        {
+            "name": "docker",
+            "path": ".cspell/docker.dic",
+            "addWords": false,
+            "scope": "workspace"
+        },
+        {
+            "name": "nginx",
+            "path": ".cspell/nginx.dic",
+            "addWords": false,
+            "scope": "workspace"
+        },
+        {
+            "name": "php",
+            "path": ".cspell/php.dic",
+            "addWords": true,
+            "scope": "workspace"
+        },
+        {
+            "name": "postgres",
+            "path": ".cspell/postgres.dic",
+            "addWords": false,
+            "scope": "workspace"
+        },
+        {
+            "name": "shellcheck",
+            "path": ".cspell/shellcheck.dic",
+            "addWords": false,
+            "scope": "workspace"
+        },
+        {
+            "name": "spaethtech",
+            "path": ".cspell/spaethtech.dic",
+            "addWords": false,
+            "scope": "workspace"
+        },
+        {
+            "name": "ssh",
+            "path": ".cspell/ssh.dic",
+            "addWords": false,
+            "scope": "workspace"
+        },
+        {
+            "name": "travis",
+            "path": ".cspell/travis.dic",
+            "addWords": false,
+            "scope": "workspace"
+        },
+        {
+            "name": "ubiquiti",
+            "path": ".cspell/ubiquiti.dic",
+            "addWords": false,
+            "scope": "workspace"
+        }
+    ]
+}
