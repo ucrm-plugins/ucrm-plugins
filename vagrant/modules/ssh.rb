@@ -12,7 +12,7 @@ module SSH
 
     def SSH.log(message)
         name = @@machine ? @@machine.name : "default"
-        puts "    #{name}: #{message}"
+        puts "    #{name}: [VSSH] #{message}"
     end
 
     def SSH.sshPath()
@@ -26,7 +26,7 @@ module SSH
 
     def SSH.updateConfig(host = nil, name = nil, user = nil, port = nil)
         file = "#{SSH.sshPath()}/config"
-        info = SSH.sshInfo()
+        info = SSH.sshInfo().gsub(/([\r?\n]){2,}/, '\1')
 
         # Modify the config as specified...
         if info.match(/^Host (.*)$/)
@@ -103,7 +103,20 @@ module SSH
             # ...OTHERWISE, nothing to do!
         end
 
-        File.open(file, "wb") { |f| f.puts contents }
+        SSH.log("Cleaning up config file...")
+        contents = contents.gsub(/([\r?\n]){3,}/, '\1\1')
+
+        if contents.strip.empty?
+            if File.exists?(file)
+                SSH.log("Deleting empty config file...")
+                File.delete(file)
+            else
+                SSH.log("Ignoring empty config...")
+            end
+        else
+            SSH.log("Saving config changes...")
+            File.open(file, "wb") { |f| f.puts contents }
+        end
     end
 
     def SSH.updateScript(file, key, value)

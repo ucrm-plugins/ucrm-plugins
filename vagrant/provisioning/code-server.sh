@@ -1,27 +1,39 @@
 #!/usr/bin/env bash
 
+DATA_DIR=/home/vagrant/.local/share/code-server
+CONF_DIR=/home/vagrant/.config/code-server
+
 if [ ! -f /usr/bin/code-server ]; then
     echo "Installing Code Server..."
     curl -fsSL https://code-server.dev/install.sh | bash
 else
     echo "Code Server already installed..."
+    systemctl stop code-server@vagrant
 fi
 
-mkdir -p /home/vagrant/.config/code-server
+echo "Killing existing processes..."
+fuser -k "$BIND_PORT"/tcp > /dev/null 2>&1
 
-cat << EOF > /home/vagrant/.config/code-server/config.yaml
-bind-addr: 0.0.0.0:8443
+echo "Resetting data directory..."
+if [ -d "$DATA_DIR" ]; then
+    rm -rf "$DATA_DIR"
+fi
+
+mkdir -p "$DATA_DIR"/{Machine,extensions}
+mkdir -p "$CONF_DIR"
+
+echo "Creating User's code-server config..."
+cat << EOF > "$CONF_DIR"/config.yaml
+bind-addr: $BIND_HOST:$BIND_PORT
 auth: none
-password: vagrant
-cert: /src/ucrm-plugins/vagrant/certs/$BOX_HOSTNAME.crt
-cert-key: /src/ucrm-plugins/vagrant/certs/$BOX_HOSTNAME.key
+cert: $WORKSPACE/vagrant/certs/$BOX_HOSTNAME.crt
+cert-key: $WORKSPACE/vagrant/certs/$BOX_HOSTNAME.key
+#user-data-dir: $DATA_DIR
+#ignore-last-opened: true
+disable-telemetry: true
 EOF
 
-chown vagrant:vagrant -R /home/vagrant
-
-systemctl stop code-server@vagrant
-
-echo "Configuring Code Server..."
+echo "Defining code-server service..."
 # Fix the service definition for our configuration!
 cat << EOF > /usr/lib/systemd/user/code-server.service
 [Unit]
@@ -31,20 +43,45 @@ After=network.target
 [Service]
 Type=exec
 User=vagrant
-ExecStart=/usr/bin/code-server --disable-telemetry $WORKSPACE
+ExecStart=/usr/bin/code-server $WORKSPACE
 Restart=always
 
 [Install]
 WantedBy=default.target
 EOF
 
-cat << EOF > /home/vagrant/.local/share/code-server/Machine/settings.json
+echo "Creating Machine settings..."
+cat << EOF > "$DATA_DIR"/Machine/settings.json
 {
-    "workbench.startupEditor": "none"
+    "workbench.startupEditor": "readme"
 }
 EOF
 
-sed -i "s/\"query\": {},/\"query\": {\n    \"folder\": \"$WORKSPACE\"\n  },/g" /home/vagrant/.local/share/code-server/coder.json
+# NOTE: This seems to be the only current way to set the default workspace folder on startup!
+echo "Setting the default Workspace folder..."
+cat << EOF > "$DATA_DIR"/coder.json
+{
+    "query": { "folder": "$WORKSPACE" }
+}
+EOF
+
+# shellcheck disable=SC2206
+# Parse provided extensions
+EXTS=(${EXTENSIONS//[\[,\]\"]/})
+
+if [ ${#EXTS[@]} -ne 0 ]; then
+    ARGS="--extensions-dir $DATA_DIR/extensions --force"
+    for i in "${EXTS[@]}"; do
+        ARGS="$ARGS --install-extension $i"
+    done
+
+    # shellcheck disable=SC2086
+    # Attempt to install any requested extensions...
+    code-server $ARGS
+fi
+
+echo "Fixing permissions..."
+chown vagrant:vagrant -R /home/vagrant
 
 echo "Starting Code Server..."
 systemctl enable --now code-server@vagrant

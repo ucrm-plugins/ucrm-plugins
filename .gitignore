@@ -16,3 +16,5 @@ certs/
 
 env/*
 !env/README.md
+
+.code-server/

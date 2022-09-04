@@ -1,7 +1,9 @@
-mkdir
-inet
-realpath
-MSYS_NO_PATHCONV
-mkcert
-shopt
 dotglob
+fuser
+inet
+mkcert
+mkdir
+MSYS_NO_PATHCONV
+realpath
+shopt
+usermod

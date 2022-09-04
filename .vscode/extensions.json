@@ -1,11 +1,13 @@
 {
     "recommendations": [
         "natizyskunk.sftp",
-        "felixfbecker.php-debug",
         "editorconfig.editorconfig",
         "ms-azuretools.vscode-docker",
         "streetsidesoftware.code-spell-checker",
         "ikappas.composer",
-        "bmewburn.vscode-intelephense-client"
+        "bmewburn.vscode-intelephense-client",
+        "ionutvmi.path-autocomplete",
+        "neilbrayfield.php-docblocker",
+        "marcostazi.vs-code-vagrantfile"
     ]
 }

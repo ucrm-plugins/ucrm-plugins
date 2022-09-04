@@ -141,11 +141,11 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
         env: {}
 
     # build: This provisioner is responsible for building an updated version of the overrides.
-    config.vm.provision :postgres,
-        type: :shell,
-        keep_color: true,
-        path: "#{PROVISIONING_DIR}/postgres.sh",
-        env: {}
+    # config.vm.provision :postgres,
+    #     type: :shell,
+    #     keep_color: true,
+    #     path: "#{PROVISIONING_DIR}/postgres.sh",
+    #     env: {}
 
     # Provision file/folder permissions...
     config.vm.provision :permissions,
@@ -162,21 +162,38 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
         env: {}
 
     # Provision NodeJS...
-    config.vm.provision :node,
-        type: :shell,
-        keep_color: true,
-        path: "#{PROVISIONING_DIR}/node.sh",
-        env: {}
+    # config.vm.provision :node,
+    #     type: :shell,
+    #     keep_color: true,
+    #     path: "#{PROVISIONING_DIR}/node.sh",
+    #     env: {}
 
-    # Provision VSCode Server...
+    # Provision Code Server...
     config.vm.provision :code_server,
         type: :shell,
         keep_color: true,
         #run: :never,
         path: "#{PROVISIONING_DIR}/code-server.sh",
+        #privileged: false,
         env: {
             "BOX_HOSTNAME" => "#{BOX_HOSTNAME}",
-            "WORKSPACE" => "#{VBOX_PROJECT_DIR}"
+            "WORKSPACE" => "#{VBOX_PROJECT_DIR}",
+            "BIND_HOST" => "0.0.0.0",
+            "BIND_PORT" => "8080",
+            # cspell:disable
+            "EXTENSIONS" => [
+                "natizyskunk.sftp",
+                "editorconfig.editorconfig",
+                "ms-azuretools.vscode-docker",
+                "streetsidesoftware.code-spell-checker",
+                "ikappas.composer",
+                "bmewburn.vscode-intelephense-client",
+                "ionutvmi.path-autocomplete",
+                "neilbrayfield.php-docblocker",
+                "marcostazi.vs-code-vagrantfile",
+                "felixfbecker.php-debug"
+            ]
+            # cspell:enable
         }
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -244,17 +261,3 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
     end
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -9,6 +9,9 @@ add-apt-repository -y ppa:ondrej/php
 apt-get update -y
 apt-get install -y php7.4-cli php7.4-curl php7.4-mbstring php7.4-xdebug php7.4-xml php7.4-zip
 
+# apt-cache policy php7.*
+# 1:7.4.30-5+ubuntu20.04.1+deb.sury.org+1
+
 # TODO: Install extensions!
 
 ########################################################################################################################

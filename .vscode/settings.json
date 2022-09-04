@@ -1,20 +1,13 @@
 {
+
     "terminal.integrated.profiles.windows": {
         "Git Bash": {
             "source": "Git Bash",
-            "args": [ "--rcfile", ".bashrc" ],
-            "env": {}
+            "args": [ "--rcfile", ".vscode/.bashrc" ],
+            "icon": "terminal-bash"
         }
     },
     "terminal.integrated.defaultProfile.windows": "Git Bash",
-
-    //
-    // ENVIRONMENT
-    //
-    "terminal.integrated.env.linux": {
-        "PATH": "/src/ucrm-plugins/bin:/src/ucrm-plugins/vendor/bin:${env:PATH}",
-        "PROJECT_DIR": "/src/ucrm-plugins"
-    },
 
     //
     // EDITOR

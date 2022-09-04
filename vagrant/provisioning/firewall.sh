@@ -28,7 +28,7 @@ ufw allow 5432/tcp
 
 # Allow Code Server
 #ufw allow 8080/tcp
-ufw allow 8443/tcp
+ufw allow 8080/tcp
 
 # Allow Xdebug
 ufw allow 9003/tcp
