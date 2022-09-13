@@ -12,7 +12,8 @@
         "spaethtech",
         "ssh",
         "travis",
-        "ubiquiti"
+        "ubiquiti",
+        "ucrm-plugins"
     ],
     "dictionaryDefinitions": [
         {
@@ -79,6 +80,12 @@
             "name": "ubiquiti",
             "path": ".cspell/ubiquiti.dic",
             "addWords": false,
+            "scope": "workspace"
+        },
+        {
+            "name": "ucrm-plugins",
+            "path": ".cspell/ucrm-plugins.dic",
+            "addWords": true,
             "scope": "workspace"
         }
     ]

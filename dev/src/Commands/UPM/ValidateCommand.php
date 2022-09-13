@@ -7,11 +7,19 @@ use Opis\JsonSchema\Errors\ErrorFormatter;
 use Opis\JsonSchema\Exceptions\SchemaException;
 use Opis\JsonSchema\Helper;
 use Opis\JsonSchema\Validator;
+use Symfony\Component\Console\Formatter\OutputFormatterStyle;
+use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Helper\TableStyle;
+use Symfony\Component\Console\Input\Input;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use UCRM\Plugins\Commands\PluginSpecificCommand;
+use UCRM\Plugins\Commands\PluginRequiredCommand;
+use UCRM\Plugins\Support\Diff;
+use UCRM\Plugins\Support\Diffs\JsonDiff;
 use UCRM\Plugins\Support\FileSystem;
+use UCRM\Plugins\Support\JSON;
+use ZipArchive;
 
 /**
  * ValidateCommand
@@ -21,7 +29,7 @@ use UCRM\Plugins\Support\FileSystem;
  *
  * @final
  */
-final class ValidateCommand extends PluginSpecificCommand
+final class ValidateCommand extends PluginRequiredCommand
 {
     protected array $errors = [];
 
@@ -34,7 +42,6 @@ final class ValidateCommand extends PluginSpecificCommand
             ->setName("validate")
             ->setDescription("Validates the specified UCRM Plugin")
             ->addArgument("name", InputArgument::REQUIRED, "The name of the plugin");
-            //->addOption("verbose", "v", InputOption::VALUE_NONE, "Show verbose output");
 
    }
 
@@ -42,26 +49,33 @@ final class ValidateCommand extends PluginSpecificCommand
      * @inheritDoc
      *
      */
-    protected function execute(InputInterface $input, OutputInterface $output) : int
+    protected function onExecute(InputInterface $input, OutputInterface $output) : int
     {
-        $this->beforeExecute($input, $output);
+        //$this->beforeExecute($input, $output);
 
         $this->io->writeln("\nValidating Plugin at: $this->cwd");
 
         $this->requiredFiles([ "README.md", "src/main.php", "src/manifest.json" ]);
         $this->validSyntax();
-        $this->validManifest();
+        $this->validManifest($output);
 
         $this->io->section("\nSUMMARY");
         $this->io->writeln("No issues found!\n");
 
-        $this->afterExecute($input, $output);
+        //$this->afterExecute($input, $output);
 
         return self::SUCCESS;
     }
 
 
-    protected function requiredFiles(array $files)
+    /**
+     * Ensures the required files are found.
+     *
+     * @param array $files
+     *
+     * @return bool
+     */
+    protected function requiredFiles(array $files): bool
     {
         $this->io->section("Required Files");
 
@@ -84,9 +98,13 @@ final class ValidateCommand extends PluginSpecificCommand
         }
 
         if ($missing)
+        {
             $this->error("One or more required files are missing, see output above!", TRUE);
+            return FALSE;
+        }
 
         $this->io->writeln("Required files found!");
+        return TRUE;
     }
 
     protected function validSyntax()
@@ -153,9 +171,16 @@ final class ValidateCommand extends PluginSpecificCommand
 
     }
 
-    protected function validManifest()
+    /**
+     * @throws \Exception
+     */
+    protected function validManifest(OutputInterface $output): bool
     {
+
         $this->io->section("Manifest");
+
+        if(!file_exists("src/manifest.json"))
+            return FALSE;
 
         $validator = new Validator();
         $data = json_decode(file_get_contents("src/manifest.json"));
@@ -171,15 +196,82 @@ final class ValidateCommand extends PluginSpecificCommand
                 $formatter->format($results->error()),
                 JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
             ));
-            $this->error("Schema errors detected, see output above!", TRUE);
+            $this->error("Schema errors detected, see output above!");
+            //return FALSE;
+        }
+        else
+        {
+            $this->io->writeln("Schema validated!");
         }
 
         // TODO: Compare differences between source manifest.json and bundled manifest.json!
+        if(file_exists("$this->name.zip"))
+        {
+            $zip = new ZipArchive();
+            $zip->open("$this->name.zip");
+
+            $zipManifest = $zip->getFromName("manifest.json");
+            unset($zip);
+
+            if(!$zipManifest)
+            {
+                $this->error("Plugin bundle does not include a manifest.json file!");
+                return FALSE;
+            }
+
+            //$array1 = JSON::load("src/manifest.json")->getDecoded();
+            //$array2 = (new JSON($zipManifest))->getDecoded();
+
+            //$diff = Diff::json(file_get_contents("src/manifest.json"), $zipManifest);
+            $diff = JsonDiff::fromFiles()
+
+            echo $diff;
+
+            exit;
+            $diff = Diff::array($array1, $array2);
+
+            if (count($diff) > 0)
+            {
+                printf(<<<EOF
+                    The file "manifest.json" differs between the following:
+
+                    %s
+                    - %s
+                    - %s
+
+                    Does the Plugin need to be (re-)bundled?
+
+                    EOF,
+                    FileSystem::path(PROJECT_DIR."/plugins/$this->name"),
+                    FileSystem::path("src/manifest.json"),
+                    FileSystem::path("$this->name.zip")
+                );
+
+                $style = new TableStyle();
+                $style->setHeaderTitleFormat("<fg=blue;bg=black;options=bold> %s </>");
+
+                $table = new Table($output);
+                $table->setStyle($style);
+
+
+                $table->setHeaderTitle("manifest.json");
+
+
+                //$table = self::createDiffTable($table, ["KEY", "FILE", "ZIP"], $diff, $array1, $array2);
+
+                $table->render();
+
+                return FALSE;
+            }
+
+
+        }
 
 
 
-
+        return TRUE;
     }
+
 
 
 }

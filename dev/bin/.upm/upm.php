@@ -1,5 +1,5 @@
 #!/usr/bin/env php
-<?php // cspell:ignore FQNS
+<?php
 declare(strict_types=1);
 
 use Symfony\Component\Console\Application;

@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+#PROJECT_DIR=$(realpath "$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"/../..)
+
+# IF we are running this script from within Git Bash for Windows...
+if [[ "$(uname)" = MINGW64_NT* ]]
+then
+    INSTALL_BIN=$HOME/bin/mkcert.exe
+
+    if [ ! -f "$INSTALL_BIN" ]
+    then
+        mkdir -p "$(dirname "$INSTALL_BIN")"
+        echo "Installing mkcert in User's bin..."
+        curl -sJL https://dl.filippo.io/mkcert/latest?for=windows/amd64 -o "$INSTALL_BIN"
+    fi
+
+    # NOTE: Otherwise paths starting with / are prefixed with "C:\Program Files\Git"
+    export MSYS_NO_PATHCONV=1
+fi
+
+# Or on Mac OSX...
+if [[ "$(uname)" = Darwin ]]
+then
+    # TODO: Test on OSX!
+
+    INSTALL_BIN=$HOME/bin/mkcert
+
+    if [ ! -f "$INSTALL_BIN" ]
+    then
+        mkdir -p "$(dirname "$INSTALL_BIN")"
+        echo "Installing mkcert in User's bin..."
+        curl -sJL https://dl.filippo.io/mkcert/latest?for=darwin/amd64 -o "$INSTALL_BIN"
+        chmod +x "$INSTALL_BIN"
+    fi
+fi
+
+# Or on Linux...
+if [[ "$(uname)" = Linux ]]
+then
+    # Check to see if the command is from the guest VM...
+    if [ "$ENVIRONMENT" == "guest" ]
+    then
+        echo -e "The mkcert command is not normally used in the guest VM, installation will continue...\n"
+    fi
+
+    # TODO: Test on Linux!
+
+    INSTALL_BIN=$HOME/bin/mkcert
+
+    if [ ! -f "$INSTALL_BIN" ]
+    then
+        mkdir -p "$(dirname "$INSTALL_BIN")"
+        echo "Installing mkcert in User's bin..."
+        curl -sJL https://dl.filippo.io/mkcert/latest?for=linux/amd64 -o "$INSTALL_BIN"
+        chmod +x "$INSTALL_BIN"
+    fi
+fi
+
+"$INSTALL_BIN" "$@"

@@ -20,5 +20,6 @@ services:
             args:
               UCRM_VERSION: 3.4.7
         #volumes:
+        #    - /:/proxy
         #    - ./overrides/ucrm/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
         #    - ./overrides/ucrm/xdebug_params:/etc/nginx/xdebug_params

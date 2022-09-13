@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
+if [ "$ENVIRONMENT" == "guest" ]
+then
+    echo "The VSSH command can not be used from within the guest VM, exiting!"
+    exit
+fi
+
 SSH_PATH=~/.ssh/config
-SSH_HOST=uisp-dev
+SSH_HOST=uisp
 
 ssh -F "$SSH_PATH" "$SSH_HOST" "$@"

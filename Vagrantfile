@@ -13,16 +13,16 @@ require_relative    "#{HOST_VAGRANT_DIR}/modules/os.rb"
 require_relative    "#{HOST_VAGRANT_DIR}/modules/ssh.rb"
 require_relative    "#{HOST_VAGRANT_DIR}/modules/uisp.rb"
 
-PROVISIONING_DIR    = "#{HOST_VAGRANT_DIR}/provisioning"
+PROVISIONERS_DIR    = "#{HOST_VAGRANT_DIR}/provisioners"
 CERTIFICATES_DIR    = "#{HOST_VAGRANT_DIR}/certs"
 
 # ----------------------------------------------------------------------------------------------------------------------
 # CONFIGURATION
 # ----------------------------------------------------------------------------------------------------------------------
 
-BOX_HOSTNAME        = "uisp-dev"
+BOX_HOSTNAME        = "uisp"
 BOX_ADDRESS         = "192.168.56.10"
-DNS_ALIASES         = [ "#{BOX_HOSTNAME}.local" ]
+DNS_ALIASES         = [ "#{BOX_HOSTNAME}.dev" ]
 ROOT_PASSWORD       = "vagrant"
 UISP_VERSION        = "1.4.7"
 UCRM_VERSION        = UISP.getUcrmVersion(UISP_VERSION)
@@ -33,7 +33,9 @@ UCRM_VERSION        = UISP.getUcrmVersion(UISP_VERSION)
 
 Vagrant.configure(VAGRANT_FILE_VER) do |config|
 
-    config.vagrant.plugins = [ "vagrant-hostmanager" ]
+    config.vagrant.plugins = [ "vagrant-vbguest", "vagrant-hostmanager" ]
+
+    config.vbguest.auto_update = false
 
     # ------------------------------------------------------------------------------------------------------------------
     # NETWORKING
@@ -84,6 +86,12 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
         vm.name = "#{BOX_HOSTNAME}-#{UISP_VERSION}"
         vm.cpus = 1
         vm.memory = 4096
+        # vb.customize [
+        #     "setextradata",
+        #     :id,
+        #     "VBoxInternal2/SharedFoldersEnableSymlinksCreate#{VBOX_PROJECT_DIR}",
+        #     "1"
+        # ]
     end
 
     # NOTE: Both Hyper-V and VMware have numerous issues preventing a completely functioning system, so they have been
@@ -97,28 +105,35 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
     config.vm.provision :users,
         type: :shell,
         keep_color: true,
-        path: "#{PROVISIONING_DIR}/users.sh",
+        path: "#{PROVISIONERS_DIR}/users.sh",
         env: { "ROOT_PASSWORD" => "#{ROOT_PASSWORD}" }
+
+    # Provision the bash environment...
+    config.vm.provision :bash,
+        type: :shell,
+        keep_color: true,
+        path: "#{PROVISIONERS_DIR}/bash.sh",
+        env: { }
 
     # Provision the Network...
     config.vm.provision :network,
         type: :shell,
         keep_color: true,
-        path: "#{PROVISIONING_DIR}/network.sh",
-        env: { "IPV6_DISABLE" => "all,default,lo,eth0" }
+        path: "#{PROVISIONERS_DIR}/network.sh",
+        env: { "IPV6_DISABLE" => "all,default,lo,eth0,eth1" }
 
     # Provision the Firewall...
     config.vm.provision :firewall,
         type: :shell,
         keep_color: true,
-        path: "#{PROVISIONING_DIR}/firewall.sh",
+        path: "#{PROVISIONERS_DIR}/firewall.sh",
         env: {}
 
     # Provision the UISP installation...
     config.vm.provision :uisp,
         type: :shell,
         keep_color: true,
-        path: "#{PROVISIONING_DIR}/uisp.sh",
+        path: "#{PROVISIONERS_DIR}/uisp.sh",
         env: {
             "UISP_VERSION" => "#{UISP_VERSION}",
             "BOX_HOSTNAME" => "#{BOX_HOSTNAME}",
@@ -130,57 +145,64 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
         type: :shell,
         keep_color: true,
         run: :always,
-        path: "#{PROVISIONING_DIR}/environment.sh",
-        env: { "UISP_VERSION" => "#{UISP_VERSION}", "UCRM_VERSION" => "#{UCRM_VERSION}" }
+        path: "#{PROVISIONERS_DIR}/environment.sh",
+        env: {
+            "UISP_VERSION" => "#{UISP_VERSION}",
+            "UCRM_VERSION" => "#{UCRM_VERSION}"
+            #"PROJECT_DIR" => "#{VBOX_PROJECT_DIR}"
+        }
 
     # build: This provisioner is responsible for building an updated version of the overrides.
     config.vm.provision :overrides,
         type: :shell,
         keep_color: true,
-        path: "#{PROVISIONING_DIR}/overrides.sh",
+        path: "#{PROVISIONERS_DIR}/overrides.sh",
         env: {}
 
     # build: This provisioner is responsible for building an updated version of the overrides.
-    # config.vm.provision :postgres,
-    #     type: :shell,
-    #     keep_color: true,
-    #     path: "#{PROVISIONING_DIR}/postgres.sh",
-    #     env: {}
-
-    # Provision file/folder permissions...
-    config.vm.provision :permissions,
+    config.vm.provision :postgres,
         type: :shell,
         keep_color: true,
-        path: "#{PROVISIONING_DIR}/permissions.sh",
+        run: :never,
+        path: "#{PROVISIONERS_DIR}/postgres.sh",
         env: {}
 
     # Provision PHP...
     config.vm.provision :php,
         type: :shell,
         keep_color: true,
-        path: "#{PROVISIONING_DIR}/php.sh",
-        env: {}
+        path: "#{PROVISIONERS_DIR}/php.sh",
+        env: {
+            "PROJECT_DIR" => "#{VBOX_PROJECT_DIR}"
+        }
 
     # Provision NodeJS...
-    # config.vm.provision :node,
-    #     type: :shell,
-    #     keep_color: true,
-    #     path: "#{PROVISIONING_DIR}/node.sh",
-    #     env: {}
+    config.vm.provision :node,
+        type: :shell,
+        keep_color: true,
+        #run: :never,
+        path: "#{PROVISIONERS_DIR}/node.sh",
+        env: {}
+
+        # Provision NodeJS...
+    config.vm.provision :permissions,
+        type: :shell,
+        keep_color: true,
+        #run: :never,
+        path: "#{PROVISIONERS_DIR}/permissions.sh",
+        env: {}
 
     # Provision Code Server...
     config.vm.provision :code_server,
         type: :shell,
         keep_color: true,
-        #run: :never,
-        path: "#{PROVISIONING_DIR}/code-server.sh",
-        #privileged: false,
+        run: :never,
+        path: "#{PROVISIONERS_DIR}/code-server.sh",
         env: {
             "BOX_HOSTNAME" => "#{BOX_HOSTNAME}",
             "WORKSPACE" => "#{VBOX_PROJECT_DIR}",
             "BIND_HOST" => "0.0.0.0",
             "BIND_PORT" => "8080",
-            # cspell:disable
             "EXTENSIONS" => [
                 "natizyskunk.sftp",
                 "editorconfig.editorconfig",
@@ -193,12 +215,13 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
                 "marcostazi.vs-code-vagrantfile",
                 "felixfbecker.php-debug"
             ]
-            # cspell:enable
         }
 
     # ------------------------------------------------------------------------------------------------------------------
     # TRIGGERS
     # ------------------------------------------------------------------------------------------------------------------
+
+    require 'fileutils'
 
     config.trigger.before :up do |trigger|
         trigger.info = "Configuring SSL for #{BOX_HOSTNAME}"
@@ -244,7 +267,7 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
         trigger.info = "Configuring VSSH for Windows"
         trigger.ruby do |env, machine|
             SSH.setMachine(machine)
-            SSH.updateConfig(BOX_HOSTNAME, BOX_ADDRESS, "vagrant", "22")
+            SSH.updateConfig(BOX_HOSTNAME, DNS_ALIASES.join(" "), BOX_ADDRESS, "vagrant", "22")
             #SSH.updateScript("#{HOST_PROJECT_DIR}/dev/bin/vssh", "SSH_PATH", "~/.ssh/config")
             SSH.updateScript("#{HOST_PROJECT_DIR}/dev/bin/vssh", "SSH_HOST", BOX_HOSTNAME)
 
@@ -257,6 +280,7 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
         trigger.ruby do |env, machine|
             SSH.setMachine(machine)
             SSH.deleteConfig(BOX_HOSTNAME)
+            FileUtils.rm_rf("#{HOST_VAGRANT_DIR}/env")
         end
     end
 

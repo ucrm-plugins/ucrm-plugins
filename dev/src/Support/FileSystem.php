@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+// cspell:ignore degit
+
 namespace UCRM\Plugins\Support;
 
 /**
@@ -15,7 +17,7 @@ final class FileSystem
     {
         return strtoupper(substr(PHP_OS, 0, 3)) === "WIN";
     }
-    
+
     /**
      * Makes changes to a given path for consistency, replacing and trimming slashes as needed.
      * NOTE: This method does not rely upon the existence of the folder/file like realpath() and other functions.
@@ -28,24 +30,24 @@ final class FileSystem
     {
         return rtrim(str_replace(["\\", "/"], $separator, $path), $separator);
     }
-    
+
     public static function uri(string $path): string
     {
         return "file://".(DIRECTORY_SEPARATOR === "\\" ? "/" : "").self::path($path, "/");
     }
-    
-    
+
+
     public static function execRemoveDirRecursive(string $dir): bool
     {
         if (!file_exists($dir) || !is_dir($dir))
             return FALSE;
-            
+
         exec(self::onWindows() ? "rmdir /s /q $dir" : "rm -rf $dir");
-        
+
         return !file_exists($dir);
     }
-    
-    
+
+
 
     /**
      * Calls unlink() repeatedly until the file is removed or the specified timeout is reached.
@@ -109,7 +111,7 @@ final class FileSystem
 
     /** @var string The base path to use when starting recursion and from which to build relative paths. */
     private static string $deleteBase = "";
-    
+
     /**
      * Deletes all content from a directory (recursively).
      *
@@ -124,10 +126,10 @@ final class FileSystem
     {
         if (!array_key_exists("files", $counts))
             $counts["files"] = 0;
-    
+
         if (!array_key_exists("folders", $counts))
             $counts["folders"] = 0;
-        
+
         $dir = self::path($dir);
 
         if (!self::$deleteBase)
@@ -155,7 +157,7 @@ final class FileSystem
             {
                 if ($verbose)
                     print_r("Deleted: $path\n");
-                
+
                 //$count += unlink($path) ? 1 : 0;
                 $counts["files"] += self::unlinkRetry($path) ? 1 : 0;
             }
@@ -176,10 +178,10 @@ final class FileSystem
             {
                 $f = $counts["files"] !== 1 ? "files" : "file";
                 $d = $counts["folders"] !== 1 ? "folders" : "folder";
-                
+
                 print_r("{$counts['files']} $f deleted and {$counts['folders']} $d removed!\n");
             }
-            
+
             return TRUE;
         }
         //return !($dir !== self::$deleteBase) || $count++ && self::rmdirRetry($dir);
@@ -226,8 +228,8 @@ final class FileSystem
 
         return TRUE;
     }
-    
-    
+
+
     /**
      * @param string $dir
      * @param string $separator
@@ -255,7 +257,7 @@ final class FileSystem
         }
         return $result;
     }
-    
+
     /**
      * @param string $dir
      * @param callable|NULL $func
@@ -267,15 +269,15 @@ final class FileSystem
     public static function each(string $dir, callable $func = NULL, string $separator = DIRECTORY_SEPARATOR, bool $absolute = FALSE): array
     {
         $func = $func ?? function(string $file): string { return $file; };
-        
+
         $result = [];
         foreach(scandir($dir) as $file)
         {
             if ($file === "." || $file === "..")
                 continue;
-            
+
             $filePath = $dir . $separator . $file;
-            
+
             if (is_dir($filePath)) {
                 foreach (self::scan($filePath, $separator) as $childFilename) {
                     $result[] = $func(($absolute ? $dir . $separator : "") . $file . $separator . $childFilename);
@@ -286,7 +288,7 @@ final class FileSystem
         }
         return $result;
     }
-    
+
     /**
      * @param string $source
      * @param string $destination
@@ -300,25 +302,25 @@ final class FileSystem
     {
         if (!array_key_exists("files", $counts))
             $counts["files"] = 0;
-    
+
         if (!array_key_exists("folders", $counts))
             $counts["folders"] = 0;
-        
+
         if (!is_dir($source))
             return FALSE;
-    
+
         if (is_dir($destination) && !$replace)
             return FALSE;
-        
+
         if (!is_dir($destination) && !mkdir($destination))
             return FALSE;
-    
+
         $files = self::each($source,
             function($file) use ($source, $destination, $verbose, &$counts)
             {
                 $s = $source . DIRECTORY_SEPARATOR . $file;
                 $d = $destination . DIRECTORY_SEPARATOR . $file;
-    
+
                 if (!file_exists(dirname($d)))
                 {
                     if (mkdir(dirname($d)))
@@ -326,27 +328,27 @@ final class FileSystem
                     else
                         die("Could not create directory: ". dirname($d));
                 }
-                
+
                 copy($s, $d);
                 $counts["files"] += 1;
-                
+
                 if ($verbose)
                     print_r("Copied: $s\n");
-                
+
                 return $file;
             }
         );
-        
+
         if ($verbose)
         {
             $f = $counts["files"] !== 1 ? "files" : "file";
             $d = $counts["folders"] !== 1 ? "folders" : "folder";
             print_r("{$counts['files']} $f copied and {$counts['folders']} $d created!\n");
         }
-        
+
         return $files;
     }
-    
+
     /**
      * @param string $url
      * @param string $dir
@@ -358,28 +360,28 @@ final class FileSystem
     public static function gitClone(string $url, string $dir, bool $degit = FALSE, bool $verbose = FALSE)
     {
         $output = exec("git clone $url $dir");
-    
+
         if ($verbose)
             print_r($output."\n");
-    
+
         if (!$degit)
             self::execRemoveDirRecursive(self::path("$dir/.git/"));
-    
+
     }
-    
-    
+
+
     // as per RFC 3986
     // @see https://www.rfc-editor.org/rfc/rfc3986#section-5.2.4
     public static function canonical(string $path, string $separator = DIRECTORY_SEPARATOR)
     {
         // Force forward slashes!
         $path = FileSystem::path($path, "/");
-        
+
         // 1.  The input buffer is initialized with the now-appended path
         //     components and the output buffer is initialized to the empty
         //     string.
         $output = '';
-        
+
         // 2.  While the input buffer is not empty, loop as follows:
         while ($path !== '') {
             // A.  If the input buffer begins with a prefix of "`../`" or "`./`",
@@ -390,7 +392,7 @@ final class FileSystem
             ) {
                 $path = substr($path, strlen($prefix));
             } else
-                
+
                 // B.  if the input buffer begins with a prefix of "`/./`" or "`/.`",
                 //     where "`.`" is a complete path segment, then replace that
                 //     prefix with "`/`" in the input buffer; otherwise,
@@ -400,7 +402,7 @@ final class FileSystem
                 ) {
                     $path = '/' . substr($path, strlen($prefix));
                 } else
-                    
+
                     // C.  if the input buffer begins with a prefix of "/../" or "/..",
                     //     where "`..`" is a complete path segment, then replace that
                     //     prefix with "`/`" in the input buffer and remove the last
@@ -413,13 +415,13 @@ final class FileSystem
                         $path = '/' . substr($path, strlen($prefix));
                         $output = substr($output, 0, strrpos($output, '/'));
                     } else
-                        
+
                         // D.  if the input buffer consists only of "." or "..", then remove
                         //     that from the input buffer; otherwise,
                         if ($path == '.' || $path == '..') {
                             $path = '';
                         } else
-                            
+
                             // E.  move the first path segment in the input buffer to the end of
                             //     the output buffer, including the initial "/" character (if
                             //     any) and any subsequent characters up to, but not including,
@@ -432,12 +434,12 @@ final class FileSystem
                             $path = (string) substr($path, $pos);
                         }
         }
-        
+
         // 3.  Finally, the output buffer is returned as the result of remove_dot_segments.
         return str_replace("/", $separator, $output);
     }
-    
-    
-    
-    
+
+
+
+
 }

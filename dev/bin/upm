@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
-#PROJECT_DIR=$(realpath "$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"/../..)
-#BIN_TARGET="$PROJECT_DIR/bin/upm.php"
-#COMPOSER_RUNTIME_BIN_DIR="$PROJECT_DIR/vendor/bin"
 
-php "$PROJECT_DIR/dev/bin/.upm/upm.php" --ansi "$@"
+PROJECT_DIR=$(realpath "$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"/../..)
+DEV_BIN_DIR=$PROJECT_DIR/dev/bin
+
+if [ ! -d "$PROJECT_DIR"/vendor ]
+then
+    (cd "$PROJECT_DIR" && composer update)
+fi
+
+php "$DEV_BIN_DIR"/.upm/upm.php --ansi "$@"

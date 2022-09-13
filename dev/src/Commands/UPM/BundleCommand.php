@@ -1,4 +1,4 @@
-<?php /** @noinspection PhpUnused */
+<?php
 declare(strict_types=1);
 
 namespace UCRM\Plugins\Commands\UPM;
@@ -19,8 +19,6 @@ use UCRM\Plugins\Support\FileSystem;
  */
 final class BundleCommand extends PluginSpecificCommand
 {
-
-
     /**
      * @inheritDoc
      */
@@ -30,12 +28,10 @@ final class BundleCommand extends PluginSpecificCommand
             ->setName("bundle")
             ->setDescription("Bundles the specified UCRM plugin")
             ->addArgument("name", InputArgument::REQUIRED, "The name of the plugin");
-
    }
 
     /**
      * @inheritDoc
-     *
      */
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
@@ -53,6 +49,7 @@ final class BundleCommand extends PluginSpecificCommand
 
         $uri = FileSystem::uri(getcwd()."/$this->name.zip");
         $this->io->writeln($uri);
+        //$this->io->writeln(getcwd()."/$this->name.zip");
 
         $this->afterExecute($input, $output);
 

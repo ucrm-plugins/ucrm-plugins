@@ -1,37 +1,44 @@
 {
-
     "terminal.integrated.profiles.windows": {
         "Git Bash": {
             "source": "Git Bash",
-            "args": [ "--rcfile", ".vscode/.bashrc" ],
+            "args": [
+                "--rcfile",
+                ".bashrc"
+            ],
+            "icon": "terminal-bash"
+        },
+        "SSH": {
+            "source": "Git Bash",
+            "args": [
+                "-c",
+                "./dev/bin/vssh"
+            ],
             "icon": "terminal-bash"
         }
     },
     "terminal.integrated.defaultProfile.windows": "Git Bash",
-
     //
     // EDITOR
     //
     "workbench.colorTheme": "Default Dark+",
     "explorer.compactFolders": false,
-
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
     //
     // GIT
     //
     "git.confirmSync": false,
     "git.autofetch": true,
-
     //
     // PHP Debug
     //
     "php.debug.executablePath": "/usr/bin/php",
     "php.debug.ideKey": "VSCODE",
-
     //
     // COMPOSER
     //
     "composer.executablePath": "/usr/bin/composer",
-
     //
     // INTELIPHENSE
     //
@@ -118,7 +125,7 @@
     "intelephense.format.enable": true,
     "intelephense.completion.triggerParameterHints": true,
     "intelephense.completion.insertUseDeclaration": true,
-    "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true,
+    "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": false,
     "intelephense.trace.server": "messages",
     "intelephense.files.exclude": [
         "**/.git/**",
@@ -137,8 +144,5 @@
         "_ide_helper.php",
         "_ide_helper_models"
     ],
-
-
-
-
+    "intelephense.format.braces": "allman",
 }

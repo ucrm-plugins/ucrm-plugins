@@ -1,0 +1,21 @@
+<component name="ProjectDictionaryState">
+  <dictionary name="bash">
+    <words>
+      <w>MSYS_NO_PATHCONV</w>
+      <w>dearmor</w>
+      <w>dotglob</w>
+      <w>fuser</w>
+      <w>inet</w>
+      <w>libsqlite</w>
+      <w>mkcert</w>
+      <w>mkdir</w>
+      <w>noninteractive</w>
+      <w>nproc</w>
+      <w>readlink</w>
+      <w>realpath</w>
+      <w>runuser</w>
+      <w>shopt</w>
+      <w>usermod</w>
+    </words>
+  </dictionary>
+</component>

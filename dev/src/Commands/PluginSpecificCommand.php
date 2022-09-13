@@ -7,6 +7,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use UCRM\Plugins\Commands\Exceptions\PluginInvalidNameException;
 use UCRM\Plugins\Support\FileSystem;
 
 /**
@@ -22,7 +23,10 @@ abstract class PluginSpecificCommand extends BaseCommand
 
     protected string $name;
 
-
+    /**
+     * @inheritDoc
+     *
+     */
     protected function beforeExecute(InputInterface $input, OutputInterface $output): void
     {
         parent::beforeExecute($input, $output);
@@ -30,12 +34,8 @@ abstract class PluginSpecificCommand extends BaseCommand
         $this->name = $input->getArgument("name");
 
         if (!preg_match(self::NAMING_PATTERN, $this->name))
-            $this->error("The Plugin's name is invalid, please adhere to ".self::NAMING_PATTERN, TRUE);
-
-        if (file_exists($this->name) && is_dir($this->name))
-            $this->chdir("$this->cwd/$this->name");
-
-
+            //throw new PluginInvalidNameException("The Plugin's name should adhere to ".self::NAMING_PATTERN);
+            $this->error("The Plugin's name should adhere to ".self::NAMING_PATTERN, TRUE);
 
     }
 

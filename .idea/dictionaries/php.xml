@@ -1,0 +1,34 @@
+<component name="ProjectDictionaryState">
+    <dictionary name="php">
+        <words>
+            <w>autoload</w>
+            <w>chdir</w>
+            <w>friendsofphp</w>
+            <w>getcwd</w>
+            <w>getenv</w>
+            <w>intval</w>
+            <w>ltrim</w>
+            <w>mbstring</w>
+            <w>ondrej</w>
+            <w>opis</w>
+            <w>passthru</w>
+            <w>pathinfo</w>
+            <w>phpunit</w>
+            <w>preg</w>
+            <w>robo</w>
+            <w>rtrim</w>
+            <w>scandir</w>
+            <w>setenv</w>
+            <w>simplexml</w>
+            <w>sprintf</w>
+            <w>stripos</w>
+            <w>strlen</w>
+            <w>strpos</w>
+            <w>strrpos</w>
+            <w>strtoupper</w>
+            <w>symfony</w>
+            <w>usleep</w>
+            <w>xdebug</w>
+        </words>
+    </dictionary>
+</component>

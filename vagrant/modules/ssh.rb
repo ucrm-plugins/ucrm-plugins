@@ -24,22 +24,26 @@ module SSH
         `vagrant ssh-config`
     end
 
-    def SSH.updateConfig(host = nil, name = nil, user = nil, port = nil)
+    def SSH.updateConfig(host = nil, alts = nil, name = nil, user = nil, port = nil) #, path = "~/")
         file = "#{SSH.sshPath()}/config"
         info = SSH.sshInfo().gsub(/([\r?\n]){2,}/, '\1')
 
         # Modify the config as specified...
         if info.match(/^Host (.*)$/)
             host ||= info.match(/^Host (.*)$/).captures[0]
+            alts ||= ""
             name ||= info.match(/^  HostName (.*)$/).captures[0]
             user ||= info.match(/^  User (.*)$/).captures[0]
             port ||= info.match(/^  Port (.*)$/).captures[0]
 
             info = info
-                .gsub(/^Host (.*)$/, "Host #{host}")
+                .gsub(/^Host (.*)$/, "Host #{host} #{alts}")
                 .gsub(/^  HostName (.*)$/, "  HostName #{name}")
                 .gsub(/^  User (.*)$/, "  User #{user}")
                 .gsub(/^  Port (.*)$/, "  Port #{port}")
+
+            #info += "  RequestTTY force"
+            #info += "  RemoteCommand cd #{path} && bash -l"
         end
 
         #puts host, name, user, port

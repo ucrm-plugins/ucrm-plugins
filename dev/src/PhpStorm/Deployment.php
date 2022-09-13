@@ -11,7 +11,7 @@ class Deployment extends XmlConfigManager
     {
         return new self(self::getPath($file));
     }
-    
+
     /**
      * @param string $name
      *
@@ -21,35 +21,46 @@ class Deployment extends XmlConfigManager
     //{
     //    return $this->first($this->xpathUntilFound("/project/component/serverData/paths", "[@name='$name']", "[1]"));
     //}
-    
-    
-    
+
+
+    /**
+     * Gets the default deployment server name.
+     *
+     * @return string|null
+     */
     public function getDefaultServerName(): ?string
     {
         $component = $this->xml->xpath("/project/component");
-        
+
         if ($component === FALSE || $component === NULL)
             return NULL;
-        
+
         return $component[0]->attributes()["serverName"];
     }
-    
+
+    /**
+     * Adds a path mapping to the
+     *
+     * @param string $plugin
+     *
+     * @return void
+     */
     public function addPathMapping(string $plugin)
     {
-        $component = $this->xpathFirst("/project/component[@name='PublishConfigData'");
-    
+        $component = $this->xpathFirst("/project/component[@name='PublishConfigData']");
+
         print_r($component);
-        
+
         //if ($component === NULL || !array_key_exists("serverName", $component->attributes()))
         {
-        
+
         }
-        
-    
-    
+
+
+
     }
-    
-    
+
+
 
 
 

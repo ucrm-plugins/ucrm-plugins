@@ -1,9 +1,15 @@
+dearmor
 dotglob
 fuser
 inet
+libsqlite
 mkcert
 mkdir
 MSYS_NO_PATHCONV
+noninteractive
+nproc
+readlink
 realpath
+runuser
 shopt
 usermod
