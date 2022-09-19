@@ -1,0 +1,7 @@
+bind-addr: 0.0.0.0:8080
+auth: none
+cert: certs/code-server.crt
+cert-key: certs/code-server.key
+user-data-dir: .local/share/code-server
+#ignore-last-opened: true
+disable-telemetry: true

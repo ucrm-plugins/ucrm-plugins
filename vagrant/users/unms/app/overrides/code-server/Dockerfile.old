@@ -1,0 +1,57 @@
+FROM ubuntu:20.04
+
+##ENV USER_DIR=/home/coder
+#ENV CONF_DIR=${USER_DIR}/.config/code-server
+#ENV DATA_DIR=${USER_DIR}/.local/share/code-server
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y update
+
+RUN DEBIAN_FRONTEND=noninteractive apt-get -y install apt-utils curl
+
+RUN curl -fsSL https://code-server.dev/install.sh | bash
+
+  #-o ${USER_DIR}/install.sh
+
+#RUN bash ${USER_DIR}/install.sh
+
+## shellcheck disable=SC2206
+## Parse provided extensions
+#EXTS=(${EXTENSIONS//[\[,\]\"]/})
+#
+#if [ ${#EXTS[@]} -ne 0 ]; then
+#    ARGS="--extensions-dir $DATA_DIR/extensions --force"
+#    for i in "${EXTS[@]}"; do
+#        ARGS="$ARGS --install-extension $i"
+#    done
+#
+#    # shellcheck disable=SC2086
+#    # Attempt to install any requested extensions...
+#    code-server $ARGS
+#fi
+
+#RUN rm -rf /var/lib/apt/lists/*
+
+RUN useradd -d /home/coder -s /bin/bash -G root coder
+RUN mkdir -p /home/coder && chown coder:coder -R /home/coder
+
+USER coder
+
+#RUN chown coder:coder -R ${USER_DIR}
+
+RUN mkdir -p ~/.config/code-server\
+ && mkdir -p ~/.local/share/code-server/{Machine,extensions}\
+ && mkdir -p ~/project
+
+COPY config.yaml ~/.config/code-server/config.yaml
+COPY settings.json ~/.local/share/code-server/Machine/settings.json
+COPY coder.json ~/.local/share/code-server/coder.json
+
+RUN chown coder:coder -R ~/
+
+WORKDIR ~/project
+
+EXPOSE 8080
+
+
+ENTRYPOINT [ "/usr/bin/bash" ]
+CMD [ "/usr/bin/code-server", "--config", "~/.config/code-server/config.yaml", "~/project" ]

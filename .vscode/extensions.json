@@ -8,7 +8,6 @@
         "bmewburn.vscode-intelephense-client",
         "ionutvmi.path-autocomplete",
         "neilbrayfield.php-docblocker",
-        "marcostazi.vs-code-vagrantfile",
-        "slevesque.vscode-zipexplorer"
+        "marcostazi.vs-code-vagrantfile"
     ]
 }

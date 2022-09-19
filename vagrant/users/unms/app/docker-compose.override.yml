@@ -23,3 +23,23 @@ services:
         #    - /:/proxy
         #    - ./overrides/ucrm/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
         #    - ./overrides/ucrm/xdebug_params:/etc/nginx/xdebug_params
+#    code:
+#        container_name: code-server
+#        image: ubnt/code:latest
+#        build:
+#            context: ./overrides/code-server
+#            dockerfile: Dockerfile
+#        networks:
+#            - public
+#        ports:
+#            - "8080:8080"
+#        environment:
+#            PROJECT_DIR: /src/ucrm-plugins
+#        volumes:
+#            - /src/ucrm-plugins/vagrant/users/vagrant/.config:/home/coder/.config
+#            - /src/ucrm-plugins/vagrant/users/vagrant/.local:/home/coder/.local
+#            - /src/ucrm-plugins:/src/ucrm-plugins
+#            - /src/ucrm-plugins/vagrant/certs/uisp.crt:/home/coder/certs/code-server.crt:ro
+#            - /src/ucrm-plugins/vagrant/certs/uisp.key:/home/coder/certs/code-server.key:ro
+#            #- /src/ucrm-plugins/vagrant/users/vagrant/.config:/home/coder/.config
+#            #- /src/ucrm-plugins/vagrant/users/vagrant/.local:/home/coder/.local
