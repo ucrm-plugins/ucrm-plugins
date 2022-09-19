@@ -223,7 +223,7 @@ final class ValidateCommand extends PluginRequiredCommand
             //$array2 = (new JSON($zipManifest))->getDecoded();
 
             //$diff = Diff::json(file_get_contents("src/manifest.json"), $zipManifest);
-            $diff = JsonDiff::fromFiles()
+            //$diff = JsonDiff::fromFiles();
 
             echo $diff;
 

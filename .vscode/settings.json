@@ -12,7 +12,7 @@
             "source": "Git Bash",
             "args": [
                 "-c",
-                "./dev/bin/vssh"
+                "./bin/vssh"
             ],
             "icon": "terminal-bash"
         }

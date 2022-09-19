@@ -12,18 +12,17 @@ PROJECT_DIR=$(realpath "$( cd -- "$( dirname -- "$(readlink -f "${BASH_SOURCE[0]
 
 # NOTE: The ENVIRONMENT should already be set on the guest (via /etc/environment), so this is the best way to determine
 # whether we're on the host.  It should work with any host (i.e. Windows, Darwin, Linux, etc)!
-ENVIRONMENT=${ENVIRONMENT:-host}
+VIRTUAL_ENV=${VIRTUAL_ENV:-host}
 
 # Set any directories to be added to $PATH...
 pathadd "$(composer -n config --global home 2> /dev/null)"/vendor/bin
 pathadd "$(which npm 2> /dev/null)"/vendor/bin
 pathadd "$PROJECT_DIR"/vendor/bin
-pathadd "$PROJECT_DIR"/dev/vendor/bin
-pathadd "$PROJECT_DIR"/dev/bin
+pathadd "$PROJECT_DIR"/bin
 
 # Export the project directory for use in the terminal.
 export PROJECT_DIR=$PROJECT_DIR
-export ENVIRONMENT=$ENVIRONMENT
+export VIRTUAL_ENV=$VIRTUAL_ENV
 
 # shellcheck disable=SC2164
 cd "$PROJECT_DIR"

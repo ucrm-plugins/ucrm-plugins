@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# The command to execute when an extension matches!
+command=node
+
+# The list of all possible script extensions:
+extensions=(
+    .js
+    .es6
+    .jsx
+    .mjs
+)
+
+    # Set the default working directory, if one is not already set in the ENV.
+WORKING_DIR=${WORKING_DIR:-/usr/src/app}
+
+# This file will be copied to the same folder as the parent docker-entrypoint, so the path is the same!
+source docker-entrypoint

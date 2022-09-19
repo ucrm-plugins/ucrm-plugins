@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# The command to execute when an extension matches!
+command=node
+
+# The list of all possible script extensions:
+extensions=(
+    .php
+    .php3
+    .php4
+    .php5
+    .phtml
+)
+
+# Set the default working directory, if one is not already set in the ENV.
+WORKING_DIR=${WORKING_DIR:-/opt/project}
+
+# This file will be copied to the same folder as the parent docker-entrypoint, so the path is the same!
+source docker-entrypoint

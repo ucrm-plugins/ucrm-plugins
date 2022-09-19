@@ -268,8 +268,8 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
         trigger.ruby do |env, machine|
             SSH.setMachine(machine)
             SSH.updateConfig(BOX_HOSTNAME, DNS_ALIASES.join(" "), BOX_ADDRESS, "vagrant", "22")
-            #SSH.updateScript("#{HOST_PROJECT_DIR}/dev/bin/vssh", "SSH_PATH", "~/.ssh/config")
-            SSH.updateScript("#{HOST_PROJECT_DIR}/dev/bin/vssh", "SSH_HOST", BOX_HOSTNAME)
+            #SSH.updateScript("#{HOST_PROJECT_DIR}/bin/vssh", "SSH_PATH", "~/.ssh/config")
+            SSH.updateScript("#{HOST_PROJECT_DIR}/bin/vssh", "SSH_HOST", BOX_HOSTNAME)
 
             File.open("#{HOST_VAGRANT_DIR}/build_version", "wb") { |f| f.puts UISP_VERSION }
         end
