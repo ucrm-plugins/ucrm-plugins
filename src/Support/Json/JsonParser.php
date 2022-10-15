@@ -7,12 +7,12 @@ namespace UCRM\Plugins\Support;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
 
 /**
- *
+ * JsonParser
  *
  * @author Ryan Spaeth <rspaeth@spaethtech.com>
  * @copyright 2022 - Spaeth Technologies Inc.
  */
-final class JSON
+class JsonParser
 {
     private const REGEX_COMMENT_REPLACE = '#"comment-(\d+)"\s*:\s*"([^"]*)",?#';
     private const REGEX_COMMENT_LINE    = '#^\s*//([^\n]*)$#';
@@ -21,38 +21,65 @@ final class JSON
 
     private const DEFAULT_ENCODE_FLAGS  = JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES;
 
-    private string $encoded;
-    private array  $decoded;
+    /**
+     * @var array|object
+     */
+    private $decoded;
 
     /**
-     *
-     *
-     * @param string $json
-     * @param boolean $decode
+     * @var false|string
      */
-    public function __construct(string $json)
-    {
-        $this->decoded = self::decode($json, true);
-    }
+    //private $json;
 
     /**
-     * Reads a JSON file
+     * Constructor
      *
-     * @param string $path
-     * @return self
+     * Loads and/or decodes the specified JSON string or file.
+     *
+     * @param string $jsonOrPath Either a JSON string or path to a JSON file.
      */
-    public static function load(string $path): self
+    public function __construct(string $jsonOrPath, ?bool $associative = null)
     {
-        if (!file_exists($path))
-            throw new FileNotFoundException("Could not open file $path");
+        // IF the provided string is valid JSON...
+        if (self::isJson($jsonOrPath))
+        {
+            // ...THEN, decode it!
+            $this->decoded = self::decode($jsonOrPath, $associative);
+            //$this->json = $jsonOrPath;
+        }
+        else
+        {
+            // ...OTHERWISE, assume it is a path, so check its existence.
 
-        return new self(file_get_contents($path));
+            if (!file_exists($jsonOrPath))
+                throw new FileNotFoundException("Could not open file $jsonOrPath", 1);
+
+            $this->decoded = self::decode(file_get_contents($jsonOrPath), $associative);
+            //$this->json = file_get_contents($jsonOrPath);
+        }
     }
 
-    public function getDecoded(): array
+
+    private static function isJson(string $string): bool
+    {
+        json_decode($string);
+        return json_last_error() === JSON_ERROR_NONE;
+    }
+
+    public function decoded()
     {
         return $this->decoded;
     }
+
+//    public function asArray(): array
+//    {
+//        return ($this->decoded = self::decode($this->json, true));
+//    }
+//
+//    public function asObject(): object
+//    {
+//        return ($this->decoded = self::decode($this->json, false));
+//    }
 
     /**
      *
@@ -64,33 +91,64 @@ final class JSON
      */
     public function save(string $path, int $flags = self::DEFAULT_ENCODE_FLAGS, int $depth = 512): self
     {
-        $this->encoded = json_encode($this->decoded, $flags, $depth);
-        $this->encoded = self::replaceComments($this->encoded);
+        $encoded = json_encode($this->decoded, $flags, $depth);
+        $encoded = self::replaceComments($encoded);
 
-        file_put_contents($path, $this->encoded);
+        file_put_contents($path, $encoded);
 
         return $this;
     }
 
-    public function get(...$nodes)
+    /**
+     * @param string|int $key
+     * @param mixed $default
+     * @param string $separator
+     *
+     * @return mixed
+     */
+    public function get($key, $default = null, string $separator = ".")
     {
-        $current = $this->decoded;
+        //print_r($this->decoded);
+        print_r($this->decoded->information->version);
+        exit;
 
-        foreach ($nodes as $node)
-        {
-            var_dump(array_keys($current));
-        }
-
-        return $current;
+        return ArrayHelper::get($this->decoded, $key, $default, $separator);
     }
 
     /**
-     * @param JSON $json
+     * @param string|int $key
+     * @param mixed $value
+     * @param string $separator
+     *
+     * @return JsonParser
+     */
+    public function set($key, $value, string $separator = "."): self
+    {
+        $this->decoded = ArrayHelper::set($this->decoded, $key, $value, $separator);
+        return $this;
+    }
+
+//    public function get(...$nodes)
+//    {
+//        $current = $this->decoded;
+//
+//        foreach ($nodes as $node)
+//        {
+//            var_dump(array_keys($current));
+//        }
+//
+//        return $current;
+//    }
+
+
+
+    /**
+     * @param JsonParser $json
      * @param bool $ignoreComments
      *
      * @return array
      */
-    public function diff(JSON $json, bool $ignoreComments = TRUE): array
+    public function diff(JsonParser $json, bool $ignoreComments = TRUE): array
     {
         return Diff::array($this->getDecoded(), $json->getDecoded());
     }
@@ -106,11 +164,11 @@ final class JSON
      * @param integer $flags
      * @return mixed
      */
-    public static function decode(string $json, int $depth = 512, int $flags = 0)
+    public static function decode(string $json, ?bool $associative = null, int $depth = 512, int $flags = 0)
     {
         $json = self::removeComments($json);
         $json = self::removeTrailingCommas($json);
-        $json = json_decode($json, TRUE, $depth, $flags);
+        $json = json_decode($json, $associative, $depth, $flags);
 
         if(json_last_error() !== JSON_ERROR_NONE)
             return FALSE;
@@ -169,9 +227,7 @@ final class JSON
 
     private static function replaceComments(string $json): string
     {
-        $i = 0;
-        $json = preg_replace(self::REGEX_COMMENT_REPLACE, "//$2", $json);
-return $json;
+        return preg_replace(self::REGEX_COMMENT_REPLACE, "//$2", $json);
     }
 
     private static function removeTrailingCommas(string $json): string

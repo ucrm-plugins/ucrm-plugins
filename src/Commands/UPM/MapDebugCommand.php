@@ -28,10 +28,11 @@ class PhpStormMapDebugCommand extends PluginRequiredCommand
      */
     protected function configure() : void
     {
+        parent::configure();
+
         $this
             ->setName("phpstorm:map-debug")
-            ->setDescription("Creates server path mappings for Plugin debugging")
-            ->addArgument("name", InputArgument::REQUIRED, "The name of the plugin");
+            ->setDescription("Creates server path mappings for Plugin debugging");
 
     }
 
@@ -40,7 +41,7 @@ class PhpStormMapDebugCommand extends PluginRequiredCommand
      *
      * @throws Exception
      */
-    protected function onExecute(InputInterface $input, OutputInterface $output) : int
+    protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         // Get the hostname of the VM from the config file.
         if (file_exists($box = FileSystem::path(PROJECT_DIR."/vagrant/env/box.conf")))
@@ -59,7 +60,6 @@ class PhpStormMapDebugCommand extends PluginRequiredCommand
             $this->error("File .idea/php.xml could not be found!", TRUE);
 
         $project = simplexml_load_file($php);
-
 
 
 
