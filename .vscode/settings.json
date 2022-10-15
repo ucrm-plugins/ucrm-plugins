@@ -8,7 +8,7 @@
             ],
             "icon": "terminal-bash"
         },
-        "SSH": {
+        "SSH (Vagrant)": {
             "source": "Git Bash",
             "args": [
                 "-c",
@@ -31,118 +31,33 @@
     "git.confirmSync": false,
     "git.autofetch": true,
     //
-    // PHP Debug
+    // PHP
     //
-    "php.debug.executablePath": "/usr/bin/php",
+    "php.debug.executablePath": "C:/dev/lib/php/7.4.27-nts/php.exe",
     "php.debug.ideKey": "VSCODE",
-    //
-    // COMPOSER
-    //
-    "composer.executablePath": "/usr/bin/composer",
-    //
-    // INTELIPHENSE
-    //
-    "intelephense.environment.phpVersion": "7.4",
-    "intelephense.files.associations": [
-        "*.php",
-        "*.phtml"
+    "php.format.codeStyle": "PSR-2",
+    "php.problems.exclude": {
+        // NOTE: For now, we are going to exclude the following paths from checking for ALL problems.  Later, we can fix
+        // these issues, leave them to the individual developers, or simply leave these exclusions.
+        "plugins/argentina-afip-invoices": true,
+        "plugins/backup-sync-dropbox": true,
+        "plugins/fio_cz": true,
+        "plugins/invoice-csv-export": true,
+        "plugins/mkt-queue-sync": true,
+        "plugins/quickbooks-online": true,
+        "plugins/revenue-report": true,
+        "plugins/routeros-packet-manager": true,
+        "plugins/routeros-suspension": true,
+        "plugins/sms-twilio": true,
+        "plugins/ucrm-client-signup": true,
+        // Ignore any Plugin specific vendor folders.
+        "plugins/**/vendor": true,
+    },
+    "php.stubs": [
+        "*",
+        "xdebug"
     ],
-    "intelephense.stubs": [
-        "apache",
-        "bcmath",
-        "bz2",
-        "calendar",
-        "com_dotnet",
-        "Core",
-        "ctype",
-        "curl",
-        "date",
-        "dba",
-        "dom",
-        "enchant",
-        "exif",
-        "FFI",
-        "fileinfo",
-        "filter",
-        "fpm",
-        "ftp",
-        "gd",
-        "gettext",
-        "gmp",
-        "hash",
-        "iconv",
-        "imap",
-        "intl",
-        "json",
-        "ldap",
-        "libxml",
-        "mbstring",
-        "meta",
-        "mysqli",
-        "oci8",
-        "odbc",
-        "openssl",
-        "pcntl",
-        "pcre",
-        "PDO",
-        "pdo_ibm",
-        "pdo_mysql",
-        "pdo_pgsql",
-        "pdo_sqlite",
-        "pgsql",
-        "Phar",
-        "posix",
-        "pspell",
-        "readline",
-        "Reflection",
-        "session",
-        "shmop",
-        "SimpleXML",
-        "snmp",
-        "soap",
-        "sockets",
-        "sodium",
-        "SPL",
-        "sqlite3",
-        "standard",
-        "superglobals",
-        "sysvmsg",
-        "sysvsem",
-        "sysvshm",
-        "tidy",
-        "tokenizer",
-        "xdebug",
-        "xml",
-        "xmlreader",
-        "xmlrpc",
-        "xmlwriter",
-        "xsl",
-        "Zend OPcache",
-        "zip",
-        "zlib"
-    ],
-    "intelephense.telemetry.enabled": false,
-    "intelephense.format.enable": true,
-    "intelephense.completion.triggerParameterHints": true,
-    "intelephense.completion.insertUseDeclaration": true,
-    "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": false,
-    "intelephense.trace.server": "messages",
-    "intelephense.files.exclude": [
-        "**/.git/**",
-        "**/.svn/**",
-        "**/.hg/**",
-        "**/CVS/**",
-        "**/.DS_Store/**",
-        "**/node_modules/**",
-        "**/bower_components/**",
-        "**/storage",
-        "**/storage/**",
-        "**/tests/**",
-        "**/resources/views/**",
-        "**/database/migrations/**",
-        "**/storage/framework/views/**",
-        "_ide_helper.php",
-        "_ide_helper_models"
-    ],
-    "intelephense.format.braces": "allman",
+    "php.docblock.functionSnippet": {
+        "@author": "${name:Ryan}"
+    },
 }

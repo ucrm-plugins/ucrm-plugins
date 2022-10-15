@@ -1,45 +1,75 @@
-<?php /** @noinspection PhpUnused */
+<?php
 declare(strict_types=1);
 
-namespace UCRM\Plugins\Robo\Tasks\Bundler;
+namespace UCRM\Plugins\Robo\Tasks\Plugin;
 
 use Robo\Contract\TaskInterface;
 use Robo\Result;
+use Robo\Task\BaseTask;
 use UCRM\Plugins\Support\FileSystem;
+use UCRM\Plugins\Support\Json\JsonParser;
 
-class Bundle implements TaskInterface
+class Bundle extends BaseTask implements TaskInterface
 {
+    protected string $folder;
     protected string $plugin;
-    protected string $output;
+    protected string $source;
 
-    public function __construct(string $plugin, ?string $output = null)
+    /**
+     * Summary of __construct
+     *
+     * @param string $plugin
+     * @author Ryan
+     */
+    public function __construct(string $plugin)
     {
-        $this->plugin = FileSystem::path($plugin);
-        $this->output = FileSystem::path($output);
+        $this->plugin = $plugin;
+        $this->folder = FileSystem::path(PROJECT_DIR . "/plugins/$this->plugin");
+        $this->source = FileSystem::path("$this->folder/src");
+    }
+
+    public function version(?string $version = null): self
+    {
+        if (!$version) {
+            //            $manifest = ($parser = new JsonParser($path = FileSystem::path("$this->source/manifest.json")))->decoded();
+//            $version = $manifest->information->version;
+//            print_r("$version\n");
+//            //$version = $manifest->information->version = "1.0.2";
+//            //print_r("$version\n");
+//            $parser->save($path);
+
+            $manifest = ($parser = new JsonParser($path = FileSystem::path("$this->source/manifest.json")))
+                ->generate("UCRM\\Plugins", "Manifest", FileSystem::path(PROJECT_DIR . "/src"));
+
+            exit;
+            $version = $manifest->information->version;
+
+
+        }
+
+
+
+        return $this;
     }
 
     public function run(): Result
     {
-        $src = FileSystem::path(PROJECT_DIR."/plugins/$this->plugin/src");
+        //$src = FileSystem::path(PROJECT_DIR."/plugins/$this->plugin/src");
 
-        if (!file_exists($src) || !is_dir($src))
+
+
+        exit;
+
+        if (!file_exists($this->source) || !is_dir($this->source))
             return Result::error($this, "The specified Plugin does not seem to have a src folder!");
 
-        chdir($src);
+        chdir($this->source);
 
-        if (file_exists("composer.json"))
-        {
-            exec("composer install --ansi");
-            exec("composer archive --ansi --file $this->plugin");
+        if (file_exists("composer.json")) {
+            passthru("composer install --ansi");
+            passthru("composer archive --ansi --file $this->plugin");
         }
 
-        echo $this->output . "\n";
-        $uri = FileSystem::uri("$this->output/$this->plugin.zip");
-        $this->io->writeln($uri);
-        //$this->io->writeln(getcwd()."/$this->plugin.zip");
-
-        //$this->afterExecute($input, $output);
-
-        return self::SUCCESS;
+        return Result::success($this);
     }
 }

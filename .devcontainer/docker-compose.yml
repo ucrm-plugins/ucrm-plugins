@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+    uisp:
+        image: spaethtech/uisp
+        container_name: uisp
+        build:
+            context: .
+            #dockerfile: Dockerfile
+        ports:
+            - "8080:80"
+            - "8443:443"
+        privileged: true
+        volumes:
+            - \\\\\$wsl\\Ubuntu-20.04\\sys\\fs\\cgroup:/sys/fs/cgroup:ro
+            - /var/run/docker.sock:/var/run/docker.sock
+            - ..:/src/ucrm-plugins

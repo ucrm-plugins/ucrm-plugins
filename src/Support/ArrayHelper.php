@@ -8,6 +8,26 @@ use Closure;
 
 class ArrayHelper
 {
+//    protected array $array;
+//    protected string $delimiter;
+//
+//    /**
+//     * @param array $array
+//     * @param string $delimiter
+//     */
+//    public function __construct(array $array, string $delimiter = ".")
+//    {
+//        $this->array = $array;
+//        $this->delimiter = $delimiter;
+//    }
+//
+//    public static function convert(array $array, string $delimiter = "."): self
+//    {
+//        return new ArrayHelper($array, $delimiter);
+//    }
+//
+
+
     /**
      * Get an item from an array using "dot" notation.
      *
@@ -24,7 +44,7 @@ class ArrayHelper
             return value($default);
         }
 
-        
+
         if ($key === "") {
             return $array;
         }

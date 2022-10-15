@@ -1,0 +1,8 @@
+setopt
+curlopt
+verifypeer
+returntransfer
+progressfunction
+noprogress
+followlocation
+errno

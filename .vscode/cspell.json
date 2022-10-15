@@ -1,9 +1,16 @@
 {
+    "words": [
+        "Nette"
+    ],
     "gitignoreRoot": "../",
     "useGitignore": true,
+    "ignorePaths": [
+        "composer.*"
+    ],
     "dictionaries": [
         "bash",
         "cmder",
+        "curl",
         "docker",
         "nginx",
         "php",
@@ -25,6 +32,12 @@
         {
             "name": "cmder",
             "path": ".cspell/cmder.dic",
+            "addWords": false,
+            "scope": "workspace"
+        },
+        {
+            "name": "curl",
+            "path": ".cspell/curl.dic",
             "addWords": false,
             "scope": "workspace"
         },

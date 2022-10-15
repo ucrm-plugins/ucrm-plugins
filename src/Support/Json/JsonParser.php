@@ -2,9 +2,16 @@
 
 declare(strict_types=1);
 
-namespace UCRM\Plugins\Support;
+namespace UCRM\Plugins\Support\Json;
 
+use Nette\PhpGenerator\ClassType;
+use Nette\PhpGenerator\PhpNamespace;
+use DateTime;
+use Nette\PhpGenerator\Property;
 use Symfony\Component\Filesystem\Exception\FileNotFoundException;
+use UCRM\Plugins\Support\ArrayHelper;
+use UCRM\Plugins\Support\Diff;
+use UCRM\Plugins\Manifest;
 
 /**
  * JsonParser
@@ -27,9 +34,9 @@ class JsonParser
     private $decoded;
 
     /**
-     * @var false|string
+     * @var string
      */
-    //private $json;
+    private string $json;
 
     /**
      * Constructor
@@ -45,7 +52,7 @@ class JsonParser
         {
             // ...THEN, decode it!
             $this->decoded = self::decode($jsonOrPath, $associative);
-            //$this->json = $jsonOrPath;
+            $this->json = $jsonOrPath;
         }
         else
         {
@@ -55,7 +62,7 @@ class JsonParser
                 throw new FileNotFoundException("Could not open file $jsonOrPath", 1);
 
             $this->decoded = self::decode(file_get_contents($jsonOrPath), $associative);
-            //$this->json = file_get_contents($jsonOrPath);
+            $this->json = file_get_contents($jsonOrPath);
         }
     }
 
@@ -80,6 +87,33 @@ class JsonParser
 //    {
 //        return ($this->decoded = self::decode($this->json, false));
 //    }
+
+    public function generate(string $namespace, string $class, string $dir): ?JsonObject
+    {
+        $fields = self::decode($this->json, true);
+        /** @var Manifest $object */
+        $object = new JsonObject($fields, $namespace, $class, $dir, function(Property &$property, string $class, string $key, $value): bool
+        {
+            if ($class === "UCRM\\Plugins\\Manifest\\Information\\UcrmVersionCompliancy" ||
+                $class === "UCRM\\Plugins\\Manifest\\Information\\UnmsVersionCompliancy")
+            {
+                if($key === "min" || $key === "max")
+                {
+                    $property->setType("string")->setNullable();
+                    return true;
+                }
+
+            }
+
+            return false;
+        });
+        //$object->information->ucrmVersionCompliancy->
+
+
+        return $object;
+    }
+
+
 
     /**
      *

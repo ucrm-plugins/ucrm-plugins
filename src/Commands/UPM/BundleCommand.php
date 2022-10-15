@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace UCRM\Plugins\Commands\UPM;
@@ -6,7 +7,7 @@ namespace UCRM\Plugins\Commands\UPM;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use UCRM\Plugins\Commands\PluginSpecificCommand;
+use UCRM\Plugins\Commands\PluginRequiredCommand;
 use UCRM\Plugins\Support\FileSystem;
 
 /**
@@ -17,43 +18,42 @@ use UCRM\Plugins\Support\FileSystem;
  *
  * @final
  */
-final class BundleCommand extends PluginSpecificCommand
+final class BundleCommand extends PluginRequiredCommand
 {
     /**
      * @inheritDoc
      */
-    protected function configure() : void
+    protected function configure(): void
     {
+        parent::configure();
+
         $this
             ->setName("bundle")
-            ->setDescription("Bundles the specified UCRM plugin")
-            ->addArgument("name", InputArgument::REQUIRED, "The name of the plugin");
-   }
+            ->setDescription("Bundles the specified UCRM plugin");
+    }
 
     /**
      * @inheritDoc
      */
-    protected function execute(InputInterface $input, OutputInterface $output) : int
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $this->beforeExecute($input, $output);
+        //$this->beforeExecute($input, $output);
+        $this->chdir("src");
 
-        chdir("src");
-
-        if (file_exists("composer.json"))
-        {
+        if (file_exists("composer.json")) {
             exec("composer install --ansi");
-            exec("composer archive --ansi --file $this->name");
+            exec("composer archive --ansi --file $this->plugin");
         }
 
-        chdir("..");
+        $this->chdir("..");
 
-        $uri = FileSystem::uri(getcwd()."/$this->name.zip");
+        echo $this->cwd . "\n";
+        $uri = FileSystem::uri($this->cwd . "/$this->plugin.zip");
         $this->io->writeln($uri);
-        //$this->io->writeln(getcwd()."/$this->name.zip");
+        //$this->io->writeln(getcwd()."/$this->plugin.zip");
 
-        $this->afterExecute($input, $output);
+        //$this->afterExecute($input, $output);
 
         return self::SUCCESS;
     }
-
 }

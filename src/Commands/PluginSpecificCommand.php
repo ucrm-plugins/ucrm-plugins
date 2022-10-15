@@ -1,10 +1,12 @@
-<?php /** @noinspection PhpUnused */
+<?php
+
 declare(strict_types=1);
 
 namespace UCRM\Plugins\Commands;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use UCRM\Plugins\Commands\Exceptions\PluginInvalidNameException;
@@ -21,7 +23,12 @@ abstract class PluginSpecificCommand extends BaseCommand
 {
     protected const NAMING_PATTERN = "/^[a-z][_a-z\d-]*$/";
 
-    protected string $name;
+    protected string $plugin;
+
+    protected function configure(): void
+    {
+        $this->addArgument("plugin", InputArgument::REQUIRED, "The name of the plugin");
+    }
 
     /**
      * @inheritDoc
@@ -31,13 +38,10 @@ abstract class PluginSpecificCommand extends BaseCommand
     {
         parent::beforeExecute($input, $output);
 
-        $this->name = $input->getArgument("name");
+        $this->plugin = $input->getArgument("plugin");
 
-        if (!preg_match(self::NAMING_PATTERN, $this->name))
+        if (!preg_match(self::NAMING_PATTERN, $this->plugin))
             //throw new PluginInvalidNameException("The Plugin's name should adhere to ".self::NAMING_PATTERN);
-            $this->error("The Plugin's name should adhere to ".self::NAMING_PATTERN, TRUE);
-
+            $this->error("The Plugin's name should adhere to " . self::NAMING_PATTERN, TRUE);
     }
-
-
 }

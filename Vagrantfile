@@ -24,7 +24,7 @@ BOX_HOSTNAME        = "uisp"
 BOX_ADDRESS         = "192.168.56.10"
 DNS_ALIASES         = [ "#{BOX_HOSTNAME}.dev" ]
 ROOT_PASSWORD       = "vagrant"
-UISP_VERSION        = "1.4.7"
+UISP_VERSION        = "1.4.8"
 UCRM_VERSION        = UISP.getUcrmVersion(UISP_VERSION)
 
 # ----------------------------------------------------------------------------------------------------------------------
@@ -163,7 +163,7 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
     config.vm.provision :postgres,
         type: :shell,
         keep_color: true,
-        run: :never,
+        #run: :never,
         path: "#{PROVISIONERS_DIR}/postgres.sh",
         env: {}
 
@@ -190,6 +190,13 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
         keep_color: true,
         #run: :never,
         path: "#{PROVISIONERS_DIR}/permissions.sh",
+        env: {}
+
+    config.vm.provision :fleet,
+        type: :shell,
+        keep_color: true,
+        run: :never,
+        path: "#{PROVISIONERS_DIR}/fleet.sh",
         env: {}
 
     # Provision Code Server...

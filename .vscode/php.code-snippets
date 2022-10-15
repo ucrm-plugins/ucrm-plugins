@@ -1,0 +1,9 @@
+{
+    "Horizontal Rule": {
+        "prefix": "//-",
+        "body": [
+            "// -----------------------------------------------------------------------------------------------------------------"
+        ],
+        "description": "Creates a horizontal rule indented one time."
+    }
+}

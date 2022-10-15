@@ -15,10 +15,33 @@ use UCRM\Plugins\Support\FileSystem;
  */
 class RoboFile extends Tasks
 {
+    use \UCRM\Plugins\Robo\Tasks;
+
+
     public function hello(ConsoleIO $io, $world)
     {
         $io->say("Hello, $world");
+
+
+
     }
+
+    /**
+     * @command bundle
+     *
+     * @param string $plugin The name of the Plugin
+     *
+     * @return void
+     */
+    public function bundle(ConsoleIO $io, string $plugin)
+    {
+        $this->taskPluginBundle($plugin)->version()->run();
+
+
+
+    }
+
+
 
     /**
      *

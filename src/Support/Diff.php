@@ -1,4 +1,4 @@
-<?php /** @noinspection PhpUnused */
+<?php
 declare(strict_types=1);
 
 namespace UCRM\Plugins\Support;
@@ -28,7 +28,7 @@ abstract class Diff
         $this->diff = self::difference($array1, $array2);
     }
 
-//    /**
+    //    /**
 //     * @param array $array1
 //     * @param array $array2
 //     *
@@ -63,7 +63,7 @@ abstract class Diff
 //        return new TextDiff($text1, $text2, $separator);
 //    }
 
-//    /**
+    //    /**
 //     * @throws Exception
 //     */
 //    public static function jsonFiles(string $file1, string $file2): self
@@ -79,7 +79,7 @@ abstract class Diff
 //        return TextDiff::fromFiles($file1, $file2);
 //    }
 
-//    /**
+    //    /**
 //     * @throws Exception
 //     */
 //    protected static function fromFiles(string $file1, string $file2): self
@@ -115,6 +115,7 @@ abstract class Diff
             return $aReturn;
         }
 
+        // cspell:ignore mhitza
         // as per @mhitza at https://stackoverflow.com/a/3877494/19746
         foreach ($array1 as $mKey => $mValue) {
             if (array_key_exists($mKey, $array2)) {
@@ -123,10 +124,12 @@ abstract class Diff
                     if (count($aRecursiveDiff)) {
                         $aReturn[$mKey] = $aRecursiveDiff;
                     }
-                } elseif ($mValue !== $array2[$mKey]) {
+                }
+                elseif ($mValue !== $array2[$mKey]) {
                     $aReturn[$mKey] = $mValue;
                 }
-            } else {
+            }
+            else {
                 $aReturn[$mKey] = $mValue;
             }
         }
@@ -137,10 +140,12 @@ abstract class Diff
                     if (count($aRecursiveDiff)) {
                         $aReturn[$mKey] = $aRecursiveDiff;
                     }
-                } elseif ($mValue !== $array1[$mKey]) {
+                }
+                elseif ($mValue !== $array1[$mKey]) {
                     $aReturn[$mKey] = $mValue;
                 }
-            } else {
+            }
+            else {
                 $aReturn[$mKey] = $mValue;
             }
         }
@@ -150,25 +155,26 @@ abstract class Diff
 
     public function __toString(): string
     {
-        if(!$this->diff)
+        if (!$this->diff)
             return "";
 
-         return self::_print("", $this->diff, $this->array1, $this->array2);
+        return self::_print("", $this->diff, $this->array1, $this->array2);
     }
 
     protected static string $string;
+
     /**
-     * @param string $keyPrefix
+     * @param string $prefix
      * @param array $diff
      * @param array $array1
      * @param array $array2
      * @param int $depth
      *
-     * @return void
+     * @return string
      */
-    protected static function _print(string $keyPrefix, array $diff, array $array1, array $array2, int $depth = 0): string
+    protected static function _print(string $prefix, array $diff, array $array1, array $array2, int $depth = 0): string
     {
-        if($depth === 0)
+        if ($depth === 0)
             self::$string = "";
 
         ++$depth;
@@ -184,10 +190,11 @@ abstract class Diff
                     $array2[$key],
                     $depth
                 );
-            } else {
+            }
+            else {
                 self::$string = sprintf(
                     "    %s%s%s        file: %s%s        zip : %s%s",
-                    $keyPrefix,
+                    $prefix,
                     $key,
                     PHP_EOL,
                     array_key_exists($key, $array1) ? (is_array($array1[$key]) ? 'Array' : $array1[$key]) : '(none)',

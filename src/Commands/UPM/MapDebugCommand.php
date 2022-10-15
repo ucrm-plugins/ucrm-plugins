@@ -1,13 +1,16 @@
 <?php /** @noinspection PhpUnused */
 declare(strict_types=1);
 
-namespace UCRM\Plugins\Commands\UPM\PhpStorm;
+namespace UCRM\Plugins\Commands\UPM;
 
 use Exception;
 use SimpleXMLElement;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use UCRM\Plugins\Commands\BaseCommand;
+use UCRM\Plugins\Commands\IdeCommands;
+use UCRM\Plugins\Commands\PluginCommands;
 use UCRM\Plugins\Commands\PluginRequiredCommand;
 use UCRM\Plugins\PhpStorm\XmlConfigManager;
 use UCRM\Plugins\Support\FileSystem;
@@ -20,20 +23,25 @@ use UCRM\Plugins\Support\FileSystem;
  *
  * @final
  */
-class PhpStormMapDebugCommand extends PluginRequiredCommand
+class MapDebugCommand extends BaseCommand
 {
+    use IdeCommands;
+    use PluginCommands;
 
     /**
      * @inheritDoc
      */
     protected function configure() : void
     {
-        parent::configure();
+        //parent::configure();
 
         $this
-            ->setName("phpstorm:map-debug")
+            ->setName("map:debug")
             ->setDescription("Creates server path mappings for Plugin debugging");
+            //->addOption("ide", "i", InputOption::VALUE_REQUIRED, "Any supported IDE (i.e. phpstorm, vscode)", "phpstorm");
 
+        $this->withIdeOptions(["phpstorm"]);
+        $this->withPluginArgument();
     }
 
     /**
@@ -43,6 +51,8 @@ class PhpStormMapDebugCommand extends PluginRequiredCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output) : int
     {
+        //$this->validatePluginArgument($input, $output);
+
         // Get the hostname of the VM from the config file.
         if (file_exists($box = FileSystem::path(PROJECT_DIR."/vagrant/env/box.conf")))
         {
@@ -61,6 +71,10 @@ class PhpStormMapDebugCommand extends PluginRequiredCommand
 
         $project = simplexml_load_file($php);
 
+
+        $ide = $input->getOption("ide");
+        echo $ide."\n";
+        exit;
 
 
         if (!($server = $project->xpath("component[@name='PhpProjectServersManager']/servers/server[@host='$host' or @host='$ip']")))

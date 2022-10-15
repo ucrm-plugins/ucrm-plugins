@@ -4,10 +4,10 @@
         "editorconfig.editorconfig",
         "ms-azuretools.vscode-docker",
         "streetsidesoftware.code-spell-checker",
-        "ikappas.composer",
-        "bmewburn.vscode-intelephense-client",
         "ionutvmi.path-autocomplete",
-        "neilbrayfield.php-docblocker",
-        "marcostazi.vs-code-vagrantfile"
+        "marcostazi.vs-code-vagrantfile",
+        "devsense.phptools-vscode",
+        "devsense.composer-php-vscode",
+        "devsense.profiler-php-vscode"
     ]
 }

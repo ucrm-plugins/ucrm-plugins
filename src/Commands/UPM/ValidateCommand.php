@@ -4,21 +4,15 @@ declare(strict_types=1);
 namespace UCRM\Plugins\Commands\UPM;
 
 use Opis\JsonSchema\Errors\ErrorFormatter;
-use Opis\JsonSchema\Exceptions\SchemaException;
-use Opis\JsonSchema\Helper;
 use Opis\JsonSchema\Validator;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableStyle;
-use Symfony\Component\Console\Input\Input;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use UCRM\Plugins\Commands\PluginRequiredCommand;
 use UCRM\Plugins\Support\Diff;
-use UCRM\Plugins\Support\Diffs\JsonDiff;
 use UCRM\Plugins\Support\FileSystem;
-use UCRM\Plugins\Support\JSON;
 use ZipArchive;
 
 /**
@@ -63,6 +57,7 @@ final class ValidateCommand extends PluginRequiredCommand
         $this->io->writeln("No issues found!\n");
 
         //$this->afterExecute($input, $output);
+
 
         return self::SUCCESS;
     }

@@ -12,12 +12,11 @@
         "opis/json-schema": "^2.3",
         "consolidation/robo": "^3.0",
         "ext-dom": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "nette/php-generator": "^3.6"
     },
     "autoload-dev": {
-        "files": [
-            "src/globals.php"
-        ],
+        "files": [ "globals.php" ],
         "psr-4": {
             "UCRM\\Plugins\\": "src/"
         }

@@ -1,0 +1,9 @@
+{
+    "name": "UISP",
+    //"dockerComposeFile": "docker-compose.yml",
+    //"service": "uisp",
+    //"workspaceFolder": "/src/ucrm-plugins",
+    //"shutdownAction": "stopCompose",
+    "image": "mcr.microsoft.com/vscode/devcontainers/php:7.4",
+    "workspaceFolder": "/src/ucrm-plugins"
+}

@@ -1,19 +1,16 @@
-<?php /** @noinspection PhpUnused */
+<?php
+
+/** @noinspection PhpUnused */
+
 declare(strict_types=1);
 
 namespace UCRM\Plugins\Commands;
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableStyle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use UCRM\Plugins\Commands\Exceptions\PluginInvalidNameException;
-use UCRM\Plugins\Commands\Exceptions\PluginNotFoundException;
 use UCRM\Plugins\Support\Diff;
-use UCRM\Plugins\Support\FileSystem;
-use UCRM\Plugins\Support\JSON;
 
 /**
  * PluginRequiredCommand
@@ -32,12 +29,11 @@ abstract class PluginRequiredCommand extends PluginSpecificCommand
     {
         parent::beforeExecute($input, $output);
 
-        if (!file_exists($this->name) || !is_dir($this->name))
-            //throw new Exceptions\PluginNotFoundException("The plugin '$this->name' could not be found!");
-            $this->error("The plugin '$this->name' could not be found!", TRUE);
+        if (!file_exists($this->plugin) || !is_dir($this->plugin))
+            //throw new Exceptions\PluginNotFoundException("The plugin '$this->plugin' could not be found!");
+            $this->error("The plugin '$this->plugin' could not be found!", TRUE);
 
-        $this->chdir("$this->cwd/$this->name");
-
+        $this->chdir("$this->cwd/$this->plugin");
     }
 
 
@@ -73,17 +69,20 @@ abstract class PluginRequiredCommand extends PluginSpecificCommand
      *
      * @return void
      */
-    public static function _createDiffTable(Table &$table, array $diff, array $array1, array $array2,
-        int $depth = 0, string $prefix = ""): Table
-    {
+    public static function _createDiffTable(
+        Table &$table,
+        array $diff,
+        array $array1,
+        array $array2,
+        int $depth = 0,
+        string $prefix = ""
+    ): Table {
         ++$depth;
         if ($depth > 50)
             return $table;
 
-        foreach ($diff as $key => $value)
-        {
-            if (array_key_exists($key, $array1) && array_key_exists($key, $array2) && is_array($array1[$key]))
-            {
+        foreach ($diff as $key => $value) {
+            if (array_key_exists($key, $array1) && array_key_exists($key, $array2) && is_array($array1[$key])) {
                 $table = self::createDiffTable(
                     $table,
                     $headers,
@@ -93,29 +92,25 @@ abstract class PluginRequiredCommand extends PluginSpecificCommand
                     $depth,
                     $key . '.'
                 );
-            }
-            else
-            {
+            } else {
                 $table->addRow([
                     "$prefix$key",
                     array_key_exists($key, $array1) ? (is_array($array1[$key]) ? 'Array' : $array1[$key]) : '(none)',
                     array_key_exists($key, $array2) ? (is_array($array2[$key]) ? 'Array' : $array2[$key]) : '(none)'
                 ]);
-//                printf(
-//                    "    %s%s%s        file: %s%s        zip : %s%s",
-//                    $keyPrefix,
-//                    $key,
-//                    PHP_EOL,
-//                    array_key_exists($key, $array1) ? (is_array($array1[$key]) ? 'Array' : $array1[$key]) : '(none)',
-//                    PHP_EOL,
-//                    array_key_exists($key, $array2) ? (is_array($array2[$key]) ? 'Array' : $array2[$key]) : '(none)',
-//                    PHP_EOL
-//                );
+                //                printf(
+                //                    "    %s%s%s        file: %s%s        zip : %s%s",
+                //                    $keyPrefix,
+                //                    $key,
+                //                    PHP_EOL,
+                //                    array_key_exists($key, $array1) ? (is_array($array1[$key]) ? 'Array' : $array1[$key]) : '(none)',
+                //                    PHP_EOL,
+                //                    array_key_exists($key, $array2) ? (is_array($array2[$key]) ? 'Array' : $array2[$key]) : '(none)',
+                //                    PHP_EOL
+                //                );
             }
         }
 
         return $table;
     }
-
-
 }
