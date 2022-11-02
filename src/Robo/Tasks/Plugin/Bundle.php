@@ -16,8 +16,6 @@ class Bundle extends BaseTask implements TaskInterface
     protected string $source;
 
     /**
-     * Summary of __construct
-     *
      * @param string $plugin
      * @author Ryan
      */

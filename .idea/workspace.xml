@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bbebbc60-a51a-4b36-9165-b548024dcb2e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.bashrc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.devcontainer/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.devcontainer/devcontainer.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.fleet/run.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.fleet/settings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/bash.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/bashrc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/docker.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/nginx.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/php.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/postgres.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/rspaeth.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/shellcheck.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/spaethtech.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/ssh.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/ubiquiti.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/ucrm_plugins.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sshConfigs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ucrm-plugins.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ucrm-plugins.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RoboFile.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vagrantfile" beforeDir="false" afterPath="$PROJECT_DIR$/Vagrantfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/.docker/docker-command" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/.docker/docker-entrypoint" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/.docker/node/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/.docker/node/docker-entrypoint" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/.docker/php/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/.docker/php/docker-entrypoint" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/.upm/upm.php" beforeDir="false" afterPath="$PROJECT_DIR$/bin/.upm/upm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/composer" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/gulp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/node" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/node-bash" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/npm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/php-bash" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/robo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/yo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/wsl/hosts.ps1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/wsl/hosts.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/wsl.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/globals.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Commands/UPM/BundleCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands/UPM/BundleCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Robo/Tasks/Plugin/Bundle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Robo/Tasks/Plugin/Bundle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/env/box.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/env/unms.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/overrides.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/overrides.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/users/unms/app/docker-compose.override.yml" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/users/unms/app/docker-compose.override.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/ucrm/xdebug.ini" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/ucrm/xdebug.ini" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <execution>
+      <phar pharPath="C:\dev\lib\composer\composer.phar" />
+    </execution>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4.27 NTS">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/vendor/sebastian/diff" />
+      <path value="$PROJECT_DIR$/vendor/symfony/finder" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/vendor/symfony/stopwatch" />
+      <path value="$PROJECT_DIR$/vendor/symfony/options-resolver" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-grapheme" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/symfony/string" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
+      <path value="$PROJECT_DIR$/vendor/wikimedia/composer-merge-plugin" />
+      <path value="$PROJECT_DIR$/vendor/symfony/service-contracts" />
+      <path value="$PROJECT_DIR$/vendor/friendsofphp/php-cs-fixer" />
+      <path value="$PROJECT_DIR$/vendor/doctrine/annotations" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/vendor/symfony/filesystem" />
+      <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/vendor/symfony/process" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/opis/uri" />
+      <path value="$PROJECT_DIR$/vendor/opis/string" />
+      <path value="$PROJECT_DIR$/vendor/opis/json-schema" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="2GujaMTFiVZAJjZoopQnD3Zd7Lz" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/dev/src/spaethtech/annotations&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bbebbc60-a51a-4b36-9165-b548024dcb2e" name="Changes" comment="" />
+      <created>1667245425163</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667245425163</updated>
+      <workItem from="1667245426844" duration="1472000" />
+      <workItem from="1667330067605" duration="2195000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

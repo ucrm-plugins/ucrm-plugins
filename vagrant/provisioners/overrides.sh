@@ -27,8 +27,10 @@ echo "provided UCRM_VERSION: $UCRM_VERSION)"
 ########################################################################################################################
 # OVERRIDES
 ########################################################################################################################
-
-ln -s /src/ucrm-plugins/vagrant/users/unms/app/overrides overrides
+if [ ! -d /home/unms/app/overrides ]
+then
+    ln -s /src/ucrm-plugins/vagrant/users/unms/app/overrides overrides
+fi
 
 compose=/src/ucrm-plugins/vagrant/users/unms/app/docker-compose.override.yml
 

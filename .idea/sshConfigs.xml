@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="SshConfigs">
-    <configs>
-      <sshConfig authType="OPEN_SSH" host="uisp" id="eede4f97-3b03-42d4-8515-543ddc0ab20a" port="22" nameFormat="DESCRIPTIVE" username="vagrant" useOpenSSHConfig="true" />
-    </configs>
-  </component>
-</project>

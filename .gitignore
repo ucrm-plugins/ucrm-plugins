@@ -2,9 +2,6 @@
 node_modules/
 vendor/
 
-# JetBrains IDE
-# NOTE: Handled directly by .idea/.gitignore
-
 # Vagrant Metadata
 .vagrant/
 
@@ -15,4 +12,4 @@ env/*
 !env/README.md
 
 .code-server/
-
+**/*.box

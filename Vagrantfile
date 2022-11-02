@@ -84,7 +84,7 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
     # VirtualBox
     config.vm.provider :virtualbox do |vm, override|
         vm.name = "#{BOX_HOSTNAME}-#{UISP_VERSION}"
-        vm.cpus = 1
+        vm.cpus = 2
         vm.memory = 4096
         # vb.customize [
         #     "setextradata",
@@ -96,6 +96,28 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
 
     # NOTE: Both Hyper-V and VMware have numerous issues preventing a completely functioning system, so they have been
     # abandoned for the time being!
+
+    config.vm.provider :digital_ocean do |provider, override|
+        override.ssh.username = "vagrant"
+        override.ssh.private_key_path = '~/.ssh/id_rsa'
+        override.vm.box = 'digital_ocean'
+        override.vm.box_url = "https://github.com/devopsgroup-io/vagrant-digitalocean/raw/master/box/digital_ocean.box"
+        override.nfs.functional = false
+        override.vm.allowed_synced_folder_types = :rsync
+
+        provider.token = ENV["DIGITALOCEAN_TOKEN"]
+        provider.image = 'ubuntu-20-04-x64'
+        provider.region = 'sfo1'
+        provider.size = 's-1vcpu-2gb'
+        provider.backups_enabled = false
+        provider.private_networking = false
+        provider.ipv6 = false
+        provider.monitoring = false
+        provider.ssh_key_name = "vagrant"
+        provider.setup = true
+    end
+
+
 
     # ------------------------------------------------------------------------------------------------------------------
     # PROVISIONERS
