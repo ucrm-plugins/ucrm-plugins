@@ -43,7 +43,7 @@ export PGPASSWORD="$PGPASSWORD"
 export PGUSER="$PGUSER"
 export PGDATABASE="$PGDATABASE"
 export PGHOST="localhost"
-export ENVIRONMENT="guest"
+export VIRTUAL_ENV="guest"
 EOF
 
 # Double check permissions and source the new values.

@@ -1,22 +1,23 @@
 
-# The Vagrant configuration for a UISP Base Box with minimal changes to the default installation of UISP.
+# A Vagrant configuration file for a UISP Base Box with changes specifically for Plugin Development.
 #
 # @author Ryan Spaeth <rspaeth@spaethtech.com>
 # @copyright 2022 Spaeth Technologies Inc.
 
 VAGRANT_FILE_VER    = "2"
+
 HOST_PROJECT_DIR    = File.expand_path("./")
 VBOX_PROJECT_DIR    = "/src/ucrm-plugins"
 HOST_VAGRANT_DIR    = File.expand_path("./vagrant")
-
-require_relative    "#{HOST_VAGRANT_DIR}/modules/os.rb"
-require_relative    "#{HOST_VAGRANT_DIR}/modules/ssh.rb"
-require_relative    "#{HOST_VAGRANT_DIR}/modules/uisp.rb"
-
+RUBY_MODULES_DIR    = "#{HOST_VAGRANT_DIR}/modules"
 PROVISIONERS_DIR    = "#{HOST_VAGRANT_DIR}/provisioners"
 CERTIFICATES_DIR    = "#{HOST_VAGRANT_DIR}/certs"
 
-# ----------------------------------------------------------------------------------------------------------------------
+require_relative    "#{RUBY_MODULES_DIR}/os.rb"
+require_relative    "#{RUBY_MODULES_DIR}/ssh.rb"
+require_relative    "#{RUBY_MODULES_DIR}/uisp.rb"
+
+# ======================================================================================================================
 # CONFIGURATION
 # ----------------------------------------------------------------------------------------------------------------------
 
@@ -27,7 +28,7 @@ ROOT_PASSWORD       = "vagrant"
 UISP_VERSION        = "1.4.8"
 UCRM_VERSION        = UISP.getUcrmVersion(UISP_VERSION)
 
-# ----------------------------------------------------------------------------------------------------------------------
+# ======================================================================================================================
 # VAGRANT
 # ----------------------------------------------------------------------------------------------------------------------
 
@@ -37,7 +38,7 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
 
     config.vbguest.auto_update = false
 
-    # ------------------------------------------------------------------------------------------------------------------
+    # ==================================================================================================================
     # NETWORKING
     # ------------------------------------------------------------------------------------------------------------------
 
@@ -61,23 +62,23 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
 
     config.vm.network "private_network", ip: BOX_ADDRESS
 
-    # ------------------------------------------------------------------------------------------------------------------
+    # ==================================================================================================================
     # FILE SYSTEM
     # ------------------------------------------------------------------------------------------------------------------
 
     # Disable the default synced folder.
     config.vm.synced_folder ".", "/vagrant", disabled: true
 
-    # And sync our entire project.
+    # And sync our entire project.  Default mapping is PROJECT_DIR to /src/ucrm-plugins
     config.vm.synced_folder "#{HOST_PROJECT_DIR}", "#{VBOX_PROJECT_DIR}"
 
-    # ------------------------------------------------------------------------------------------------------------------
+    # ==================================================================================================================
     # BASE BOX
     # ------------------------------------------------------------------------------------------------------------------
 
     config.vm.box = "bento/ubuntu-20.04"
 
-    # ------------------------------------------------------------------------------------------------------------------
+    # ==================================================================================================================
     # PROVIDERS
     # ------------------------------------------------------------------------------------------------------------------
 
@@ -86,75 +87,34 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
         vm.name = "#{BOX_HOSTNAME}-#{UISP_VERSION}"
         vm.cpus = 2
         vm.memory = 4096
-        # vb.customize [
-        #     "setextradata",
-        #     :id,
-        #     "VBoxInternal2/SharedFoldersEnableSymlinksCreate#{VBOX_PROJECT_DIR}",
-        #     "1"
-        # ]
     end
 
-    # NOTE: Both Hyper-V and VMware have numerous issues preventing a completely functioning system, so they have been
-    # abandoned for the time being!
-
-    config.vm.provider :digital_ocean do |provider, override|
-        override.ssh.username = "vagrant"
-        override.ssh.private_key_path = '~/.ssh/id_rsa'
-        override.vm.box = 'digital_ocean'
-        override.vm.box_url = "https://github.com/devopsgroup-io/vagrant-digitalocean/raw/master/box/digital_ocean.box"
-        override.nfs.functional = false
-        override.vm.allowed_synced_folder_types = :rsync
-
-        provider.token = ENV["DIGITALOCEAN_TOKEN"]
-        provider.image = 'ubuntu-20-04-x64'
-        provider.region = 'sfo1'
-        provider.size = 's-1vcpu-2gb'
-        provider.backups_enabled = false
-        provider.private_networking = false
-        provider.ipv6 = false
-        provider.monitoring = false
-        provider.ssh_key_name = "vagrant"
-        provider.setup = true
-    end
-
-
-
-    # ------------------------------------------------------------------------------------------------------------------
+    # ==================================================================================================================
     # PROVISIONERS
     # ------------------------------------------------------------------------------------------------------------------
 
-    # Provision the Users...
-    config.vm.provision :users,
-        type: :shell,
-        keep_color: true,
+    # Users...
+    config.vm.provision :users, type: :shell, keep_color: true,
         path: "#{PROVISIONERS_DIR}/users.sh",
         env: { "ROOT_PASSWORD" => "#{ROOT_PASSWORD}" }
 
-    # Provision the bash environment...
-    config.vm.provision :bash,
-        type: :shell,
-        keep_color: true,
+    # Bash...
+    config.vm.provision :bash, type: :shell, keep_color: true,
         path: "#{PROVISIONERS_DIR}/bash.sh",
         env: { }
 
-    # Provision the Network...
-    config.vm.provision :network,
-        type: :shell,
-        keep_color: true,
+    # Network...
+    config.vm.provision :network, type: :shell, keep_color: true,
         path: "#{PROVISIONERS_DIR}/network.sh",
         env: { "IPV6_DISABLE" => "all,default,lo,eth0,eth1" }
 
-    # Provision the Firewall...
-    config.vm.provision :firewall,
-        type: :shell,
-        keep_color: true,
+    # Firewall...
+    config.vm.provision :firewall, type: :shell, keep_color: true,
         path: "#{PROVISIONERS_DIR}/firewall.sh",
         env: {}
 
-    # Provision the UISP installation...
-    config.vm.provision :uisp,
-        type: :shell,
-        keep_color: true,
+    # UISP...
+    config.vm.provision :uisp, type: :shell, keep_color: true,
         path: "#{PROVISIONERS_DIR}/uisp.sh",
         env: {
             "UISP_VERSION" => "#{UISP_VERSION}",
@@ -162,95 +122,71 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
             "BOX_CERT_DIR" => "#{VBOX_PROJECT_DIR}/vagrant/certs"
         }
 
-    # env: Always run the environment provisioner, to keep changes updated in the ENV and files.
-    config.vm.provision :environment,
-        type: :shell,
-        keep_color: true,
-        run: :always,
+    # Environment...
+    # NOTE: We run this provisioner on every "up", to keep changes updated in the ENV and associated files.
+    config.vm.provision :environment, type: :shell, keep_color: true, run: :always,
         path: "#{PROVISIONERS_DIR}/environment.sh",
         env: {
             "UISP_VERSION" => "#{UISP_VERSION}",
-            "UCRM_VERSION" => "#{UCRM_VERSION}"
-            #"PROJECT_DIR" => "#{VBOX_PROJECT_DIR}"
+            "UCRM_VERSION" => "#{UCRM_VERSION}",
+            "PROJECT_DIR" => "#{VBOX_PROJECT_DIR}"
         }
 
-    # build: This provisioner is responsible for building an updated version of the overrides.
-    config.vm.provision :overrides,
-        type: :shell,
-        keep_color: true,
+    # Overrides...
+    # NOTE: This provisioner is responsible for building an updated version of the included overrides.
+    config.vm.provision :overrides, type: :shell, keep_color: true,
         path: "#{PROVISIONERS_DIR}/overrides.sh",
         env: {}
 
-    # build: This provisioner is responsible for building an updated version of the overrides.
-    config.vm.provision :postgres,
-        type: :shell,
-        keep_color: true,
-        #run: :never,
+    # PostgreSQL...
+    # NOTE: This provisioner is installs PostgreSQL (Server & Client) on the VM and does some user fix-ups.
+    config.vm.provision :postgres, type: :shell, keep_color: true,
         path: "#{PROVISIONERS_DIR}/postgres.sh",
         env: {}
 
-    # Provision PHP...
-    config.vm.provision :php,
-        type: :shell,
-        keep_color: true,
+    # PHP...
+    config.vm.provision :php, type: :shell, keep_color: true,
         path: "#{PROVISIONERS_DIR}/php.sh",
         env: {
             "PROJECT_DIR" => "#{VBOX_PROJECT_DIR}"
         }
 
-    # Provision NodeJS...
-    config.vm.provision :node,
-        type: :shell,
-        keep_color: true,
+    # NodeJS...
+    config.vm.provision :node, type: :shell, keep_color: true,
         #run: :never,
         path: "#{PROVISIONERS_DIR}/node.sh",
         env: {}
 
-        # Provision NodeJS...
-    config.vm.provision :permissions,
-        type: :shell,
-        keep_color: true,
+    # Permissions...
+    config.vm.provision :permissions, type: :shell, keep_color: true,
         #run: :never,
         path: "#{PROVISIONERS_DIR}/permissions.sh",
         env: {}
 
-    config.vm.provision :fleet,
-        type: :shell,
-        keep_color: true,
+    # JetBrains Fleet (Testing)...
+    # NOTE: As we are only testing, this provisioner needs to be run manually.
+    config.vm.provision :fleet, type: :shell, keep_color: true,
         run: :never,
         path: "#{PROVISIONERS_DIR}/fleet.sh",
         env: {}
 
-    # Provision Code Server...
-    config.vm.provision :code_server,
-        type: :shell,
-        keep_color: true,
+    # Code Server...
+    # NOTE: As this is an optional provisioner, it needs to be run manually.
+    config.vm.provision :code_server, type: :shell, keep_color: true,
         run: :never,
         path: "#{PROVISIONERS_DIR}/code-server.sh",
         env: {
             "BOX_HOSTNAME" => "#{BOX_HOSTNAME}",
             "WORKSPACE" => "#{VBOX_PROJECT_DIR}",
             "BIND_HOST" => "0.0.0.0",
-            "BIND_PORT" => "8080",
-            "EXTENSIONS" => [
-                "natizyskunk.sftp",
-                "editorconfig.editorconfig",
-                "ms-azuretools.vscode-docker",
-                "streetsidesoftware.code-spell-checker",
-                "ikappas.composer",
-                "bmewburn.vscode-intelephense-client",
-                "ionutvmi.path-autocomplete",
-                "neilbrayfield.php-docblocker",
-                "marcostazi.vs-code-vagrantfile",
-                "felixfbecker.php-debug"
-            ]
+            "BIND_PORT" => "8080"
         }
 
-    # ------------------------------------------------------------------------------------------------------------------
+    # ==================================================================================================================
     # TRIGGERS
     # ------------------------------------------------------------------------------------------------------------------
 
-    require 'fileutils'
+    require "fileutils"
 
     config.trigger.before :up do |trigger|
         trigger.info = "Configuring SSL for #{BOX_HOSTNAME}"
@@ -264,7 +200,9 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
                     puts "Installing mkcert on Windows (in Vagrant's embedded shell)..."
                     MKCERT_URL = "https://dl.filippo.io/mkcert/latest?for=windows/amd64"
                     `wget -q --show-progress #{MKCERT_URL} -O /usr/bin/mkcert.exe`
-                else
+                end
+
+                if OS.linux?
                     puts "Installing mkcert on Linux..."
                     MKCERT_URL = "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
                     `wget -q --show-progress #{MKCERT_URL} -O /usr/bin/mkcert`

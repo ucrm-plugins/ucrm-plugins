@@ -36,6 +36,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/opis/uri" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/opis/string" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/opis/json-schema" />
+      <excludeFolder url="file://$MODULE_DIR$/.vagrant" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -1,105 +1,19 @@
 {
-    "words": [
-        "Nette"
-    ],
+    "words": [],
     "gitignoreRoot": "../",
     "useGitignore": true,
     "ignorePaths": [
         "composer.*"
     ],
-    "dictionaries": [
-        "bash",
-        "cmder",
-        "curl",
-        "docker",
-        "nginx",
-        "php",
-        "postgres",
-        "shellcheck",
-        "spaethtech",
-        "ssh",
-        "travis",
-        "ubiquiti",
-        "ucrm-plugins"
-    ],
     "dictionaryDefinitions": [
         {
-            "name": "bash",
-            "path": ".cspell/bash.dic",
-            "addWords": true,
-            "scope": "workspace"
-        },
-        {
-            "name": "cmder",
-            "path": ".cspell/cmder.dic",
+            "name": "project",
+            "path": "ucrm-plugins.dic",
             "addWords": false,
-            "scope": "workspace"
-        },
-        {
-            "name": "curl",
-            "path": ".cspell/curl.dic",
-            "addWords": false,
-            "scope": "workspace"
-        },
-        {
-            "name": "docker",
-            "path": ".cspell/docker.dic",
-            "addWords": false,
-            "scope": "workspace"
-        },
-        {
-            "name": "nginx",
-            "path": ".cspell/nginx.dic",
-            "addWords": false,
-            "scope": "workspace"
-        },
-        {
-            "name": "php",
-            "path": ".cspell/php.dic",
-            "addWords": true,
-            "scope": "workspace"
-        },
-        {
-            "name": "postgres",
-            "path": ".cspell/postgres.dic",
-            "addWords": false,
-            "scope": "workspace"
-        },
-        {
-            "name": "shellcheck",
-            "path": ".cspell/shellcheck.dic",
-            "addWords": false,
-            "scope": "workspace"
-        },
-        {
-            "name": "spaethtech",
-            "path": ".cspell/spaethtech.dic",
-            "addWords": false,
-            "scope": "workspace"
-        },
-        {
-            "name": "ssh",
-            "path": ".cspell/ssh.dic",
-            "addWords": false,
-            "scope": "workspace"
-        },
-        {
-            "name": "travis",
-            "path": ".cspell/travis.dic",
-            "addWords": false,
-            "scope": "workspace"
-        },
-        {
-            "name": "ubiquiti",
-            "path": ".cspell/ubiquiti.dic",
-            "addWords": false,
-            "scope": "workspace"
-        },
-        {
-            "name": "ucrm-plugins",
-            "path": ".cspell/ucrm-plugins.dic",
-            "addWords": true,
             "scope": "workspace"
         }
+    ],
+    "dictionaries": [
+        "project"
     ]
 }

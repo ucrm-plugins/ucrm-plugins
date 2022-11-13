@@ -68,11 +68,25 @@ EOF
 
 # shellcheck disable=SC2206
 # Parse provided extensions
-EXTS=(${EXTENSIONS//[\[,\]\"]/})
+#EXTS=(${EXTENSIONS//[\[,\]\"]/})
+EXTENSIONS=(
+    natizyskunk.sftp
+    editorconfig.editorconfig
+    ms-azuretools.vscode-docker
+    streetsidesoftware.code-spell-checker
+    ikappas.composer
+    bmewburn.vscode-intelephense-client
+    ionutvmi.path-autocomplete
+    neilbrayfield.php-docblocker
+    marcostazi.vs-code-vagrantfile
+    felixfbecker.php-debug
+)
 
-if [ ${#EXTS[@]} -ne 0 ]; then
+
+
+if [ ${#EXTENSIONS[@]} -ne 0 ]; then
     ARGS="--extensions-dir $DATA_DIR/extensions --force"
-    for i in "${EXTS[@]}"; do
+    for i in "${EXTENSIONS[@]}"; do
         ARGS="$ARGS --install-extension $i"
     done
 

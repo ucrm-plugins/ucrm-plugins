@@ -5,6 +5,10 @@ module OS
         (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
     end
 
+    def OS.wsl?
+        /WSL/i.match?(`uname -r`)
+    end
+
     def OS.mac?
         (/darwin/ =~ RUBY_PLATFORM) != nil
     end

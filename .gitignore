@@ -8,8 +8,5 @@ vendor/
 # Any and all .env files!
 **/*.env
 
-env/*
-!env/README.md
-
 .code-server/
 **/*.box

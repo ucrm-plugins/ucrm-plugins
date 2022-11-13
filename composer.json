@@ -6,7 +6,7 @@
     },
     "autoload-dev": {
         "files": [
-            "globals.php"
+            "src/globals.php"
         ],
         "psr-4": {
             "UCRM\\Plugins\\": "src/"

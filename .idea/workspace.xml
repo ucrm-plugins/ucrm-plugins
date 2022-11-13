@@ -1,64 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="3" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="bbebbc60-a51a-4b36-9165-b548024dcb2e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.bashrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.devcontainer/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.devcontainer/devcontainer.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.fleet/run.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.fleet/settings.json" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.bashrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/wsl.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/project.dic" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vagrant/certs/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vagrant/env/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vagrant/users/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vagrant/users/unms/data/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/bash.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/bashrc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/docker.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/nginx.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/php.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/postgres.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/rspaeth.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/shellcheck.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/spaethtech.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/ssh.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/ubiquiti.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/ucrm_plugins.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sshConfigs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/ucrm-plugins.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ucrm-plugins.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RoboFile.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/.cspell/bash.dic" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/.cspell/cmder.dic" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/.cspell/curl.dic" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/.cspell/docker.dic" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/.cspell/nginx.dic" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/.cspell/php.dic" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/.cspell/postgres.dic" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/.cspell/shellcheck.dic" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/.cspell/spaethtech.dic" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/.cspell/ssh.dic" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/.cspell/travis.dic" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/.cspell/ubiquiti.dic" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/.cspell/ucrm-plugins.dic" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/cspell.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/cspell.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Vagrantfile" beforeDir="false" afterPath="$PROJECT_DIR$/Vagrantfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/.docker/docker-command" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/.docker/docker-entrypoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/.docker/node/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/.docker/node/docker-entrypoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/.docker/php/Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/.docker/php/docker-entrypoint" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/.upm/upm.php" beforeDir="false" afterPath="$PROJECT_DIR$/bin/.upm/upm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/composer" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/gulp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/node" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/node-bash" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/npm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/php-bash" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/robo" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/yo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/vssh" beforeDir="false" afterPath="$PROJECT_DIR$/bin/vssh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chef_guid" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/wsl/hosts.ps1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/wsl/hosts.sh" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/wsl.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/globals.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Commands/UPM/BundleCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands/UPM/BundleCommand.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Robo/Tasks/Plugin/Bundle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Robo/Tasks/Plugin/Bundle.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vagrant/env/box.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vagrant/env/unms.conf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/overrides.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/overrides.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vagrant/users/unms/app/docker-compose.override.yml" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/users/unms/app/docker-compose.override.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/ucrm/xdebug.ini" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/ucrm/xdebug.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/globals.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/globals.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/.editorconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/modules/os.rb" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/modules/os.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/code-server.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/code-server.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/environment.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/environment.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/users.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/users.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,13 +51,13 @@
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
-      <phar pharPath="C:\dev\lib\composer\composer.phar" />
+      <executable path="composer" />
     </execution>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4.27 NTS">
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.4">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
       <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
@@ -109,23 +92,43 @@
       <path value="$PROJECT_DIR$/vendor/opis/json-schema" />
     </include_path>
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2GujaMTFiVZAJjZoopQnD3Zd7Lz" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/dev/src/spaethtech/annotations&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/dev/src/ucrm-plugins/ucrm-plugins/ucrm-plugins.dic",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.webide.settings.project.settings.php",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\dev\src\ucrm-plugins\ucrm-plugins\.idea\dictionaries" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\dev\src\ucrm-plugins\ucrm-plugins" />
+      <recent name="C:\dev\src\ucrm-plugins\ucrm-plugins\.vscode\.cspell" />
+      <recent name="C:\dev\src\ucrm-plugins\ucrm-plugins\.dictionaries" />
+      <recent name="C:\dev\src\ucrm-plugins\ucrm-plugins\src" />
+      <recent name="C:\dev\src\ucrm-plugins\ucrm-plugins\dev\unms" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="1" Folder0="C:\dev\src\ucrm-plugins\ucrm-plugins" CustomDictionaries="1" CustomDictionary0="C:\dev\src\ucrm-plugins\ucrm-plugins\ucrm-plugins.dic" DefaultDictionary="project-level" UseSingleDictionary="false" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="bbebbc60-a51a-4b36-9165-b548024dcb2e" name="Changes" comment="" />
@@ -135,6 +138,19 @@
       <updated>1667245425163</updated>
       <workItem from="1667245426844" duration="1472000" />
       <workItem from="1667330067605" duration="2195000" />
+      <workItem from="1668028168049" duration="7673000" />
+      <workItem from="1668035980680" duration="7000" />
+      <workItem from="1668036010398" duration="1000" />
+      <workItem from="1668036021583" duration="7000" />
+      <workItem from="1668036038545" duration="807000" />
+      <workItem from="1668037920987" duration="111000" />
+      <workItem from="1668038044083" duration="48000" />
+      <workItem from="1668038102748" duration="9335000" />
+      <workItem from="1668365472934" duration="5411000" />
+      <workItem from="1668370950556" duration="67000" />
+      <workItem from="1668371025175" duration="691000" />
+      <workItem from="1668371724217" duration="79000" />
+      <workItem from="1668371813953" duration="5466000" />
     </task>
     <servers />
   </component>
