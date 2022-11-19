@@ -17,6 +17,8 @@ curlopt
 dearmor
 dotglob
 errno
+errexit
+errtrace
 fastcgi
 fileutils
 followlocation
@@ -35,6 +37,7 @@ mkcert
 mkdir
 noninteractive
 noprogress
+nounset
 nproc
 ondrej
 opis
@@ -47,6 +50,7 @@ pghost
 pgpassword
 pguser
 phpunit
+pipefail
 postgre
 preg
 proctitle
@@ -74,6 +78,7 @@ strpos
 strrpos
 strtoupper
 symfony
+udiff
 usermod
 usleep
 vbguest
@@ -82,3 +87,4 @@ verifypeer
 vssh
 workdir
 xdebug
+xtrace
