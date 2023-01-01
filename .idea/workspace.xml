@@ -3,14 +3,354 @@
   <component name="AnalysisUIOptions">
     <option name="SCOPE_TYPE" value="3" />
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="bbebbc60-a51a-4b36-9165-b548024dcb2e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/scopes/Spell_Checked.xml" afterDir="false" />
+    <list default="true" id="bbebbc60-a51a-4b36-9165-b548024dcb2e" name="Changes" comment="Line-Endings normalization">
+      <change beforePath="$PROJECT_DIR$/.bashrc" beforeDir="false" afterPath="$PROJECT_DIR$/.bashrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/PULL_REQUEST_TEMPLATE.md" beforeDir="false" afterPath="$PROJECT_DIR$/.github/PULL_REQUEST_TEMPLATE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/cspell.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/cspell.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/extensions.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/extensions.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/php.code-snippets" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/php.code-snippets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/sftp.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/sftp.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vagrantfile" beforeDir="false" afterPath="$PROJECT_DIR$/Vagrantfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/bin/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/.upm/upm.php" beforeDir="false" afterPath="$PROJECT_DIR$/bin/.upm/upm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/bin/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/mkcert" beforeDir="false" afterPath="$PROJECT_DIR$/bin/mkcert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/upm" beforeDir="false" afterPath="$PROJECT_DIR$/bin/upm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/vssh" beforeDir="false" afterPath="$PROJECT_DIR$/bin/vssh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer-check.sh" beforeDir="false" afterPath="$PROJECT_DIR$/composer-check.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/dev/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/dev/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/dev/commands.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/dev/commands.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/extensions.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/extensions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/file-structure.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/file-structure.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/manifest.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/manifest.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/phpstorm/deployment.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/phpstorm/deployment.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/phpstorm/terminals.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/phpstorm/terminals.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/security.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/security.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/templates/minimal.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/templates/minimal.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/terminals.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/terminals.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tutorials/first-plugin.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tutorials/first-plugin.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tutorials/first-plugin/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tutorials/first-plugin/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tutorials/first-plugin/skeleton/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tutorials/first-plugin/skeleton/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tutorials/first-plugin/skeleton/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tutorials/first-plugin/skeleton/src/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tutorials/first-plugin/skeleton/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tutorials/first-plugin/skeleton/src/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tutorials/first-plugin/skeleton/src/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tutorials/first-plugin/skeleton/src/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tutorials/first-plugin/skeleton/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tutorials/first-plugin/skeleton/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/upm/using.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/upm/using.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/vagrant.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/vagrant.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/vagrant/basebox.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/vagrant/basebox.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/wsl.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/wsl.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/plugin-template/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/examples/plugin-template/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/plugin-template/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/examples/plugin-template/src/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/plugin-template/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/examples/plugin-template/src/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/plugin-template/src/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/examples/plugin-template/src/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/plugin-template/src/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/examples/plugin-template/src/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/plugin-template/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/examples/plugin-template/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/plugin-template/src/public.php" beforeDir="false" afterPath="$PROJECT_DIR$/examples/plugin-template/src/public.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generate-json.php" beforeDir="false" afterPath="$PROJECT_DIR$/generate-json.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/ucrm-plugin/generators/app/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/generators/ucrm-plugin/generators/app/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/ucrm-plugin/generators/minimal/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/generators/ucrm-plugin/generators/minimal/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/ucrm-plugin/generators/minimal/templates/src/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/generators/ucrm-plugin/generators/minimal/templates/src/.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/ucrm-plugin/generators/minimal/templates/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/generators/ucrm-plugin/generators/minimal/templates/src/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/ucrm-plugin/generators/minimal/templates/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/generators/ucrm-plugin/generators/minimal/templates/src/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/ucrm-plugin/generators/minimal/templates/src/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/generators/ucrm-plugin/generators/minimal/templates/src/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/ucrm-plugin/generators/minimal/templates/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/generators/ucrm-plugin/generators/minimal/templates/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/ucrm-plugin/generators/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/generators/ucrm-plugin/generators/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/ucrm-plugin/generators/public/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/generators/ucrm-plugin/generators/public/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/ucrm-plugin/generators/public/templates/src/public.php" beforeDir="false" afterPath="$PROJECT_DIR$/generators/ucrm-plugin/generators/public/templates/src/public.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/generators/ucrm-plugin/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/generators/ucrm-plugin/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manifest.schema.json" beforeDir="false" afterPath="$PROJECT_DIR$/manifest.schema.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pack-plugin.php" beforeDir="false" afterPath="$PROJECT_DIR$/pack-plugin.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/php-cs-check.sh" beforeDir="false" afterPath="$PROJECT_DIR$/php-cs-check.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/claves/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/claves/.htaccess" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/claves/LEEME.txt" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/claves/LEEME.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/claves/cwcert.crt" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/claves/cwcert.crt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/claves/cwkey.key" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/claves/cwkey.key" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/exceptionhandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/exceptionhandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/formatinvoice.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/formatinvoice.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/funciones.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/funciones.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/runcae.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/runcae.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/wsaa.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/wsaa.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/wsaa.wsdl" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/wsaa.wsdl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/wsaaprod.wsdl" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/wsaaprod.wsdl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/wsfev1.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/wsfev1.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/wsfev1prod.wsdl" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/wsfev1prod.wsdl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/wsfev1test.wsdl" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/wsfev1test.wsdl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/xmlgenerados/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Argentinacae/xmlgenerados/.htaccess" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Http.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Http.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Service/TemplateRenderer.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/classes/Service/TemplateRenderer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/hook_configure.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/hook_configure.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/hook_install.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/hook_install.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/hook_update.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/hook_update.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/public.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/public.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/public/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/public/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/templates/form.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/src/templates/form.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/tools/GeneraClavePrivada.bat" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/tools/GeneraClavePrivada.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/tools/LEER!!!! CERTIFICADO EJEMPLO.txt" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/tools/LEER!!!! CERTIFICADO EJEMPLO.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/tools/certificado.txt" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/tools/certificado.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/tools/ssl/bin/openssl.cnf" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/tools/ssl/bin/openssl.cnf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/argentina-afip-invoices/tools/ssl/openssl.cnf" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/argentina-afip-invoices/tools/ssl/openssl.cnf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/backup-sync-dropbox/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/backup-sync-dropbox/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/Data/UnmsBackup.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/Data/UnmsBackup.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/DataProvider/BackupDataProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/DataProvider/BackupDataProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/Facade/BackupFacade.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/Facade/BackupFacade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/Handler/BackupHandler.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/Handler/BackupHandler.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/TokenProvider/DropboxTokenProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/TokenProvider/DropboxTokenProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/Utility/LogCleaner.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/Utility/LogCleaner.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/Utility/Logger.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/Utility/Logger.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/Utility/NmsSettings.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/Utility/NmsSettings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/Utility/Strings.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/backup-sync-dropbox/src/src/Utility/Strings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fio_cz/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fio_cz/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fio_cz/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fio_cz/src/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fio_cz/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fio_cz/src/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fio_cz/src/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fio_cz/src/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fio_cz/src/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fio_cz/src/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fio_cz/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fio_cz/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fio_cz/src/src/Data/PluginData.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fio_cz/src/src/Data/PluginData.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fio_cz/src/src/Data/UcrmData.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fio_cz/src/src/Data/UcrmData.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fio_cz/src/src/Exception/CurlException.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fio_cz/src/src/Exception/CurlException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fio_cz/src/src/Facade/UcrmFacade.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fio_cz/src/src/Facade/UcrmFacade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fio_cz/src/src/FioCz/FioCz.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fio_cz/src/src/FioCz/FioCz.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fio_cz/src/src/Importer.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fio_cz/src/src/Importer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fio_cz/src/src/Service/CurlExecutor.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fio_cz/src/src/Service/CurlExecutor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fio_cz/src/src/Service/FioCurlExecutor.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fio_cz/src/src/Service/FioCurlExecutor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fio_cz/src/src/Service/Logger.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fio_cz/src/src/Service/Logger.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fio_cz/src/src/Service/OptionsManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fio_cz/src/src/Service/OptionsManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/fio_cz/src/src/Service/UcrmApi.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/fio_cz/src/src/Service/UcrmApi.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/invoice-csv-export/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/invoice-csv-export/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/invoice-csv-export/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/invoice-csv-export/src/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/invoice-csv-export/src/classes/Http.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/invoice-csv-export/src/classes/Http.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/invoice-csv-export/src/classes/Service/CsvGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/invoice-csv-export/src/classes/Service/CsvGenerator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/invoice-csv-export/src/classes/Service/TemplateRenderer.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/invoice-csv-export/src/classes/Service/TemplateRenderer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/invoice-csv-export/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/invoice-csv-export/src/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/invoice-csv-export/src/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/invoice-csv-export/src/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/invoice-csv-export/src/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/invoice-csv-export/src/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/invoice-csv-export/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/invoice-csv-export/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/invoice-csv-export/src/public.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/invoice-csv-export/src/public.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/invoice-csv-export/src/public/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/invoice-csv-export/src/public/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/invoice-csv-export/src/templates/form.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/invoice-csv-export/src/templates/form.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/kmz-map/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/kmz-map/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/kmz-map/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/kmz-map/src/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/kmz-map/src/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/kmz-map/src/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/kmz-map/src/includes/config.class.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/kmz-map/src/includes/config.class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/kmz-map/src/includes/initialize.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/kmz-map/src/includes/initialize.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/kmz-map/src/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/kmz-map/src/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/kmz-map/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/kmz-map/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/kmz-map/src/public.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/kmz-map/src/public.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/mkt-queue-sync/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/mkt-queue-sync/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/classes/Http.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/classes/Http.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/classes/RouterOsApi.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/classes/RouterOsApi.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/classes/Synchronizer.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/classes/Synchronizer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/classes/UnmsApi.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/classes/UnmsApi.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/classes/ip_in_range.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/classes/ip_in_range.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/public.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/mkt-queue-sync/src/public.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/src/globals.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/src/globals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/src/plConfigClients.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/src/plConfigClients.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/src/plConfigInfrastructure.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/src/plConfigInfrastructure.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/src/plConfigServices.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/src/plConfigServices.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/src/plInit.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/src/plInit.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/src/ucrmInfo.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/src/ucrmInfo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/uexec.py" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/packetlogic-packet-manager/src/uexec.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/public.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/public.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Data/InvoiceStatus.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Data/InvoiceStatus.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Data/PluginData.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Data/PluginData.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Data/UcrmData.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Data/UcrmData.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Exception/CurlException.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Exception/CurlException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Exception/QBAuthorizationException.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Exception/QBAuthorizationException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Facade/QuickBooksFacade.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Facade/QuickBooksFacade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Factory/DataServiceFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Factory/DataServiceFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Plugin.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Plugin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Service/CurlExecutor.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Service/CurlExecutor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Service/Logger.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Service/Logger.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Service/OptionsManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Service/OptionsManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Service/PluginDataValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Service/PluginDataValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Service/UcrmApi.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/quickbooks-online/src/src/Service/UcrmApi.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/revenue-report/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/revenue-report/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/revenue-report/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/revenue-report/src/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/revenue-report/src/classes/Http.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/revenue-report/src/classes/Http.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/revenue-report/src/classes/Service/TemplateRenderer.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/revenue-report/src/classes/Service/TemplateRenderer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/revenue-report/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/revenue-report/src/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/revenue-report/src/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/revenue-report/src/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/revenue-report/src/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/revenue-report/src/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/revenue-report/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/revenue-report/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/revenue-report/src/public.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/revenue-report/src/public.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/revenue-report/src/public/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/revenue-report/src/public/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/revenue-report/src/templates/form.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/revenue-report/src/templates/form.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/revenue-report/src/templates/result.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/revenue-report/src/templates/result.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/routeros-packet-manager/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/routeros-packet-manager/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/routeros-packet-manager/src/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/routeros-packet-manager/src/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/routeros-packet-manager/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/routeros-packet-manager/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/routeros-packet-manager/src/src/exec.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/routeros-packet-manager/src/src/exec.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/routeros-packet-manager/src/src/routeros_api_class.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/routeros-packet-manager/src/src/routeros_api_class.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/routeros-packet-manager/src/src/ucrmInfo.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/routeros-packet-manager/src/src/ucrmInfo.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/routeros-suspension/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/routeros-suspension/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/routeros-suspension/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/routeros-suspension/src/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/routeros-suspension/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/routeros-suspension/src/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/routeros-suspension/src/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/routeros-suspension/src/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/routeros-suspension/src/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/routeros-suspension/src/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/routeros-suspension/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/routeros-suspension/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/routeros-suspension/src/src/Service/RouterOsApi.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/routeros-suspension/src/src/Service/RouterOsApi.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/routeros-suspension/src/src/Service/Suspender.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/routeros-suspension/src/src/Service/Suspender.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/routeros-suspension/src/src/Service/UnmsApi.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/routeros-suspension/src/src/Service/UnmsApi.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/public.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/public.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Data/NotificationData.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Data/NotificationData.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Data/PluginData.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Data/PluginData.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Data/UcrmData.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Data/UcrmData.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Exception/CurlException.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Exception/CurlException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Facade/AbstractMessageNotifierFacade.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Facade/AbstractMessageNotifierFacade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Facade/TwilioNotifierFacade.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Facade/TwilioNotifierFacade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Factory/MessageTextFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Factory/MessageTextFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Factory/NotificationDataFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Factory/NotificationDataFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Plugin.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Plugin.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Service/CurlExecutor.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Service/CurlExecutor.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Service/Logger.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Service/Logger.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Service/OptionsManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Service/OptionsManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Service/PluginDataValidator.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Service/PluginDataValidator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Service/SmsNumberProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Service/SmsNumberProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Service/UcrmApi.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/sms-twilio/src/src/Service/UcrmApi.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ucrm-client-signup/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ucrm-client-signup/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/includes/api-interpreter.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/includes/api-interpreter.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/includes/ember-html.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/includes/ember-html.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/includes/initialize.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/includes/initialize.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/phpunit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/phpunit.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/public.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/public.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/public/ucrm-client-signup-form-1203e7d52840a7fa255aec93c1355211.js" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/public/ucrm-client-signup-form-1203e7d52840a7fa255aec93c1355211.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/public/ucrm-client-signup-form-883f793171e4b4cc98b9a928918a9189.css" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/public/ucrm-client-signup-form-883f793171e4b4cc98b9a928918a9189.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/public/vendor-2c628552e172e7331ad9cef9845edbd3.js" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/public/vendor-2c628552e172e7331ad9cef9845edbd3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/tests/InterpreterTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/tests/InterpreterTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/ucsp/Interpreter.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/ucrm-client-signup/src/ucsp/Interpreter.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.dic" beforeDir="false" afterPath="$PROJECT_DIR$/project.dic" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Commands/BaseCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands/BaseCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Commands/Exceptions/PluginInvalidNameException.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands/Exceptions/PluginInvalidNameException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Commands/Exceptions/PluginNotFoundException.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands/Exceptions/PluginNotFoundException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Commands/IdeCommands.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands/IdeCommands.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Commands/PluginCommands.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands/PluginCommands.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Commands/PluginRequiredCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands/PluginRequiredCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Commands/PluginSpecificCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands/PluginSpecificCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Commands/UPM/BundleCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands/UPM/BundleCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Commands/UPM/CreateCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands/UPM/CreateCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Commands/UPM/ExecCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands/UPM/ExecCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Commands/UPM/MapDebugCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands/UPM/MapDebugCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Commands/UPM/ValidateAllCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands/UPM/ValidateAllCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Commands/UPM/ValidateCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands/UPM/ValidateCommand.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Manifest.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manifest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Manifest/Information.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manifest/Information.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Manifest/Information/UcrmVersionCompliancy.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manifest/Information/UcrmVersionCompliancy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Manifest/Information/UnmsVersionCompliancy.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Manifest/Information/UnmsVersionCompliancy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PhpStorm/Deployment.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/PhpStorm/Deployment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PhpStorm/XmlConfigManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/PhpStorm/XmlConfigManager.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Robo/Tasks.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Robo/Tasks.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Robo/Tasks/Plugin/Bundle.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Robo/Tasks/Plugin/Bundle.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Support/ArrayHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Support/ArrayHelper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Support/Diff.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Support/Diff.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Support/Diffs/ArrayDiff.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Support/Diffs/ArrayDiff.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Support/Diffs/JsonDiff.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Support/Diffs/JsonDiff.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Support/Diffs/TextDiff.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Support/Diffs/TextDiff.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Support/Exceptions/RegExInvalidException.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Support/Exceptions/RegExInvalidException.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Support/FileSystem.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Support/FileSystem.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Support/Git.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Support/Git.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Support/Json/JsonObject.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Support/Json/JsonObject.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Support/Json/JsonParser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Support/Json/JsonParser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Support/RegEx.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Support/RegEx.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Support/Templater.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Support/Templater.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/commands.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/commands.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/globals.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/globals.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/templates/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/templates/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/minimal/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/templates/minimal/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/minimal/src/.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/minimal/src/.editorconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/minimal/src/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/templates/minimal/src/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/minimal/src/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/templates/minimal/src/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/minimal/src/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/minimal/src/main.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/minimal/src/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/templates/minimal/src/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/minimal/src/public.php" beforeDir="false" afterPath="$PROJECT_DIR$/templates/minimal/src/public.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/build.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/build.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/certs/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/certs/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/env/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/env/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/modules/os.rb" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/modules/os.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/modules/ssh.rb" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/modules/ssh.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/modules/uisp.rb" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/modules/uisp.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/package.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/package.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/bash.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/bash.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/code-server.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/code-server.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/environment.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/environment.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/firewall.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/firewall.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/fleet.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/fleet.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/network.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/network.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/node.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/node.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/permissions.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/permissions.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/php.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/php.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/postgres.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/postgres.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/uisp.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/uisp.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/users.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/users.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/publish.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/publish.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/users/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/users/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/users/unms/app/docker-compose.override.yml" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/users/unms/app/docker-compose.override.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/code-server/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/code-server/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/code-server/Dockerfile.old" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/code-server/Dockerfile.old" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/code-server/coder.json" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/code-server/coder.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/code-server/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/code-server/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/code-server/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/code-server/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/ucrm/xdebug.ini" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/ucrm/xdebug.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/ucrm/xdebug_params" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/ucrm/xdebug_params" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/validate.php" beforeDir="false" afterPath="$PROJECT_DIR$/validate.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +404,19 @@
       <path value="$PROJECT_DIR$/vendor/opis/uri" />
       <path value="$PROJECT_DIR$/vendor/opis/string" />
       <path value="$PROJECT_DIR$/vendor/opis/json-schema" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+      <path value="$PROJECT_DIR$/vendor/consolidation/self-update" />
+      <path value="$PROJECT_DIR$/vendor/consolidation/robo" />
+      <path value="$PROJECT_DIR$/vendor/consolidation/output-formatters" />
+      <path value="$PROJECT_DIR$/vendor/consolidation/log" />
+      <path value="$PROJECT_DIR$/vendor/consolidation/config" />
+      <path value="$PROJECT_DIR$/vendor/consolidation/annotated-command" />
+      <path value="$PROJECT_DIR$/vendor/league/container" />
+      <path value="$PROJECT_DIR$/vendor/php-parallel-lint/php-parallel-lint" />
+      <path value="$PROJECT_DIR$/vendor/dflydev/dot-access-data" />
+      <path value="$PROJECT_DIR$/vendor/grasmash/expander" />
+      <path value="$PROJECT_DIR$/vendor/php-cs-fixer/diff" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
     </include_path>
   </component>
   <component name="ProblemsViewState">
@@ -85,9 +438,13 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "C:/dev/src/ucrm-plugins/ucrm-plugins/project.dic",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "project.scopes",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -132,6 +489,8 @@
       <workItem from="1668381997958" duration="91000" />
       <workItem from="1668382096128" duration="225000" />
       <workItem from="1668382328177" duration="1495000" />
+      <workItem from="1672531241173" duration="92000" />
+      <workItem from="1672531342525" duration="2903000" />
     </task>
     <task id="LOCAL-00001" summary="Cleanup">
       <created>1668378283164</created>
@@ -140,7 +499,21 @@
       <option name="project" value="LOCAL" />
       <updated>1668378283164</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Restricted Xdebug version to 3.1.6, as to prevent the newer version now being installed.">
+      <created>1672534056768</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1672534056768</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Some fixes to allow for new UISP&lt;-&gt;UCRM versioning">
+      <created>1672534132785</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1672534132785</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -159,7 +532,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cleanup" />
+    <MESSAGE value="Restricted Xdebug version to 3.1.6, as to prevent the newer version now being installed." />
+    <MESSAGE value="Some fixes to allow for new UISP&lt;-&gt;UCRM versioning" />
+    <MESSAGE value="Line-Endings normalization" />
+    <option name="LAST_COMMIT_MESSAGE" value="Line-Endings normalization" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

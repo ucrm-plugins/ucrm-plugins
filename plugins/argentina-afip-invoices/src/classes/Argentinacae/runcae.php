@@ -43,7 +43,7 @@ $wsfev1->openTA($orgSelected);
 - 11, 12, 13, 15 para los clase C.
 - 51, 52, 53, 54 para los clase M.
 - 49 para los Bienes Usados
-Consultar método FEParamGetTiposCbte.
+Consultar mï¿½todo FEParamGetTiposCbte.
 */
 
 //Esto para saber si es nota de credito o debito. Si esta vacio, entonces el comprobante es para facturas, si tiene SI es nota credito, si tiene NO es nota debito.

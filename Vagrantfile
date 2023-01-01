@@ -25,8 +25,9 @@ BOX_HOSTNAME        = "uisp"
 BOX_ADDRESS         = "192.168.56.10"
 DNS_ALIASES         = [ "#{BOX_HOSTNAME}.dev" ]
 ROOT_PASSWORD       = "vagrant"
-UISP_VERSION        = "1.4.8"
-UCRM_VERSION        = UISP.getUcrmVersion(UISP_VERSION)
+UISP_VERSION        = "1.5.7"
+UCRM_VERSION        = "3.5.0"
+#UCRM_VERSION       = UISP.getUcrmVersion(UISP_VERSION)
 
 # ======================================================================================================================
 # VAGRANT
@@ -136,7 +137,10 @@ Vagrant.configure(VAGRANT_FILE_VER) do |config|
     # NOTE: This provisioner is responsible for building an updated version of the included overrides.
     config.vm.provision :overrides, type: :shell, keep_color: true,
         path: "#{PROVISIONERS_DIR}/overrides.sh",
-        env: {}
+        env: {
+            #"UISP_VERSION" => "#{UISP_VERSION}",
+            #"UCRM_VERSION" => "#{UCRM_VERSION}"
+        }
 
     # PostgreSQL...
     # NOTE: This provisioner is installs PostgreSQL (Server & Client) on the VM and does some user fix-ups.

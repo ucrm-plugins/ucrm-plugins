@@ -142,7 +142,7 @@ class WSFEv1{
   }
   
   /*
-   * Retorna el ultimo número de Request.
+   * Retorna el ultimo nï¿½mero de Request.
    */ 
   public function FECompUltimoAutorizado($tipo_cbte,$punto_vta,$cuit)
   {

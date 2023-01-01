@@ -13,12 +13,12 @@ services:
 
     # NOTES: The UCRM Version is automatically updated in the build provisioner.
     ucrm:
-        image: ubnt/unms-crm:3.4.8-xdebug
+        image: ubnt/unms-crm:3.5.0-xdebug
         build:
             context: ./overrides/ucrm
             dockerfile: Dockerfile
             args:
-              UCRM_VERSION: 3.4.8
+              UCRM_VERSION: 3.5.0
         ports:
             - "9003:9003"
         #volumes:
