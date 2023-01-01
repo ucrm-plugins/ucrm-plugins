@@ -73,17 +73,17 @@ class MapDebugCommand extends BaseCommand
 
 
         $ide = $input->getOption("ide");
-        echo $ide."\n";
-        exit;
+
+
 
 
         if (!($server = $project->xpath("component[@name='PhpProjectServersManager']/servers/server[@host='$host' or @host='$ip']")))
         {
             // Need to add a new server!
             $server = $project->xpath("component[@name='PhpProjectServersManager']/servers")[0]->addChild("server");
-            $server->addAttribute("host", "$host");
+            $server->addAttribute("host", "$host"); // uisp.dev (set by PHP_IDE_CONFIG "serverName=uisp")
             $server->addAttribute("id", XmlConfigManager::guid());
-            $server->addAttribute("name", "$host");
+            $server->addAttribute("name", "$host"); // uisp
             $server->addAttribute("use_path_mappings", "true");
         }
         else
@@ -93,6 +93,7 @@ class MapDebugCommand extends BaseCommand
             // Force to HOSTNAME?
             //if ($server["host"] == $ip)
             //    $server["host"] = $host;
+
         }
 
         if (!$server->xpath("path_mappings"))
@@ -102,20 +103,20 @@ class MapDebugCommand extends BaseCommand
         $ucrmPluginsSrc = "/data/ucrm/data/plugins";
         $ucrmPluginsWeb = "/usr/src/ucrm/web/_plugins";
 
-        self::addPathMapping($server, "$hostPluginsDir/$this->name/src", "$ucrmPluginsSrc/$this->name");
-        self::addPathMapping($server, "$hostPluginsDir/$this->name/www", "$ucrmPluginsWeb/$this->name");
+        self::addPathMapping($server, "$hostPluginsDir/$this->plugin/src", "$ucrmPluginsSrc/$this->plugin");
+        self::addPathMapping($server, "$hostPluginsDir/$this->plugin/www", "$ucrmPluginsWeb/$this->plugin");
 
         // Create any missing www/ files, as this command can be run on any of the plugins???
 
-        if (!file_exists($www = FileSystem::path(PROJECT_DIR."/plugins/$this->name/www")))
+        if (!file_exists($www = FileSystem::path(PROJECT_DIR."/plugins/$this->plugin/www")))
             mkdir($www);
 
         if (!file_exists($public = FileSystem::path("$www/public.php")))
         {
             file_put_contents($public, <<<EOF
             <?php /** @noinspection PhpIncludeInspection */
-            chdir(dirname('/usr/src/ucrm/app/data/plugins/$this->name/public.php'));
-            require_once '/usr/src/ucrm/app/data/plugins/$this->name/public.php';
+            chdir(dirname('/usr/src/ucrm/app/data/plugins/$this->plugin/public.php'));
+            require_once '/usr/src/ucrm/app/data/plugins/$this->plugin/public.php';
 
             EOF
             );
