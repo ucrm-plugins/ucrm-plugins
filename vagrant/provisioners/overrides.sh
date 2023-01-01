@@ -7,22 +7,33 @@ cd /home/unms/app
 # VERSIONING
 ########################################################################################################################
 
-FOUND_UISP=$(sed -e 's/^"//' -e 's/"$//' <<< "$(awk -F '=' '/VERSION/ {print $2}' unms.conf)")
+# Get from current docker-compose.yml?
+UISP_VERSION="$(sed -n -E 's|^\s*image:\s*ubnt/unms:(.*)|\1|p' /home/unms/app/docker-compose.yml)"
+UCRM_VERSION="$(sed -n -E 's|^\s*image:\s*ubnt/unms-crm:(.*)|\1|p' /home/unms/app/docker-compose.yml)"
 
-echo -n "Found: UISP $FOUND_UISP "
-[[ "$UISP_VERSION" == "$FOUND_UISP" ]] && echo -n "(match with " || echo -n "(overriding "
-echo "provided UISP_VERSION: $UISP_VERSION)"
+echo "UISP: $UISP_VERSION"
+echo "UCRM: $UCRM_VERSION"
 
-if [[ $FOUND_UISP =~ ([0-9]+).([0-9]+).([0-9]+) ]]; then
-    BUILD_UCRM=$(echo "${BASH_REMATCH[1]} + 2" | bc)".${BASH_REMATCH[2]}.${BASH_REMATCH[3]}"
-else
-    echo "Could not determine the version of UCRM to build!"
-    exit 1
-fi
 
-echo -n "Build: UCRM $BUILD_UCRM "
-[[ "$UCRM_VERSION" == "$BUILD_UCRM" ]] && echo -n "(match with " || echo -n "(overriding "
-echo "provided UCRM_VERSION: $UCRM_VERSION)"
+#FOUND_UISP=$(sed -e 's/^"//' -e 's/"$//' <<< "$(awk -F '=' '/VERSION/ {print $2}' unms.conf)")
+#
+#echo -n "Found: UISP $FOUND_UISP "
+#[[ "$UISP_VERSION" == "$FOUND_UISP" ]] && echo -n "(match with " || echo -n "(overriding "
+#echo "provided UISP_VERSION: $UISP_VERSION)"
+#
+#if [[ $FOUND_UISP =~ ([0-9]+).([0-9]+).([0-9]+) ]]; then
+#    BUILD_UCRM=$(echo "${BASH_REMATCH[1]} + 2" | bc)".${BASH_REMATCH[2]}.${BASH_REMATCH[3]}"
+#else
+#    echo "Could not determine the version of UCRM to build!"
+#    exit 1
+#fi
+#
+#echo -n "Build: UCRM $BUILD_UCRM "
+#[[ "$UCRM_VERSION" == "$BUILD_UCRM" ]] && echo -n "(match with " || echo -n "(overriding "
+#echo "provided UCRM_VERSION: $UCRM_VERSION)"
+
+BUILD_UCRM="$UCRM_VERSION"
+echo "$BUILD_UCRM"
 
 ########################################################################################################################
 # OVERRIDES
