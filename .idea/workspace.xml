@@ -7,16 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bbebbc60-a51a-4b36-9165-b548024dcb2e" name="Changes" comment="Line-Endings normalization">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="bbebbc60-a51a-4b36-9165-b548024dcb2e" name="Changes" comment="Minor changes and repairs on map:debug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Commands/UPM/MapDebugCommand.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Commands/UPM/MapDebugCommand.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vagrant/env/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/ucrm/xdebug.ini" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/users/unms/app/overrides/ucrm/xdebug.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vagrant/provisioners/overrides.sh" beforeDir="false" afterPath="$PROJECT_DIR$/vagrant/provisioners/overrides.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,24 +99,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/dev/src/ucrm-plugins/ucrm-plugins/project.dic",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.keymap",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/dev/src/ucrm-plugins/ucrm-plugins/project.dic&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\dev\src\ucrm-plugins\ucrm-plugins\.idea\dictionaries" />
@@ -166,7 +159,8 @@
       <workItem from="1668382096128" duration="225000" />
       <workItem from="1668382328177" duration="1495000" />
       <workItem from="1672531241173" duration="92000" />
-      <workItem from="1672531342525" duration="6363000" />
+      <workItem from="1672531342525" duration="7612000" />
+      <workItem from="1672870514625" duration="2745000" />
     </task>
     <task id="LOCAL-00001" summary="Cleanup">
       <created>1668378283164</created>
@@ -196,7 +190,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672534304183</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Minor changes and repairs on map:debug">
+      <created>1672537756674</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1672537756674</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,7 +219,8 @@
     <MESSAGE value="Restricted Xdebug version to 3.1.6, as to prevent the newer version now being installed." />
     <MESSAGE value="Some fixes to allow for new UISP&lt;-&gt;UCRM versioning" />
     <MESSAGE value="Line-Endings normalization" />
-    <option name="LAST_COMMIT_MESSAGE" value="Line-Endings normalization" />
+    <MESSAGE value="Minor changes and repairs on map:debug" />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor changes and repairs on map:debug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
